@@ -1,0 +1,85 @@
+]0;~/Desktop/2020_2100_project/R project[?1034hVet-m11andmar:R project sasher$ [KVet-m11andmar:R project sasher$ git init
+Initialized empty Git repository in /Users/sasher/Desktop/2020_2100_project/R project/.git/
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git config user.email "sasher@dtu.dk"
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git config user.name "sarasuarez93"
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ echo "# 2020_group01_real" > README.md
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git add README.md
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git commit -m "first commit"
+[master (root-commit) 6f63ab2] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git remote add origin https://github.com/rforbiodatascience/2020_group01_r eal.git
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git push -u origin master
+Enumerating objects: 3, done.
+Counting objects:  33% (1/3)   Counting objects:  66% (2/3)   Counting objects: 100% (3/3)   Counting objects: 100% (3/3), done.
+Writing objects:  33% (1/3)   Writing objects:  66% (2/3)   Writing objects: 100% (3/3)   Writing objects: 100% (3/3), 227 bytes | 227.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/rforbiodatascience/2020_group01_real.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ Username for 'https://github.com': sarasuarez93 # You will be prompted her e
+bash: Username: command not found
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ Password for 'https://sarasuarez93@github.com': Sarita93!
+bash: Password: command not found
+git commit -m "Refractir      axc  ctor usability test" s.
+> 
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ 
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+ echo F30B842D && /usr/bin/env && echo AB5D44BA[Apull[K
+[K[AVet-m11andmar:R project sasher$ git pullsarasuarez93[4Pgit pullcommit -m "Refactor usability tests.
+ echo F30B842D && /usr/bin/env && echo AB5D44BA                                               [AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+[K[K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+> Co-authored-by: annie  borch , <>a>n>n>i>e>_>b>o>r>c>h>borchborch@>h>o>t>m>a>i>l>.>c>o>m>
+> 
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+Co-authored-by: annieborch <annie_borch@hotmail.com>
+ echo F30B842D && /usr/bin/env && echo AB5D44BA[A[5P echo F30B842D && /usr/bin/env && echo AB5D44BA
+[K[A echo F30B842D && /usr/bin/env && echo AB5D44BA[Apull[K
+[K[AVet-m11andmar:R project sasher$ git pullsarasuarez93git push -u origin master[13Psarasuarez93[4Pgit pullcommit -m "Refactor usability tests.
+ echo F30B842D && /usr/bin/env && echo AB5D44BA                                               [AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+[K[K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+> 
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+ echo F30B842D && /usr/bin/env && echo AB5D44BA                                               [AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+[K[K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+> 
+> 
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+
+ echo F30B842D && /usr/bin/env && echo AB5D44BA                                               [A[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+
+[K[K[A[K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+> 
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+ echo F30B842D && /usr/bin/env && echo AB5D44BA                                               [AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.
+[K[K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <annie _borch@hotmail.com>il.com>"
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+	[31m.gitignore[m
+	[31mR project.Rproj[m
+	[31mREADME.Rmd[m
+
+nothing added to commit but untracked files present
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <annie__borch@hotmail.com>"l.com[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <anni>"[K[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <anni>" [K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <ann[1P
+[K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <an[1P[1P[1@a[1@nn>" [Aet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <anni>""[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <annie>"[1@b[1@o[1@r[1@c[1@g[1@@[1P[1P[1@h[1@2[1P[1@@[1@g[1@i[1@t[1@h[1@u[1@b[1@.[1@c[1@o[1@m
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+	[31m.gitignore[m
+	[31mR project.Rproj[m
+	[31mREADME.Rmd[m
+
+nothing added to commit but untracked files present
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <anniebborch@github.com>"[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests. Co-authored-by: annieborch <anniCo-authored-by: annieborch <anniebo[1P[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability tests.Co-authored-by: annieborch <anniebor[1P[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability tests,Co-authored-by: annieborch <anniebo[1@r[At-m11andmar:R project sasher$ git commit -m "Refactor usability tests, Co-authored-by: annieborch <annieb[1@o[At-m11andmar:R project sasher$ git commit -m "Refactor usability tests, Co-authored-by: annieborch <anniebo[1P[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability tests,Co-authored-by: annieborch <anniebor[1P[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability testsCo-authored-by: annieborch <annieborc[1P[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability testCo-authored-by: annieborch <annieborch[1P[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability tessCo-authored-by: annieborch <annieborc[1@h[At-m11andmar:R project sasher$ git commit -m "Refactor usability tesstCo-authored-by: annieborch <anniebor[1@c[At-m11andmar:R project sasher$ git commit -m "Refactor usability tesstCo-authored-by: annieborch <annieborc[1P[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability tessCo-authored-by: annieborch <annieborch[1P[Aet-m11andmar:R project sasher$ git commit -m "Refactor usability testCo-authored-by: annieborch <annieborc[1@h[At-m11andmar:R project sasher$ git commit -m "Refactor usability testsCo-authored-by: annieborch <anniebor[1@c[At-m11andmar:R project sasher$ git commit -m "Refactor usability tests Co-authored-by: annieborch <anniebo[1@r[At-m11andmar:R project sasher$ git commit -m "Refactor usability tests Vet-m11andmar:R project sasher$ [K
+[K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests Co-authored-by: annieborch <annieboorch@github.com>"                 [AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests Co-authored-by: annieborch <annieb [K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests Co-authored-by: annieborch <annie[K
+[K[AVet-m11andmar:R project sasher$ git commit -m "Refactor usability tests Co-authored-by: annieborch <annie                                     sts,
+> 
+> Co-authored-by: annieborch <annieborch@github.com>"
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ 
