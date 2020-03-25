@@ -82,4 +82,6 @@ On branch master
 Your branch is up to date with 'origin/master'.
 
 nothing to commit, working tree clean
-]0;~/Desktop/2020_2100_project/R projectVet-m11andmar:R project sasher$ 
+git add data
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git add READ            git add data
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ 
