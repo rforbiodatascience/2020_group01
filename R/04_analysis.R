@@ -12,13 +12,21 @@ source(file = "R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
-my_data_raw <- read_tsv(file = "data/raw/my_raw_data.tsv")
+my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-my_data <- my_data_raw # %>% ...
+my_data_clean_aug %>% ...
+
+# Model data
+# ------------------------------------------------------------------------------
+my_data_clean_aug %>% ...
+
+# Visualise data
+# ------------------------------------------------------------------------------
+my_data_clean_aug %>% ...
 
 # Write data
 # ------------------------------------------------------------------------------
-write_tsv(x = my_data,
-          path = "data/01_my_data.tsv")
+write_tsv(...)
+ggsave(...)
