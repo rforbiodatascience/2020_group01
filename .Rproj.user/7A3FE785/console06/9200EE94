@@ -86,4 +86,42 @@ git add data
 ]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git add READ            git add data
 ]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ 
 HEAD is now at 516dfef Merge branch 'master' of https://github.com/rforbiodatascience/2020_group01_real
-]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ 
+git nb  mv function_script.R scripts
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv function_script.R scripts[2Preset --hard origin/mastermv function_script.R scripts                           00_load.R scripts
+fatal: not under version control, source=00_load.R, destination=scripts/00_load.R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv 00_load.R scripts
+fatal: not under version control, source=00_load.R, destination=scripts/00_load.R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv 00_load.R scripts s/
+fatal: not under version control, source=00_load.R, destination=scripts/00_load.R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ getwd()
+> 
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ pwd
+/Users/sasher/Desktop/2020_2100_project/R_project
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ pwdgetwd()  echo 63AB7B78 && /usr/bin/env && echo 8874707AVet-m11andmar:R_project sasher$ g[30Pit mv 00_load.R scripts/ 
+fatal: not under version control, source=00_load.R, destination=scripts/00_load.R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv 00_load.R scripts[1P[1P[1P[1P[1P[1P[1@1[1@_[1@c[1@l[1@e[1@a[1@n
+fatal: not under version control, source=01_clean.R, destination=scripts/01_clean.R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv 01_clean.R scripts
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv 01_clean.R scripts[1P0_load.R scripts
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv 00_load.R scripts[1P[1P[1P[1P[1P[1P[1@2[10@_augment.R[1P[1P
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv Dosc  c doc
+fatal: renaming 'Doc' failed: Invalid argument
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv Doc doc    / doc
+fatal: renaming 'Doc' failed: Invalid argument
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv Doc/ doc/
+fatal: renaming 'Doc' failed: Invalid argument
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ r git mv Doc/ doc/         scripts r R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv Results results
+fatal: renaming 'Results' failed: Invalid argument
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv Results results[6Pscripts RDoc/ doc/
+fatal: renaming 'Doc' failed: Invalid argument
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv Doc/ doc/Results results[6PDoc/ doc/Results results[6Pscripts RDoc/ doc/[K[1P doc02_augment.R scripts[13PDoc doc       doc Doc
+fatal: source directory is empty, source=doc, destination=Doc/doc
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv doc DocDoc/ doc/       doc/
+fatal: renaming 'Doc' failed: Invalid argument
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv Doc doc/[1Pdoc DocDoc doc/[1Pdoc DocDoc/ doc/Results results[6Pscripts RDoc/ doc/[K[1P doc02_augment.R scripts[13PDoc doc       R/00_load.R 00\ _doit.R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv R/00_load.R 00_doit.R                     00_doit.R R/
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv 00_doit.R R/[1P[1P[1P[1P[1P[1P[1@1[1@_[1P[1P.[1P[1PR[1P [1PR/01_clean.R R/01_load.R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv R/01_clean.R R/01_load.R.[1P[1P[1P[1P[1PR[1P[1P[1P[1P[1@3[1P[1@2[10@_augment.R R/01_load.R        2_clean.R
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ git mv R/02_augment.R R/02_clean.RVet-m11andmar:R_project sasher$ [Kgit mv R/02_augment.R R/02_clean.R[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@f[1@u[1@n[1@c[13@tion_script.R[1@ R/02_clean[1P[1P[1P[1P[1P[1P[1P[1P[1@9[1@9[1@_[1@p[1@r[1@o[1@j[1@e[1@c[1@t[1@_[1@f[1@u[1@n[1@c[1@t[1@i[1@o[1@n[1@s
+]0;~/Desktop/2020_2100_project/R_projectVet-m11andmar:R_project sasher$ [KVet-m11andmar:R_project sasher$ [KVet-m11andmar:R_project sasher$ 
