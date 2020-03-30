@@ -75,3 +75,6 @@ all_4t1_barracoda %>%
   filter(response=="yes") %>% 
   distinct(Peptide.name, .keep_all = T) #14 unique peptides triggered responses 
 
+write_xlsx(all_ct26_barracoda, "data/barracoda_output_ct26_preprocessed.xlsx")
+write_xlsx(all_4t1_barracoda, "data/barracoda_output_4t1_preprocessed.xlsx")
+
