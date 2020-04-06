@@ -13,10 +13,6 @@ library(tidyverse)
 library(readxl)
 library(writexl)
 
-####### SARAS COMMENT
-# HERE I WILL INTRODUCE THE DATA LOADING CODE
-
-
 # Load data
 # -----------------------------------------------------------------------------
 ## The raw barracoda output comprises one sheet per sample. We will import all sheets into a unique dataframe.
