@@ -41,13 +41,10 @@ my_data_clean_aug <- left_join(my_data_clean, mupexi_all, by = "identifier") %>%
   # select columns of interest to plot peptide characteristics
   select(c(,15:53)) %>% 
   # remove NAs (those are peptides that were controls for the barcoding experiment but not predicted by Mupexi)
-  drop_na(HLA_allele)
+  drop_na(HLA_allele) %>% 
+  mutate(cell.line = case_when(str_detect(Peptide.name, "^CT26") ~ "CT26",
+                               str_detect(Peptide.name, "^4T1") ~ "4T1"))
 
-h <- my_data_clean_aug %>% filter(duplicated(identifier))
-
-duplicated(my_data_clean_aug$identifier)
-
-# if a peptide gave a response in one sample but it did not in another, it is duplicated!
 
 # Write data
 # ------------------------------------------------------------------------------
