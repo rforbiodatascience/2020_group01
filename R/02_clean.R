@@ -28,11 +28,8 @@ my_data_clean <- my_data %>%
     str_detect(sample, "TU$") ~ "tumor",
     str_detect(sample, "SP$") | str_detect(sample, "^CT26") ~ "spleen")) %>% 
   # add treatment column
-  mutate(treatment = case_when(
-    str_detect(sample, "^4T1_19") | str_detect(sample,"^4T1_23") | str_detect(sample,"^4T1_20") | str_detect(sample,"^4T1_16")
-    | sample == "CT26_C1" | sample == "CT26_D1" | sample == "CT26_D2" ~ "yes",
-    str_detect(sample,"^4T1_22") | str_detect(sample,"^4T1_17") | str_detect(sample,"^4T1_18") 
-    | sample == "CT26_C3" | sample == "CT26_C4" | sample == "CT26_D4" ~ "no"))
+  mutate(treatment = case_when(str_detect(sample, "^4T1_19") | str_detect(sample,"^4T1_23") | str_detect(sample,"^4T1_20") | str_detect(sample,"^4T1_16") | sample == "CT26_C1" | sample == "CT26_D1" | sample == "CT26_D2" ~ "yes",
+    str_detect(sample,"^4T1_22") | str_detect(sample,"^4T1_17") | str_detect(sample,"^4T1_18") | sample == "CT26_C3" | sample == "CT26_C4" | sample == "CT26_D4" ~ "no"))
 
 # Write data
 # ------------------------------------------------------------------------------

@@ -26,13 +26,13 @@ mupexi_4t1 <- read_xlsx(path = "data/_raw/4T1_library_mupexi.xlsx") %>%
 
 # Wrangle data
 # ------------------------------------------------------------------------------
+# This is the Mupexi file with the predicted neopeptides. It includes all peptides with characteristics to plot.
 mupexi_all <- full_join(mupexi_4t1, mupexi_ct26) %>% 
   # identifier column to merge with barracoda - HLA_peptidename
   mutate(identifier = paste(HLA_allele, Mut_peptide, sep = "_"))
 
 my_data_clean <- my_data_clean %>% mutate(identifier = paste(HLA, Sequence, sep = "_")) %>% 
   mutate(HLA = str_replace(HLA, "^H-2", "H2-"))
-  
 
 my_data_clean_aug <- left_join(my_data_clean, mupexi_all, by = "identifier") %>% 
   group_by(response) %>% 

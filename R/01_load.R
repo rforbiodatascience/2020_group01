@@ -29,12 +29,13 @@ path_4t1 <- "data/_raw/barracoda_output_4T1.xlsx"
 all_4t1_barracoda_raw <- path_4t1 %>% 
   excel_sheets() %>% 
   set_names() %>% 
-  map_df(~ read_excel(path = path_4t1, sheet = .x), .id = "sheet") %>% 
+  map_df(~ read_excel(path = path_4t1, sheet = .x), .id = "scolheet") %>% 
   # remove introduced column "...17" because of weird excel format
   select(-"...17")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
+# all barracoda files together 
 my_data <- full_join(all_ct26_barracoda_raw, all_4t1_barracoda_raw)
 
 # Write data
