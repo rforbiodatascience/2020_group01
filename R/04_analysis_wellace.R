@@ -48,10 +48,38 @@ my_data_clean_aug %>%
   labs(title ="Box plot of Mutation Elution (Rank score) vs Response", x = "Response", y = "Mutated Elution (Rank score)")
 
 ##Bar plot illustrating the frequency of mutant position with use of column peptide_position
-my_data_clean_aug %>% 
-  ggplot(mapping = aes(x = peptide_position)) +
-  geom_bar(fill="steelblue") +
-  labs(title ="Bar plot of Peptide Position", x = "Peptide Position", y = "Count")
+lib <- matrix(nrow = 1, ncol = 11)
+colnames(lib) <- c("pos1","pos2","pos3","pos4","pos5","pos6","pos7","pos8","pos9","pos10","pos11")
+lib[1, ] <- c(0,0,0,0,0,0,0,0,0,0,0)
+lib <- as.data.frame(lib)
+
+for (pos in 1:length(lib)) {
+  for (position in my_data_clean_aug$peptide_position) {
+    if (grepl(":", position)==T) {
+      pos1 <-  as.numeric(str_split(position, ':')[[1]][1]  )
+      pos2 <-  as.numeric( str_split(position, ':')[[1]][2]  )
+      posistions <- pos1:pos2
+      if (pos %in% posistions) {
+        lib[,pos] = lib[,pos]+1}
+    }
+    else if (grepl(":", position)==F) {
+      print(position)
+      position <- as.numeric(position)
+      if (pos %in% position) {
+        lib[,pos] = lib[,pos]+1 }
+    }
+  }
+  
+}
+
+lib <- as.data.frame(t(lib))
+lib$pos <- rownames(lib)
+
+ggplot(lib, aes(x=factor(pos,
+                         levels = c("pos1" , "pos2" , "pos3" , "pos4" , "pos5" , "pos6" ,"pos7" , "pos8" , "pos9" , "pos10", "pos11")),
+                y=V1)) +
+  geom_bar(stat = "identity", fill="steelblue") +
+  labs(title ="Bar plot of Peptide Position", x = "Peptide Position", y = "Number Changes")
 
 ##Bar plot illustrating the number of F(frameshift), M(missense), I(inframe insertion),  
 ## D(inframe deletion). Mutations are under "Mutation_Consequence" column.
