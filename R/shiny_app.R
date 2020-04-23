@@ -14,7 +14,7 @@ library(tidyverse)
 
 Plotting_data <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
-Plotting_data[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")] <- sapply(Mupexi_file[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")],as.numeric)
+Plotting_data[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")] <- sapply(Plotting_data[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")],as.numeric)
 # make my own function 
 #vchoices <- Mupexi_file[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")]
 #names(vchoices) <- names(Mupexi_file[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")])
@@ -27,8 +27,8 @@ library(shiny)
 # Define UI for application 
 ui <- fluidPage(
   titlePanel("Scatterplot"),
-  checkboxInput("logarithmicX", "show x-axis in log10", FALSE),
-  checkboxInput("logarithmicY", "show y-axis in log10", FALSE),
+ # checkboxInput("logarithmicX", "show x-axis in log10", FALSE),
+#  checkboxInput("logarithmicY", "show y-axis in log10", FALSE),
   
   br(),
   
@@ -77,14 +77,13 @@ server <- function(input, output) {
   # Create scatterplot object the plotOutput function is expecting
   output$scatterplot <- renderPlot({
     
-    
     p <-    ggplot(data = data, aes_string(x = input$x, y = input$y)) +
       geom_point(aes_string(color = input$ColorVar))
-    if(input$logarithmicX)
-      p <- p + scale_x_log10()
+   # if(input$logarithmicX)
+  #    p <- p + scale_x_log10()
     
-    if(input$logarithmicY)
-      p <- p + scale_y_log10()
+   # if(input$logarithmicY)
+    #  p <- p + scale_y_log10()
     
     return(p)
   })
