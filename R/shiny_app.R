@@ -16,30 +16,30 @@ Plotting_data <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Define UI for application 
 ui <- fluidPage(
-  titlePanel("plots"),
+  titlePanel("Ploting away :) "),
   checkboxInput("logarithmicX", "show x-axis in log10", FALSE),
   checkboxInput("logarithmicY", "show y-axis in log10", FALSE),
-  
+  checkboxInput("selected_dat", "Plot only responses", FALSE),
   br(),
-  #[,c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")]
   # Sidebar layout with a input and output definitions
   sidebarLayout(
     # Inputs
     sidebarPanel(
       # Select variable for y-axis
       selectInput(inputId = "y", label = "Y-axis:",
-                  choices = colnames(Plotting_data[,c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")])
+                  choices = colnames(Plotting_data[,c("Expression_Level","Mut_MHCrank_EL","Norm_MHCrank_EL" ,"Self_Similarity")])
       ),
       # Select variable for x-axis
       selectInput(inputId = "x", label = "X-axis:",
-                  choices = colnames(Plotting_data[,c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity","response")])
+                  choices = c(colnames(Plotting_data[,c("Expression_Level","Mut_MHCrank_EL", "Norm_MHCrank_EL","Self_Similarity","response","HLA_allele","Mutation_Consequence","cell.line")]))
       ),
       selectInput(inputId = "ColorVar", label = "Color stuff",
-                  choices = colnames(Plotting_data[,c("HLA_allele","Mutation_Consequence","response","HLA","organ")])
+                  choices = c(colnames(Plotting_data[,c("HLA_allele","Mutation_Consequence","response","organ","cell.line")])),
+                  
       ),
-      selectInput(inputId = "facet", label = "facet",
-                  choices = colnames(Plotting_data[,c("HLA_allele","Mutation_Consequence","response","HLA","organ")])
-      ),
+   #   selectInput(inputId = "facet", label = "facet",
+  #                choices = colnames(Plotting_data[,c("Mutation_Consequence","response","HLA","organ")])
+  #    ),
       selectInput("plot.type","Plot Type:",
                   list(boxplot = "boxplot", dotplot = "dotplot")
       ),
@@ -73,23 +73,23 @@ server <- function(input, output) {
   # Create scatterplot object the plotOutput function is expecting
   output$plots <- renderPlot({
     
+    if(input$selected_dat)
+      Plotting_data <- Plotting_data %>% filter(response=="yes")
+    
     renderText({
       switch(input$plot.type,
              "boxplot" 	= 	"Boxplot",
              "dotplot" =	"dotplot")
     })
     plot.type<-switch(input$plot.type,
-                      "boxplot" 	= ggplot(data = Plotting_data, aes_string(x = input$x, y = input$y)) +
-                        geom_boxplot(aes_string(color = input$ColorVar), alpha=0.5) +
-                        facet_grid(.~input$facet),
+                      "boxplot" 	= Plotting_data %>% ggplot(aes_string(x = input$x, y = input$y)) +
+                        geom_boxplot(aes_string(color = input$ColorVar), alpha=0.5) + 
+                        theme_bw(),
                     
-                      "dotplot" =	ggplot(data = Plotting_data, aes_string(x = input$x, y = input$y)) +
+                      "dotplot" = Plotting_data %>%	ggplot(aes_string(x = input$x, y = input$y)) +
                         geom_point(aes_string(color = input$ColorVar))) +
-                        facet_grid(.~input$facet)
+                        theme_bw()
     
-    
-   # p <-    ggplot(data = Plotting_data, aes_string(x = input$x, y = input$y)) +
-  #    geom_point(aes_string(color = input$ColorVar))
     if(input$logarithmicX)
       plot.type <- plot.type + scale_x_log10()
     
