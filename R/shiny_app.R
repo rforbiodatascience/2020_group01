@@ -31,10 +31,10 @@ ui <- fluidPage(
       ),
       # Select variable for x-axis
       selectInput(inputId = "x", label = "X-axis:",
-                  choices = c(colnames(Plotting_data[,c("Expression_Level","Mut_MHCrank_EL", "Norm_MHCrank_EL","Self_Similarity","response","HLA_allele","Mutation_Consequence","cell.line")]))
+                  choices = c(colnames(Plotting_data[,c("Expression_Level","Mut_MHCrank_EL", "Norm_MHCrank_EL","Self_Similarity","response","HLA","Mutation_Consequence")]))
       ),
       selectInput(inputId = "ColorVar", label = "Color stuff",
-                  choices = c(colnames(Plotting_data[,c("HLA_allele","Mutation_Consequence","response","organ","cell.line")])),
+                  choices = c(colnames(Plotting_data[,c("HLA","Mutation_Consequence","response","organ")])),
                   
       ),
    #   selectInput(inputId = "facet", label = "facet",
