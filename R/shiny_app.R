@@ -12,17 +12,15 @@ library(readxl)
 library(ggplot2)
 library(tidyverse)
 
-Mupexi_file <- read_xlsx("/Users/annbor/Documents/courses/R_course_22100/2020_group01_project/data/raw/ct26_library_mupexi.xlsx")
+Plotting_data <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
-
-Mupexi_file[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")] <- sapply(Mupexi_file[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")],as.numeric)
+Plotting_data[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")] <- sapply(Mupexi_file[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")],as.numeric)
 # make my own function 
 #vchoices <- Mupexi_file[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")]
 #names(vchoices) <- names(Mupexi_file[c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity")])
 # Define UI for application that draws a histogram
-Mupexi_file$Mutation_Consequence
 #data <- as.data.frame(Mupexi_file[,c("Expression_Level","Mut_MHCrank_EL", "Self_Similarity","HLA_allele","Mutation_Consequence")])
-data <- Mupexi_file
+data <- Plotting_data
 library(shiny)
 
 
