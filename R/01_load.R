@@ -14,6 +14,9 @@ source(file = "R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
+# BARRACODA FILES
+#-------------------------
+
 path_ct26 <- "data/raw/barracoda_output_CT26.xlsx"
 
 all_ct26_barracoda_raw <- path_ct26 %>% 
@@ -29,11 +32,9 @@ path_4t1 <- "data/raw/barracoda_output_4T1.xlsx"
 all_4t1_barracoda_raw <- path_4t1 %>% 
   excel_sheets() %>% 
   set_names() %>% 
-  map_df(~ read_excel(path = path_4t1, sheet = .x), .id = "sheet") #%>% 
-# remove introduced column "...17" because of weird excel format
-#select(-"...17")
+  map_df(~ read_excel(path = path_4t1, sheet = .x), .id = "sheet")
 
-# Mupexi files
+# MUPEXI FILES
 #-------------------------
 mupexi_ct26 <- read_xlsx(path = "data/raw/ct26_library_mupexi.xlsx") %>% 
   # remove extra columns from previous handling

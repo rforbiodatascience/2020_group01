@@ -35,8 +35,8 @@ treatment_labeller <- function(variable,value){
 
 ##Geom_boxplot self-similarity on y and x = response yes and no, facet by treatment 
 my_data_clean_aug %>% 
-  ggplot(mapping = aes(x = response, y = Self_Similarity)) +
-  geom_boxplot(fill="steelblue") +
+  ggplot(mapping = aes(x = response, y = Self_Similarity, fill = response)) +
+  geom_boxplot() +
   facet_wrap(treatment~., labeller=treatment_labeller) +
   labs(title ="Box plot of Self-Similarity vs Response", x = "Response", y = "Self-Similarity")
 
