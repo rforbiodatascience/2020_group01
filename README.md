@@ -10,7 +10,7 @@ The project is named:
 The project will take pre-pross of raw baracoda files and mupexi files and illustrate the charachteristics of the immunugenic neopeptides. 
 
 Group members: 
-s196321
-s196585 
+Bokai s196321
+Wellace s196585 
 Sara Suárez (sasher) sasher@dtu.dk
 Annie Borch (annbor)  annbor@dtu.dk
