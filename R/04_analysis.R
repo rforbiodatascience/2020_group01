@@ -37,7 +37,17 @@ my_data_clean_aug %>%
   geom_point() +
   geom_text(my_data_clean_aug %>% 
             filter(response == "yes"), mapping = aes(label = Peptide.name))
-            
+
+## new thing for bar plot missense mutatio 
+my_data_clean_aug %>%
+  filter(str_length(Mut_peptide)==9,Mutation_Consequence=="M") %>% 
+  ggplot(aes(x=peptide_position)) + 
+  geom_bar(aes(fill = response), stat = "count")+
+  scale_y_log10() + 
+  theme_bw()
+  
+
+
 # Write data
 # ------------------------------------------------------------------------------
 write_tsv(...)
