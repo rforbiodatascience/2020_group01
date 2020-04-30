@@ -33,6 +33,7 @@ treatment_labeller <- function(variable,value){
   return(treatment_names[value])
 }
 
+# change
 box_function <- function(x,y) {  my_data_clean_aug %>% 
   ggplot(mapping = aes_string(x = x, y = y)) +
   geom_boxplot(aes(fill = response)) }
