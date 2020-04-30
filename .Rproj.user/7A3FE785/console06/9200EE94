@@ -131,4 +131,5 @@ fatal: pathspec 'analysis.R' did not match any files
 ]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ git add analysis.R[1@0[1@4[1@_[1@||[1P[1@R[1@/
 ]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ [KVet-m11andmar:R_project_git sasher$ git add R/04_analysis.R
 ]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ git add R/04_analysis.R
+]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ git add R/05_modelling.R
 ]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ 
