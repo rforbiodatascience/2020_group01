@@ -43,15 +43,15 @@ scatterplot_function <- function(x,y) {  my_data_clean_aug %>%
 
 #1.
 
-scatterplot_function('Mut_MHCrank_EL','Norm_MHCrank_EL')
+scatterplot_function('mut_mhcrank_el','norm_mhcrank_el')
 
 #2.
 
-scatterplot_function('Mut_MHCrank_BA', 'Norm_MHCrank_BA')
+scatterplot_function('mut_mhcrank_ba', 'norm_mhcrank_ba')
 
 #3.
 
-scatterplot_function('Mut_MHCrank_EL', 'Expression_Level')
+scatterplot_function('mut_mhcrank_el', 'expression_level')
 
 
 
