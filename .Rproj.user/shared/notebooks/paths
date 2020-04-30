@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/annbor/Documents/courses/R_course_22100/2020_group01_project/R/01_load.R="1C7857EC"
 /Users/annbor/Documents/courses/R_course_22100/2020_group01_project/R/02_clean.R="5E336467"
 /Users/annbor/Documents/courses/R_course_22100/2020_group01_project/R/03_augment.R="6D008A7E"
@@ -10,3 +11,11 @@
 /Volumes/SUND/Public/T-cells-and-cancer/SRH group/Group members/Annie+Kamilla/MSKCC_bladder/bin/MSKCC_plots.Rmd="4460C8E4"
 /Volumes/SUND/Public/T-cells-and-cancer/SRH group/Group members/Annie/mm909_melanoma/bin/plotting_mm909_20200302.Rmd="D74EECD6"
 C:/Users/TPC/Downloads/kalman_ex1_FKF.R="8AF24DA7"
+=======
+/Users/sasher/Desktop/R_project_git/R/03_augment.R="231F217F"
+/Users/sasher/Desktop/R_project_git/R/04_analysis.R="5C5AAD7A"
+/Users/sasher/Desktop/R_project_git/R/04_analysis_bokai.R="983D7B91"
+/Users/sasher/Desktop/R_project_git/R/04_analysis_wellace.R="172F35B4"
+/Users/sasher/Desktop/R_project_git/README.md="824703"
+/Volumes/sasher/1-EXPERIMENTS/2019 Exp. NPV5_Self similarity immunization/1- Peptide selection/scripts/NPV 5 Library.R="3E9D70AB"
+>>>>>>> c4b45fd473d48bc2eef432ae71530d5a8392a263
