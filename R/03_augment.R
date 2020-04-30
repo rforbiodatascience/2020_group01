@@ -51,7 +51,11 @@ my_data_clean_aug <- my_data_clean %>%
   
   # add identifier column
   mutate(identifier = paste(neoepitope_sequence, hla, sep = "_"),
-         identifier = paste(identifier, cell_line, sep = "_"))
+         identifier = paste(identifier, cell_line, sep = "_")) %>% 
+  
+  # filter out unique peptides (on each response group) to plot characteristics
+  group_by(response) %>% 
+  distinct(., identifier, .keep_all = TRUE)
 
 
 # Write data
