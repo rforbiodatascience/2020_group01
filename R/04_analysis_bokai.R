@@ -35,7 +35,7 @@ ggplot(data =my_data_clean_aug,
   scale_x_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
   labs(title= "Elution rank score of neoepitope vs WT epitope", x= "Neoepitope elution rank ", y="WT epitope elution rank")
 
-
+#change
 #2.
 ggplot(data =my_data_clean_aug,
        mapping = aes(x=Mut_MHCrank_BA,y= Norm_MHCrank_BA) )+
