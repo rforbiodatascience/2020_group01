@@ -1,6 +1,4 @@
 
-
-
 #### modelling 
 TEMPT <- my_data_clean_aug %>% 
   mutate(new_score_2  = expression_level/(mut_mhcrank_el+self_similarity))
