@@ -65,8 +65,6 @@ ggplot(data =my_data_clean_aug,
   geom_point(aes(color=response, alpha = response))+
   labs( titile= "",x= "")
 
-# Write data
-# ------------------------------------------------------------------------------
 
 
 
