@@ -27,6 +27,22 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 #my_data_clean_aug %>% ...
 
 
+View(my_data_clean_aug)
+
+# scatterplot_function
+
+
+scatterplot_function <- function(x,y) {  my_data_clean_aug %>% 
+    ggplot(mapping = aes(x = x, y = y)) +
+    geom_point(aes(color=response, alpha = response))+
+    scale_y_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
+    scale_x_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
+    labs(title= "Elution rank score of neoepitope vs WT epitope", x= x, y= y)
+}
+
+scatterplot_function('Mut_MHCrank_EL','Norm_MHCrank_EL')
+
+
 #1.	
 ggplot(data =my_data_clean_aug,
        mapping = aes(x=Mut_MHCrank_EL, y= Norm_MHCrank_EL) )+
