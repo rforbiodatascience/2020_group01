@@ -27,19 +27,19 @@ ui <- fluidPage(
     sidebarPanel(
       # Select variable for y-axis
       selectInput(inputId = "y", label = "Y-axis:",
-                  choices = colnames(Plotting_data[,c("Expression_Level","Mut_MHCrank_EL","Norm_MHCrank_EL" ,"Self_Similarity")])
+                  choices = colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity")])
       ),
       # Select variable for x-axis
       selectInput(inputId = "x", label = "X-axis:",
-                  choices = c(colnames(Plotting_data[,c("Expression_Level","Mut_MHCrank_EL", "Norm_MHCrank_EL","Self_Similarity","response","HLA","Mutation_Consequence")]))
+                  choices = c(colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity","response","hla","mutation_consequence")]))
       ),
       selectInput(inputId = "ColorVar", label = "Color stuff",
-                  choices = c(colnames(Plotting_data[,c("HLA","Mutation_Consequence","response","organ")])),
+                  choices = c(colnames(Plotting_data[,c("hla","mutation_consequence","response","organ")])),
                   
       ),
-   #   selectInput(inputId = "facet", label = "facet",
-  #                choices = colnames(Plotting_data[,c("Mutation_Consequence","response","HLA","organ")])
-  #    ),
+      selectInput(inputId = "alpha", label = "alpha",
+                  choices = c("",colnames(Plotting_data[,c("response")]))
+      ),
       selectInput("plot.type","Plot Type:",
                   list(boxplot = "boxplot", dotplot = "dotplot")
       ),
@@ -87,7 +87,7 @@ server <- function(input, output) {
                         theme_bw(),
                     
                       "dotplot" = Plotting_data %>%	ggplot(aes_string(x = input$x, y = input$y)) +
-                        geom_point(aes_string(color = input$ColorVar))) +
+                        geom_point(aes_string(color = input$ColorVar, alpha= input$alpha))) +
                         theme_bw()
     
     if(input$logarithmicX)
