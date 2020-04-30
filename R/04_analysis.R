@@ -17,9 +17,7 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-my_data_clean_aug<- my_data_clean_aug %>% 
-  group_by(response) %>% 
-  distinct(., identifier, .keep_all = TRUE)
+
 
 # Model data
 # ------------------------------------------------------------------------------
@@ -27,28 +25,18 @@ my_data_clean_aug %>% ...
 
 # Visualise data
 # ------------------------------------------------------------------------------
-my_data_clean_aug %>% filter(cell_line=="CT26" & response == "yes") %>% 
-  ggplot(., aes(peptide_name, estimated_frequency, colour=sample)) +
-  geom_point() +
-  geom_text(mapping = aes(label = peptide_name)) +
-  facet_grid(vars(hla), scales = "free_y")
-
-my_data_clean_aug %>% filter(cell_line=="CT26") %>% 
-  ggplot(., aes(peptide_name, estimated_frequency_norm, colour=sample)) +
-  geom_point() +
-  geom_text(my_data_clean_aug %>% filter(cell_line=="CT26") %>% 
-              filter(response == "yes"), mapping = aes(label = peptide_name)) +
-  facet_grid(vars(hla), scales = "free_y")
-
-my_data_clean_aug %>% filter(cell_line=="4T1") %>% 
-  ggplot(., aes(peptide_name, estimated_frequency, colour=sample)) +
-  geom_point() +
-  geom_text(my_data_clean_aug %>% filter(cell_line=="4T1")  %>% 
-              filter(response == "yes"), mapping = aes(label = peptide_name)) +
-  facet_grid(vars(hla), scales = "free_y")
+# No. mutations by HLA faceted by cell_line. This plot was made by Sara because of curiosity.
+# It shows in what MHC allele do the response peptides bind. Most of the responsive peptides
+# bind H2-Kd allele in both cell lines 
+data_single_peptides %>% 
+  filter(response == "yes") %>% 
+  ggplot(aes(x = hla)) +
+  geom_bar(aes(fill = hla), stat = "count") +
+  facet_grid(vars(cell_line)) +
+  theme_bw()
 
 
-## new thing for bar plot missense mutatio 
+## new thing for bar plot missense mutation 
 my_data_clean_aug %>%
   filter(str_length(mut_peptide)==9,mutation_consequence=="M") %>% 
   ggplot(aes(x=peptide_position)) + 
@@ -65,7 +53,6 @@ mod_diamond <- lm(mut_mhcrank_el ~ expression_score, data = my_data_clean_aug)
 my_data_clean_aug %>% 
   ggplot() +
   geom_point(aes(x = mut_mhcrank_el, y = expression_score))
-
 
 
 # I make some nice code :) 
