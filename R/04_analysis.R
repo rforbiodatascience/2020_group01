@@ -53,6 +53,7 @@ my_data_clean_aug %>%
   scale_y_log10() + 
   theme_bw()
 
+
 # I make some nice code :) 
 
 my_data_clean_aug %>%
@@ -63,6 +64,8 @@ my_data_clean_aug %>%
   theme_bw()
 
 
+
+#### LETS GENERATE A MERGING MISTAKE
 
 
 # Write data
