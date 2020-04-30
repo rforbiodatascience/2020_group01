@@ -47,7 +47,11 @@ my_data_clean_aug <- my_data_clean %>%
   mutate(count_norm_signif = case_when(response == "yes" ~ sum(count_normalised_edger))) %>% 
   
   # add estimated_frequency_normalized column 
-  mutate(estimated_frequency_norm =(count_norm_signif*percent_pe/count_norm_signif))
+  mutate(estimated_frequency_norm =(count_norm_signif*percent_pe/count_norm_signif)) %>% 
+  
+  # add identifier column
+  mutate(identifier = paste(neoepitope_sequence, hla, sep = "_"),
+         identifier = paste(identifier, cell_line, sep = "_"))
 
 
 # Write data

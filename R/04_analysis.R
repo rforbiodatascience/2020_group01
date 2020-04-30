@@ -12,11 +12,14 @@ source(file = "R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
-my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
+my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv") 
+
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-my_data_clean_aug %>% ...
+my_data_clean_aug<- my_data_clean_aug %>% 
+  group_by(response) %>% 
+  distinct(., identifier, .keep_all = TRUE)
 
 # Model data
 # ------------------------------------------------------------------------------
@@ -53,7 +56,16 @@ my_data_clean_aug %>%
   scale_y_log10() + 
   theme_bw()
 
-#### LETS GENERATE A MERGING MISTAKE
+#### Trial linear model
+library(modelr)
+options(na.action = na.warn)
+
+mod_diamond <- lm(mut_mhcrank_el ~ expression_score, data = my_data_clean_aug)
+
+my_data_clean_aug %>% 
+  ggplot() +
+  geom_point(aes(x = mut_mhcrank_el, y = expression_score))
+
 
 # Write data
 # ------------------------------------------------------------------------------
