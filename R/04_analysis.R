@@ -17,7 +17,7 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-my_data_clean_aug<- my_data_clean_aug %>% 
+data_single_peptides <- my_data_clean_aug %>% 
   group_by(response) %>% 
   distinct(., identifier, .keep_all = TRUE)
 
@@ -49,6 +49,21 @@ my_data_clean_aug %>% filter(cell_line=="4T1") %>%
 
 
 ## new thing for bar plot missense mutatio 
+bar_plot_func <- function(num) {
+  my_data_clean_aug %>%
+    filter(str_length(mut_peptide)==num,mutation_consequence=="M") %>% 
+    ggplot(aes(x=peptide_position)) + 
+    geom_bar(aes(fill = response), stat = "count")+
+    scale_y_log10() + 
+    theme_bw()
+  
+}
+
+bar_plot_func(9) +
+  facet_grid(vars(cell_line))
+
+
+
 my_data_clean_aug %>%
   filter(str_length(mut_peptide)==9,mutation_consequence=="M") %>% 
   ggplot(aes(x=peptide_position)) + 
