@@ -27,22 +27,22 @@ ui <- fluidPage(
     sidebarPanel(
       # Select variable for y-axis
       selectInput(inputId = "y", label = "Y-axis:",
-                  choices = c('NULL',colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity")]))
+                  choices = c(colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity")]))
       ),
       # Select variable for x-axis
       selectInput(inputId = "x", label = "X-axis:",
-                  choices = c('NULL',colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity","response","hla","mutation_consequence")]))
+                  choices = c(colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity","response","hla","mutation_consequence")]))
       ),
       selectInput(inputId = "ColorVar", label = "Color stuff",
-                  choices = c('NULL',colnames(Plotting_data[,c("hla","mutation_consequence","response","organ")])),
+                  choices = c(colnames(Plotting_data[,c("hla","mutation_consequence","response","organ")])),
                   
       ),
       selectInput(inputId = "alpha", label = "alpha",
-                  choices = c('NULL',colnames(Plotting_data[,c("response")]))
+                  choices = c(colnames(Plotting_data[,c("response")]))
                   ),
       selectInput(inputId = "facet", label = "facet",
-                  choices = c('NULL',colnames(Plotting_data[,c("response")]))
-      ),
+                  choices = c("none",colnames(Plotting_data[,c("response")]))
+                  , selected = "response"),
       selectInput("plot.type","Plot Type:",
                   list(boxplot = "boxplot", dotplot = "dotplot")
       ),
@@ -83,6 +83,7 @@ server <- function(input, output) {
              "boxplot" 	= 	"Boxplot",
              "dotplot" =	"dotplot")
     })
+    if(input$facet!="none")
     plot.type<-switch(input$plot.type,
                       "boxplot" 	= Plotting_data %>% ggplot(aes_string(x = input$x, y = input$y)) +
                         geom_boxplot(aes_string(color = input$ColorVar), alpha=0.5) + 
@@ -90,10 +91,20 @@ server <- function(input, output) {
                         facet_grid(~get(input$facet)),
                     
                       "dotplot" = Plotting_data %>%	ggplot(aes_string(x = input$x, y = input$y)) +
-                        geom_point(aes_string(color = input$ColorVar, alpha= input$alpha))) +
+                        geom_point(aes_string(color = input$ColorVar, alpha= input$alpha)) +
                         theme_bw() + 
-      facet_grid(~get(input$facet))
+      facet_grid(~get(input$facet)))
     
+    if(input$facet=="none")
+      plot.type<-switch(input$plot.type,
+                        "boxplot" 	= Plotting_data %>% ggplot(aes_string(x = input$x, y = input$y)) +
+                          geom_boxplot(aes_string(color = input$ColorVar), alpha=0.5) + 
+                          theme_bw() ,
+                        
+                        "dotplot" = Plotting_data %>%	ggplot(aes_string(x = input$x, y = input$y)) +
+                          geom_point(aes_string(color = input$ColorVar, alpha= input$alpha)) +
+                          theme_bw() )
+      
     if(input$logarithmicX)
       plot.type <- plot.type + scale_x_log10()
     
@@ -109,5 +120,12 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 
 ###########################################
+
+
+
+my_data_clean_aug %>% group_split(cell_line) %>% select(sample)
+
+
+
 
 
