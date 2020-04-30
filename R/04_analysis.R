@@ -67,6 +67,20 @@ my_data_clean_aug %>%
   geom_point(aes(x = mut_mhcrank_el, y = expression_score))
 
 
+
+# I make some nice code :) 
+
+my_data_clean_aug %>%
+  filter(str_length(mut_peptide)==10,mutation_consequence=="M") %>% 
+  ggplot(aes(x=peptide_position)) + 
+  geom_bar(aes(fill = response), stat = "count")+
+  scale_y_log10() + 
+  theme_bw()
+
+
+
+
+
 # Write data
 # ------------------------------------------------------------------------------
 write_tsv(...)
