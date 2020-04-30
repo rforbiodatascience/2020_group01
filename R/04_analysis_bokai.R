@@ -27,30 +27,42 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 #my_data_clean_aug %>% ...
 
 
-#1.	
-ggplot(data =my_data_clean_aug,
-       mapping = aes(x=Mut_MHCrank_EL, y= Norm_MHCrank_EL) )+
-  geom_point(aes(color=response, alpha = response))+
-  scale_y_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
-  scale_x_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
-  labs(title= "Elution rank score of neoepitope vs WT epitope", x= "Neoepitope elution rank ", y="WT epitope elution rank")
+view(my_data_clean_aug)
 
+colnames(my_data_clean_aug)
+#scatterplot_function
+
+scatterplot_function <- function(x,y) {  my_data_clean_aug %>% 
+    ggplot(mapping = aes_string(x = x, y = y)) +
+    geom_point(aes(color=response, alpha = response))+
+    scale_y_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
+    scale_x_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
+    labs(title= "Elution rank score of neoepitope vs WT epitope", x= "Neoepitope elution rank ", y="WT epitope elution rank")
+  }
+
+
+#1.
+
+scatterplot_function('mut_mhcrank_el','norm_mhcrank_el')
 
 #2.
-ggplot(data =my_data_clean_aug,
-       mapping = aes(x=Mut_MHCrank_BA,y= Norm_MHCrank_BA) )+
-  geom_point(aes(color=response, alpha = response))+
-  labs( titile= "", x= "")
 
+scatterplot_function('mut_mhcrank_ba', 'norm_mhcrank_ba')
 
 #3.
-ggplot(data =my_data_clean_aug,
-       mapping = aes(x=Mut_MHCrank_EL,y= Expression_Level) )+
-  geom_point(aes(color=response, alpha = response))+
-  labs( titile= "",x= "")
 
-# Write data
-# ------------------------------------------------------------------------------
+scatterplot_function('mut_mhcrank_el', 'expression_level')
+
+
+
+
+
+
+
+
+
+
+
 
 
 
