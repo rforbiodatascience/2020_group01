@@ -36,6 +36,16 @@ my_data_clean_aug %>%
   geom_point() +
   geom_text(my_data_clean_aug[my_data_clean_aug$response == "yes",], mapping = aes(label = Peptide.name))
 
+
+######
+
+
+my_data_clean_aug %>% filter(Mutation_Consequence=="M", str_length(Mut_peptide)==9) %>% 
+  ggplot(aes(x=peptide_position))+
+  geom_bar(aes(fill = response),stat = "count") +
+  scale_y_log10()
+
+
 # Write data
 # ------------------------------------------------------------------------------
 write_tsv(...)
