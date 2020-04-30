@@ -24,6 +24,25 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Visualise data
 # ------------------------------------------------------------------------------
+
+# create box_function for boxplot
+box_function <- function(x,y) {  
+  my_data_clean_aug %>% 
+    ggplot(mapping = aes_string(x = x, y = y)) +
+    geom_boxplot(aes(fill = response)) }
+
+# boxplot of mutated elution vs response, facet by cell line
+box_function('response','mut_mhcrank_el') +
+  facet_wrap(cell_line~.) +
+  labs(title ="Box plot of Mutated Elution vs Response (by Cell Line)", x = "Response", y = "Mutated Elution (Rank score)")
+
+# boxplot of self-similarity vs response, facet by cell line
+box_function('response','self_similarity') +
+  facet_wrap(cell_line~.) +
+  labs(title ="Box plot of Self Similarity vs Response (by Cell Line)", x = "Response", y = "Self Similarity")
+
+# ------------------------------------------------------------------------------
+
 treatment_names <- list(
   'no'="Treatment: No",
   'yes'="Treatment: Yes"
@@ -33,68 +52,43 @@ treatment_labeller <- function(variable,value){
   return(treatment_names[value])
 }
 
-# change
-box_function <- function(x,y) {  my_data_clean_aug %>% 
-  ggplot(mapping = aes_string(x = x, y = y)) +
-  geom_boxplot(aes(fill = response)) }
-
-box_function('response','mut_mhcrank_el')
-
-
-##Geom_boxplot self-similarity on y and x = response yes and no, facet by treatment 
-my_data_clean_aug %>% 
-  ggplot(mapping = aes(x = response, y = Self_Similarity, fill = response)) +
-  geom_boxplot() +
+# boxplot of mutated elution vs response, facet by treatment
+box_function('response','mut_mhcrank_el') +
   facet_wrap(treatment~., labeller=treatment_labeller) +
-  labs(title ="Box plot of Self-Similarity vs Response", x = "Response", y = "Self-Similarity")
+  labs(title ="Box plot of Mutated Elution vs Response (by Treatment)", x = "Response", y = "Mutated Elution (Rank score)")
 
-##Geom_boxplot Mut_rank_el on y and x = response yes and no, facet by treatment
-my_data_clean_aug %>% 
-  ggplot(mapping = aes(x = response, y = Mut_MHCrank_EL)) +
-  geom_boxplot(fill="steelblue") +
+# boxplot of self-similarity vs response, facet by treatment
+box_function('response','self_similarity') +
   facet_wrap(treatment~., labeller=treatment_labeller) +
-  labs(title ="Box plot of Mutation Elution (Rank score) vs Response", x = "Response", y = "Mutated Elution (Rank score)")
+  labs(title ="Box plot of Self Similarity vs Response (by Treatment)", x = "Response", y = "Self Similarity")
 
-##Bar plot illustrating the frequency of mutant position with use of column peptide_position
-lib <- matrix(nrow = 1, ncol = 11)
-colnames(lib) <- c("pos1","pos2","pos3","pos4","pos5","pos6","pos7","pos8","pos9","pos10","pos11")
-lib[1, ] <- c(0,0,0,0,0,0,0,0,0,0,0)
-lib <- as.data.frame(lib)
+# ------------------------------------------------------------------------------
 
-for (pos in 1:length(lib)) {
-  for (position in my_data_clean_aug$peptide_position) {
-    if (grepl(":", position)==T) {
-      pos1 <-  as.numeric(str_split(position, ':')[[1]][1]  )
-      pos2 <-  as.numeric( str_split(position, ':')[[1]][2]  )
-      posistions <- pos1:pos2
-      if (pos %in% posistions) {
-        lib[,pos] = lib[,pos]+1}
-    }
-    else if (grepl(":", position)==F) {
-      print(position)
-      position <- as.numeric(position)
-      if (pos %in% position) {
-        lib[,pos] = lib[,pos]+1 }
-    }
-  }
+# create barplot_func for barplot
+barplot_func <- function(num) {
+  my_data_clean_aug %>%
+    filter(str_length(mut_peptide)==num, mutation_consequence=="M") %>% 
+    ggplot(aes(x=peptide_position)) + 
+    geom_bar(aes(fill = response), stat = "count")+
+    scale_y_log10() + 
+    theme_bw()
   
 }
 
-lib <- as.data.frame(t(lib))
-lib$pos <- rownames(lib)
+# barplot of count vs peptide position, facet by cell line; str_length=10
+barplot_func(10) +
+  facet_wrap(cell_line~.) +
+  labs(title ="Bar plot of Peptide Position (by Cell Line)", x = "Peptide Position", y = "Count")
 
-ggplot(lib, aes(x=factor(pos,
-                         levels = c("pos1" , "pos2" , "pos3" , "pos4" , "pos5" , "pos6" ,"pos7" , "pos8" , "pos9" , "pos10", "pos11")),
-                y=V1)) +
-  geom_bar(stat = "identity", fill="steelblue") +
-  labs(title ="Bar plot of Peptide Position", x = "Peptide Position", y = "Number Changes")
-
-##Bar plot illustrating the number of F(frameshift), M(missense), I(inframe insertion),  
-## D(inframe deletion). Mutations are under "Mutation_Consequence" column.
+# barplot of mutation consequence to illustrate FMID, facet by cell line
+# FMID, i.e. F(frameshift), M(missense), I(inframe insertion), D(inframe deletion)
 my_data_clean_aug %>% 
-  ggplot(mapping = aes(x = Mutation_Consequence)) +
-  geom_bar(fill="steelblue") +
-  labs(title ="Bar plot of Mutation Consequence", x = "Mutation Consequence", y = "Count")
+  ggplot(aes(x = mutation_consequence)) +
+  geom_bar(aes(fill = response), stat = "count") +
+  scale_y_log10() +
+  theme_bw() +
+  facet_wrap(cell_line~.) +
+  labs(title ="Bar plot of Mutation Consequence (by Cell Line)", x = "Mutation Consequence", y = "Count")
 
 # Write data
 # ------------------------------------------------------------------------------
