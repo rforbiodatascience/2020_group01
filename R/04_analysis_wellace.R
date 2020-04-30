@@ -80,6 +80,8 @@ barplot_func(10) +
   facet_wrap(cell_line~.) +
   labs(title ="Bar plot of Peptide Position (by Cell Line)", x = "Peptide Position", y = "Count")
 
+# ------------------------------------------------------------------------------
+
 # barplot of mutation consequence to illustrate FMID, facet by cell line
 # FMID, i.e. F(frameshift), M(missense), I(inframe insertion), D(inframe deletion)
 my_data_clean_aug %>% 
