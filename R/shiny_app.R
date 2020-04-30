@@ -27,18 +27,21 @@ ui <- fluidPage(
     sidebarPanel(
       # Select variable for y-axis
       selectInput(inputId = "y", label = "Y-axis:",
-                  choices = colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity")])
+                  choices = c('NULL',colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity")]))
       ),
       # Select variable for x-axis
       selectInput(inputId = "x", label = "X-axis:",
-                  choices = c(colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity","response","hla","mutation_consequence")]))
+                  choices = c('NULL',colnames(Plotting_data[,c("expression_level","mut_mhcscore_el","norm_mhcrank_el" ,"self_similarity","response","hla","mutation_consequence")]))
       ),
       selectInput(inputId = "ColorVar", label = "Color stuff",
-                  choices = c(colnames(Plotting_data[,c("hla","mutation_consequence","response","organ")])),
+                  choices = c('NULL',colnames(Plotting_data[,c("hla","mutation_consequence","response","organ")])),
                   
       ),
       selectInput(inputId = "alpha", label = "alpha",
-                  choices = c("",colnames(Plotting_data[,c("response")]))
+                  choices = c('NULL',colnames(Plotting_data[,c("response")]))
+                  ),
+      selectInput(inputId = "facet", label = "facet",
+                  choices = c('NULL',colnames(Plotting_data[,c("response")]))
       ),
       selectInput("plot.type","Plot Type:",
                   list(boxplot = "boxplot", dotplot = "dotplot")
@@ -66,7 +69,6 @@ ui <- fluidPage(
     )
   )
 )
-
 # Define server function required to create the scatterplot
 server <- function(input, output) {
   
@@ -84,11 +86,13 @@ server <- function(input, output) {
     plot.type<-switch(input$plot.type,
                       "boxplot" 	= Plotting_data %>% ggplot(aes_string(x = input$x, y = input$y)) +
                         geom_boxplot(aes_string(color = input$ColorVar), alpha=0.5) + 
-                        theme_bw(),
+                        theme_bw() + 
+                        facet_grid(~get(input$facet)),
                     
                       "dotplot" = Plotting_data %>%	ggplot(aes_string(x = input$x, y = input$y)) +
                         geom_point(aes_string(color = input$ColorVar, alpha= input$alpha))) +
-                        theme_bw()
+                        theme_bw() + 
+      facet_grid(~get(input$facet))
     
     if(input$logarithmicX)
       plot.type <- plot.type + scale_x_log10()
@@ -105,4 +109,5 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 
 ###########################################
+
 
