@@ -53,6 +53,8 @@ my_data_clean_aug %>%
   scale_y_log10() + 
   theme_bw()
 
+#### LETS GENERATE A MERGING MISTAKE
+
 # Write data
 # ------------------------------------------------------------------------------
 write_tsv(...)
