@@ -33,6 +33,13 @@ treatment_labeller <- function(variable,value){
   return(treatment_names[value])
 }
 
+box_function <- function(x,y) {  my_data_clean_aug %>% 
+  ggplot(mapping = aes_string(x = x, y = y)) +
+  geom_boxplot(aes(fill = response)) }
+
+box_function('response','mut_mhcrank_el')
+
+
 ##Geom_boxplot self-similarity on y and x = response yes and no, facet by treatment 
 my_data_clean_aug %>% 
   ggplot(mapping = aes(x = response, y = Self_Similarity, fill = response)) +
