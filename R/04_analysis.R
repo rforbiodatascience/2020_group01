@@ -24,19 +24,20 @@ my_data_clean_aug %>% ...
 
 # Visualise data
 # ------------------------------------------------------------------------------
-my_data_clean_aug %>% 
-  ggplot(., aes(Peptide.name, estimated_frequency, colour=sample)) +
+my_data_clean_aug %>% filter(cell_line=="CT26") %>% 
+  ggplot(., aes(peptide_name, estimated_frequency, colour=sample)) +
   geom_point() +
   geom_text(my_data_clean_aug %>% 
-              filter(response == "yes"), mapping = aes(label = Peptide.name))
-  #facet_grid(vars(response))
+              filter(response == "yes"), mapping = aes(label = peptide_name)) +
+  facet_grid(vars(hla), vars(sample))
 
 # need to split axes until 1.5 to compare with estimated_frequency
-my_data_clean_aug %>% 
+my_data_clean_aug %>% filter(cell_line=="CT26") %>% 
   ggplot(., aes(Peptide.name, estimated_frequency_norm, colour=response)) +
   geom_point() +
   geom_text(my_data_clean_aug %>% 
-            filter(response == "yes"), mapping = aes(label = Peptide.name))
+            filter(response == "yes"), mapping = aes(label = Peptide.name)) +
+  facet_grid(vars(hla), vars(sample))
             
 # Write data
 # ------------------------------------------------------------------------------
