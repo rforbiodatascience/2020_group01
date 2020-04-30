@@ -5,7 +5,6 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library("tidyverse")
-library(ggseqlogo)
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -82,17 +81,6 @@ my_data_clean_aug %>%
   geom_bar(aes(fill = response), stat = "count")+
   scale_y_log10() + 
   theme_bw()
-
-## ggseq logos
-my_data_clean_aug %>% 
-  filter(str_length(Mut_peptide)==9,response=="yes",Mutation_Consequence=="M") %>% 
-  select(Mut_peptide) %>% 
-  ggseqlogo()
-
-my_data_clean_aug %>% 
-  filter(str_length(Mut_peptide)==9,response=="no",Mutation_Consequence=="M") %>% sample_n(20) %>% 
-  select(Mut_peptide) %>% 
-  ggseqlogo()
 
 
 
