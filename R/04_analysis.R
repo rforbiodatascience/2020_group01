@@ -5,6 +5,7 @@ rm(list = ls())
 # Load libraries
 # ------------------------------------------------------------------------------
 library("tidyverse")
+library("ggrepel")
 
 # Define functions
 # ------------------------------------------------------------------------------
@@ -24,6 +25,20 @@ my_data_clean_aug %>% ...
 
 # Visualise data
 # ------------------------------------------------------------------------------
+data_peptides <- my_data_clean_aug %>% 
+  group_by(response) %>% 
+  distinct(identifier, .keep_all = T)
+
+
+my_data_clean_aug %>% filter(cell_line == "CT26") %>% 
+  ggplot(., aes(mut_mhcrank_el, expression_level)) +
+  geom_point(aes(colour = response, alpha = response, size = estimated_frequency_norm))+
+  facet_grid(vars(treatment)) +
+  geom_text_repel(my_data_clean_aug %>% 
+            filter(response == "yes", cell_line=="CT26"), 
+            mapping = aes(label = peptide_name))+
+  theme_bw()
+
 
 ## new thing for bar plot missense mutatio 
 bar_plot_func <- function(num) {
@@ -81,8 +96,6 @@ my_data_clean_aug %>%
   geom_bar(aes(fill = response), stat = "count")+
   scale_y_log10() + 
   theme_bw()
-
-
 
 
 
