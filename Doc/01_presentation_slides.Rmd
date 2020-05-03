@@ -4,7 +4,6 @@ author: "Group 01: Sara, Annie, Wellace and Bokai"
 output:
   ioslides_presentation:
     logo: ../../2020_group01_real_version03/Doc/R_for_bio_data_science_hex_logo_quadratic_small.png
-  slidy_presentation: default
 always_allow_html: yes
 ---
 
