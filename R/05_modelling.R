@@ -56,3 +56,17 @@ plot(perf,colorize=TRUE, main = "self_similarity")
 dev.off()
 
 
+
+
+#
+
+#### Trial linear model
+library(modelr)
+options(na.action = na.warn)
+
+mod_diamond <- lm(mut_mhcrank_el ~ expression_score, data = my_data_clean_aug)
+
+my_data_clean_aug %>% 
+  ggplot() +
+  geom_point(aes(x = mut_mhcrank_el, y = expression_score))
+

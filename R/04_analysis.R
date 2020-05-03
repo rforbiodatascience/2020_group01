@@ -48,11 +48,17 @@ my_data_clean_aug %>% filter(cell_line == "CT26") %>%
 
 # all nine mer 
 bar_plot_func(9) +
-  facet_grid(vars(cell_line))
+  facet_grid(vars(cell_line))+
+  labs(title ="Bar plot of Peptide Position (by Cell Line)", 
+       x = "Peptide Position", 
+       y = "Count")
 
 # all 10 mer 
 bar_plot_func(10) +
-  facet_grid(vars(cell_line))
+  facet_grid(vars(cell_line))+
+  labs(title ="Bar plot of Peptide Position (by Cell Line)",
+       x = "Peptide Position", 
+       y = "Count")
 
 
 
@@ -100,7 +106,7 @@ box_function('response','self_similarity') +
   facet_wrap(cell_line~.) +
   labs(title ="Box plot of Self Similarity vs Response (by Cell Line)", 
        x = "Response", 
-       y = "Self Similarity")
+       y = "Self Similarity") 
 
 
 treatment_names <- list(
@@ -139,26 +145,6 @@ my_data_clean_aug %>%
   labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
        x = "Mutation Consequence", 
        y = "Count")
-
-
-
-
-
-
-
-
-
-
-#### Trial linear model
-library(modelr)
-options(na.action = na.warn)
-
-mod_diamond <- lm(mut_mhcrank_el ~ expression_score, data = my_data_clean_aug)
-
-my_data_clean_aug %>% 
-  ggplot() +
-  geom_point(aes(x = mut_mhcrank_el, y = expression_score))
-
 
 ################## GGseq logo 
 # ------------------------------------------------------------------------------------------
