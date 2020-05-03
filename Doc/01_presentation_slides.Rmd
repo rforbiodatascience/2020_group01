@@ -13,7 +13,10 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Introduction
+## Introduction {.smaller}
+### Rationale of the study
+
+## Background Information
 ### **Neoepitopes derived from somatic mutations in the tumor**
 
 - <font size="4">High tumor mutational burden (TMB) correlates with neopeptide expression</font>
@@ -58,126 +61,113 @@ my_data_clean_aug <- read_tsv(file = "../../2020_group01_real_version04/data/03_
 
 ```
 
-<img src="../../2020_group01_real_version04/Doc/06_images.png" height="310px" width="790px" />
+![](06_images.png)
 
-## Objective: What characteristics make neoepitopes elicit tumor-specific CD8 T cell responses?
-```{r, include=FALSE}
-library(xaringan)
-```
-.pull-left[
+## Our Data
+![](06.5_images.png)
+
+## Objective
+#### What characteristics make neoepitopes elicit tumor-specific CD8 T cell responses?
 - Combine xx_library_mupexi file with xx_barracoda file.
 - Plot different characteristics of the responses vs no-responses neoepitopes.
 - Store data wrangling and plotting functions into an R package.
 - Develop a simple Shinny app to visualize the plots.
 - Train an ANN to predict responses from the response/no response data
-]
 
-.pull-right[
+## Objective
 ![](07_images.png)
-]
 
+## Project Roadmap
+![](08_images.png)
 
-## Getting Started
+## Project Roadmap
+![](09_images.png)
 
-- Create a new R Markdown file in RStudio by going to  
-File > New File > R Markdown...
-- Click the "presentation" tab
-- Enter a title, author, and select what kind of slideshow you ultimately want (this can all be changed later)
+## 00_doit
+**Raw files**
+```
+# Run all scripts
+# ------------------------------------------------------------------------------
+source(file = "R/01_load.R")
+source(file = "R/02_clean.R")
+source(file = "R/03_augment.R")
+source(file = "R/04_analysis.R")
+```
 
-## Getting Started
-The beginning of an R Markdown file looks like this:<br><br>
-`---`  
-`title: "Air Quality"`  
-`author: "JHU"`  
-`date: "May 17, 2016"`  
-`output: html_document`  
-`---`<br><br>
-The new document you've created will contain example text and code below this -- delete it for a fresh start.
+## 01_load
 
-## Making Your First Slide
-- Title your first slide using two # signs: <br> `## Insert Title Here`
-- To make a slide without a title, use three asterisks:<br> `***`
-- You can add subheadings with more # signs: <br>
-`### Subheading` or `#### Smaller Subheading`
-- To add a new slide, just add another Title: <br> `## New Slide Title`
-
-## Adding Text
-- Add bullet points to a slide using a hyphen followed by a space: <br>
-`- bullet point`
-- Add sub-points using four spaces and a plus sign:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;`+ sub-point`
-- Add an ordered list by typing the number/letter: <br>
-`1. first point`<br>
-&nbsp;&nbsp;&nbsp;&nbsp;`a) sub-sub-point`
-- Add bullet points that appear one by one (on click) with:<br>
-`>- iterated bullet point`
-
-## Formatting Text
-              Text                               Code in R Markdown
-----------------------------------    ----------------------------------------
-           plain text                              `plain text`  
-           *italics*                               `*italics*`  
-           **bold**                                `**bold**` 
-  [link](http://www.jhsph.edu)          `[link](http://www.jhsph.edu)`  
-          `verbatim code`                          ` `code here` `
- 
-## Embedding R Code
-This is a chunk of R code in R Markdown:<br><br>
-\`\`\`{r} <br>
-`head(airquality)`<br>
-\`\`\`  
-The code gets run, and both the input and output are displayed.
+- Import Barracoda files (and merge)
 ```{r}
-head(airquality)
+colnames(all_ct26_barracoda_raw)
+```
+- Import Mupexi files (and merge)
+```{r}
+colnames(all_ct26_barracoda_raw)
+```
+- Import sample_info and MHC_info sheets
+```{r}
+colnames(all_ct26_barracoda_raw)
+```
+- Merge all into my_data
+```{r}
+colnames(all_ct26_barracoda_raw)
 ```
 
-## Embedding R Code
-To hide the input code, use `echo=FALSE`.<br><br>
-\`\`\`{r, echo=FALSE} <br>
-`head(airquality)`<br>
-\`\`\` 
-```{r, echo=FALSE}
-head(airquality)
-```
-This can be useful for showing plots.
+## 02_clean
+- Remove redundant columns or introduced due to excel file import (as …17)
+- Round numeric colums to 3 decimals
+- Remove control samples that were present in Barracoda but not in Mupexi and introduced NAs in the peptide characteristics
 
-## Embedding R Code
-To show the input code only, use `eval=FALSE`.<br><br>
-\`\`\`{r, eval=FALSE} <br>
-`head(airquality)`<br>
-\`\`\` 
-```{r, eval=FALSE}
-head(airquality)
+**input**
+```{r}
+colnames(mydata)
+```
+**output**
+```{r}
+colnames(my_data_clean)
 ```
 
-## Embedding R Code
-To run the code without showing input or output, use `include=FALSE`. <br><br>
-\`\`\`{r, include=FALSE} <br>
-`library(ggplot2)`<br>
-\`\`\` 
+- Output: **my_data_clean**
 
-## Generating Slideshows
-- Click the **Knit** button at the top of the R Markdown document to generate your new document.
-    + You may be asked to install required packages if you don't already have them installed -- hit "Yes" and RStudio will install them for you
-- You can change the type of document generated by changing the `output` line in the header, or by selecting an output from the **Knit** button's pull-down menu.
+## 03_augment
+- New columns added:
+  + Response
+  + Organ
+  + Treatment
+  + Percent_count.fraction
+  + Estimated_frequency
+ 
+```{r}
+colnames(my_data_clean_aug)
+```
 
-## Generating Slideshows
-- HTML: two options with different looks
-    + `output: ioslides_presentation`
-    + `output: slidy_presentation`
-- PDF: `output: beamer_presentation`  
-- Note: You can specify multiple outputs at the beginning of the R Markdown file if you will need to generate multiple filetypes. 
+- Output: **my_data_clean_augment**
 
-## PDFs and LaTeX
-- To **knit** a PDF slideshow, you will need to install **LaTeX** on your computer
-- LaTeX is a typesetting system that is needed to convert R Markdown into formatted text for PDFs
+## 04_analysis
+- Plotting done is two files to avoid merging problems
+```
+04_analysis.R
+04_analysis_bokai.R
+04_analysis_wellace.R
+```
+```{r}
+scatterplot_function('mut_mhcrank_el','norm_mhcrank_el')+
+  labs(title= "Elution rank score of neoepitope vs WT epitope", x= "Neoepitope elution rank ", y="WT epitope elution rank")
+```
 
-### Downloading and Installing LaTeX
-- *LaTeX* is free
-- LaTeX takes up a lot of space (almost ~2.6 GB download and takes up ~5 GB when installed)
-- Visit [https://www.tug.org/begin.html](https://www.tug.org/begin.html) to download LaTeX for your operating system
-- Depending on your internet connection, it may take a while to download due to its size 
+```{r}
+# boxplot of self-similarity vs response, facet by cell line
+box_function('response','self_similarity') +
+  facet_wrap(cell_line~.) +
+  labs(title ="Box plot of Self Similarity vs Response (by Cell Line)", x = "Response", y = "Self Similarity")
+```
+
+## shiny_app
+- Plotting away :)
+![](10_images.png)
+
+## R packages coming
+
+## Discussion
 
 ## Conclusion
-
-For more information about R Markdown visit http://rmarkdown.rstudio.com/
