@@ -1,10 +1,4 @@
-## R packages 
-#install.packages("devtools")
-library(devtools)
-#install.packages("roxygen2")
+install.packages("devtools")
+library("devtools")
+devtools::install_github("klutometis/roxygen")
 library(roxygen2)
-devtools::install_github("hadley/devtools")
-
-#my_function <- function(x) { x*2}
-
-devtools::create("mypackage") 
