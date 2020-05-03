@@ -3,15 +3,20 @@
 
 
 ### seq logo generater 
-seqloggo_generator <-  function(data =my_data_clean_aug ,
+seqloggo_generator <-  function(data = my_data_clean_aug ,
                                 len = 9,
-                                resp = "yes",
-                                cons = "M",
+                                resp = c("yes","no"),
+                                cons = c("F","M","I","D"),
                                 mouse = c("CT26","4T1")) 
-{ my_data_clean_aug %>% 
+{ p <- my_data_clean_aug %>% 
     filter(str_length(mut_peptide)==len,response==resp,mutation_consequence==cons,cell_line == mouse) %>% 
     select(mut_peptide) %>% 
-    ggseqlogo()}
+    ggseqlogo()
+return(p)
+}
+
+
+
 
 # 
 

@@ -2,6 +2,7 @@ library(ggplot2)
 #install.packages(ggseqlogo)
 library(ggseqlogo)
 library(tidyverse)
+library(cowplot)
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv") 
 
 
@@ -14,13 +15,25 @@ plot_List <- list()
 i=1
 for (num in 9:10) {
   for(r in c("yes","no"))  {
-  p <- seqloggo_generator(my_data_clean_aug, num, r, "M") 
+  p <- seqloggo_generator(my_data_clean_aug, num, r) 
   print(p)
   plot_List[[i]] <- p
   i <- i+1
   }
 }
 
+pdf(file = "Results/GGseq_plot.pdf", width = 12, height = 6)
+ggdraw() +
+  draw_plot(plot_List[[1]], 0, .51, .45, .4) +
+  draw_plot(plot_List[[2]], 0, .0, .45, .4) +
+  draw_plot(plot_List[[3]], .47, .51, .45, .4) +
+  draw_plot(plot_List[[4]], .47, .0, .45, .4) +
+  draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
+
+dev.off()
+
+
+# trash 
 
 
 eightmer_no <- seqloggo_generator(my_data_clean_aug, 8, "no", "M", "CT26") 
