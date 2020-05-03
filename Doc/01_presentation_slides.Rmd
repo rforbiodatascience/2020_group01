@@ -1,10 +1,12 @@
 ---
 title: 22100 - R for Bio Data Science
-subtitle: Project Presentation
+subtitle: Elucidating Characteristics of Immunogenic Neopeptides from Murine Tumors and Cell Line Sequencing Data
 author: "Group 01: Sara, Annie, Wellace and Bokai"
 output:
   ioslides_presentation:
     logo: ../../2020_group01_real_version04/Doc/R_for_bio_data_science_hex_logo_quadratic_small.png
+    widescreen: true
+    smaller: true
 ---
 
 ```{r setup, include=FALSE}
@@ -12,11 +14,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Introduction
-
-**Project Title: **Elucidating Characteristics of Immunogenic Neopeptides from Murine Tumors and Cell Line Sequencing Data
-
-## 
-#### **Neoepitopes derived from somatic mutations in the tumor**
+### **Neoepitopes derived from somatic mutations in the tumor**
 
 - <font size="4">High tumor mutational burden (TMB) correlates with neopeptide expression</font>
 - <font size="4">They allow the distinction between healthy vs tumor cells</font>
@@ -61,6 +59,23 @@ my_data_clean_aug <- read_tsv(file = "../../2020_group01_real_version04/data/03_
 ```
 
 <img src="../../2020_group01_real_version04/Doc/06_images.png" height="310px" width="790px" />
+
+## Objective: What characteristics make neoepitopes elicit tumor-specific CD8 T cell responses?
+```{r, include=FALSE}
+library(xaringan)
+```
+.pull-left[
+- Combine xx_library_mupexi file with xx_barracoda file.
+- Plot different characteristics of the responses vs no-responses neoepitopes.
+- Store data wrangling and plotting functions into an R package.
+- Develop a simple Shinny app to visualize the plots.
+- Train an ANN to predict responses from the response/no response data
+]
+
+.pull-right[
+![](07_images.png)
+]
+
 
 ## Getting Started
 
