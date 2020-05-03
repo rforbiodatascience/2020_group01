@@ -22,17 +22,17 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-
-# Model data
-# ------------------------------------------------------------------------------
-my_data_clean_aug %>% ...
-
-# Visualise data
-# ------------------------------------------------------------------------------
-data_peptides <- my_data_clean_aug %>% 
+# select unique peptides 
+data_single_peptides <- my_data_clean_aug %>% 
   group_by(response) %>% 
   distinct(identifier, .keep_all = T)
 
+# Model data
+# ------------------------------------------------------------------------------
+# my_data_clean_aug %>% ...
+
+# Visualise data
+# ------------------------------------------------------------------------------
 
 my_data_clean_aug %>% filter(cell_line == "CT26") %>% 
   ggplot(., aes(mut_mhcrank_el, expression_level)) +

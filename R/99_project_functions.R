@@ -22,10 +22,9 @@ bar_plot_func <- function(num) {
     ggplot(aes(x=peptide_position)) + 
     geom_bar(aes(fill = response), stat = "count")+
     scale_y_log10() + 
+    scale_x_discrete(limits = c(1:num)) +
     theme_bw()
   
 }
 
-
-# 
 
