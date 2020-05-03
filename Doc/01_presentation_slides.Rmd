@@ -43,7 +43,6 @@ knitr::opts_chunk$set(echo = FALSE)
 <img src="../../2020_group01_real_version04/Doc/05_images.png" height="360px" width="790px" />
 
 ## Our Data
-- **xx_library_mupexi file:** PREDICTION OF NEOEPITOPES
 ```{r, include=FALSE}
 library("tidyverse")
 library(readxl)
@@ -55,13 +54,13 @@ source(file = "../../2020_group01_real_version04/R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
+my_data <- read_tsv(file = "../../2020_group01_real_version04/data/01_my_data.tsv")
+my_data_clean <- read_tsv(file = "../../2020_group01_real_version04/data/02_my_data_clean.tsv")
 my_data_clean_aug <- read_tsv(file = "../../2020_group01_real_version04/data/03_my_data_clean_aug.tsv") 
 
 ```
-```{r}
-colnames(ct26_library_mupexi)
-```
 
+<img src="../../2020_group01_real_version04/Doc/06_images.png" height="310px" width="790px" />
 
 ## Getting Started
 
