@@ -44,20 +44,15 @@ my_data_clean_aug %>% filter(cell_line == "CT26") %>%
   theme_bw()
 
 
-## new thing for bar plot missense mutatio 
-bar_plot_func <- function(num) {
-  my_data_clean_aug %>%
-    filter(str_length(mut_peptide)==num,mutation_consequence=="M") %>% 
-    ggplot(aes(x=peptide_position)) + 
-    geom_bar(aes(fill = response), stat = "count")+
-    scale_y_log10() + 
-    theme_bw()
-  
-}
+## Bar plot for mutaion possition only missense mutaions 
 
+# all nine mer 
 bar_plot_func(9) +
   facet_grid(vars(cell_line))
 
+# all 10 mer 
+bar_plot_func(10) +
+  facet_grid(vars(cell_line))
 
 
 
@@ -72,14 +67,17 @@ data_single_peptides %>%
   theme_bw()
 
 
-## new thing for bar plot missense mutation 
+# ## new thing for bar plot missense mutation 
+# 
+# my_data_clean_aug %>%
+#   filter(str_length(mut_peptide)==9,mutation_consequence=="M") %>% 
+#   ggplot(aes(x=peptide_position)) + 
+#   geom_bar(aes(fill = response), stat = "count")+
+#   scale_y_log10() + 
+#   theme_bw()
 
-my_data_clean_aug %>%
-  filter(str_length(mut_peptide)==9,mutation_consequence=="M") %>% 
-  ggplot(aes(x=peptide_position)) + 
-  geom_bar(aes(fill = response), stat = "count")+
-  scale_y_log10() + 
-  theme_bw()
+
+
 
 #### Trial linear model
 library(modelr)
@@ -91,15 +89,6 @@ my_data_clean_aug %>%
   ggplot() +
   geom_point(aes(x = mut_mhcrank_el, y = expression_score))
 
-
-# I make some nice code :) 
-
-my_data_clean_aug %>%
-  filter(str_length(mut_peptide)==10,mutation_consequence=="M") %>% 
-  ggplot(aes(x=peptide_position)) + 
-  geom_bar(aes(fill = response), stat = "count")+
-  scale_y_log10() + 
-  theme_bw()
 
 ################## GGseq logo 
 # ------------------------------------------------------------------------------------------
