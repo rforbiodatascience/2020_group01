@@ -23,7 +23,7 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 # Wrangle data
 # ------------------------------------------------------------------------------
 # select unique peptides 
-data_single_peptides <- my_data_clean_aug %>% 
+P1 <- data_single_peptides <- my_data_clean_aug %>% 
   group_by(response) %>% 
   distinct(identifier, .keep_all = T)
 
@@ -34,7 +34,7 @@ data_single_peptides <- my_data_clean_aug %>%
 # Visualise data
 # ------------------------------------------------------------------------------
 
-my_data_clean_aug %>% filter(cell_line == "CT26") %>% 
+P2 <- my_data_clean_aug %>% filter(cell_line == "CT26") %>% 
   ggplot(., aes(mut_mhcrank_el, expression_level)) +
   geom_point(aes(colour = response, alpha = response, size = estimated_frequency_norm))+
   facet_grid(vars(treatment)) +
@@ -47,14 +47,14 @@ my_data_clean_aug %>% filter(cell_line == "CT26") %>%
 ## Bar plot for mutaion possition only missense mutaions 
 
 # all nine mer 
-bar_plot_func(9) +
+P3 <- bar_plot_func(9) +
   facet_grid(vars(cell_line))+
   labs(title ="Bar plot of Peptide Position (by Cell Line)", 
        x = "Peptide Position", 
        y = "Count")
 
 # all 10 mer 
-bar_plot_func(10) +
+P4 <- bar_plot_func(10) +
   facet_grid(vars(cell_line))+
   labs(title ="Bar plot of Peptide Position (by Cell Line)",
        x = "Peptide Position", 
@@ -65,7 +65,7 @@ bar_plot_func(10) +
 # No. mutations by HLA faceted by cell_line. This plot was made by Sara because of curiosity.
 # It shows in what MHC allele do the response peptides bind. Most of the responsive peptides
 # bind H2-Kd allele in both cell lines 
-data_single_peptides %>% 
+P5 <- data_single_peptides %>% 
   filter(response == "yes") %>% 
   ggplot(aes(x = hla)) +
   geom_bar(aes(fill = hla), stat = "count") +
@@ -76,33 +76,32 @@ data_single_peptides %>%
 
 #1.
 
-scatterplot_function('mut_mhcrank_el','norm_mhcrank_el')+
+P6 <-scatterplot_function('mut_mhcrank_el','norm_mhcrank_el')+
   labs(title= "Elution rank score of neoepitope vs WT epitope", 
        x= "Neoepitope elution rank ", y="WT epitope elution rank")
 
 #2.
 
-scatterplot_function('mut_mhcrank_ba', 'norm_mhcrank_ba')+
+P7 <- scatterplot_function('mut_mhcrank_ba', 'norm_mhcrank_ba')+
   labs(title= "Barcode rank score of neoepitope vs WT epitope",
        x= "Neoepitope binding affinity rank ", y="WT epitope barcode rank")
 
 #3.
 
-scatterplot_function('mut_mhcrank_el', 'expression_level')+
+P8 <- scatterplot_function('mut_mhcrank_el', 'expression_level')+
   labs(title= "Elution rank score of neoepitope vs Expression level", 
        x= "Neoepitope elution rank ", y="Expression level")
 
 
 
 # boxplot of mutated elution vs response, facet by cell line
-box_function('response','mut_mhcrank_el') +
-  facet_wrap(cell_line~.) +
+P9 <-   facet_wrap(cell_line~.) +
   labs(title ="Box plot of Mutated Elution vs Response (by Cell Line)", 
        x = "Response", 
        y = "Mutated Elution (Rank score)")
 
 # boxplot of self-similarity vs response, facet by cell line
-box_function('response','self_similarity') +
+P10 <- box_function('response','self_similarity') +
   facet_wrap(cell_line~.) +
   labs(title ="Box plot of Self Similarity vs Response (by Cell Line)", 
        x = "Response", 
@@ -121,14 +120,14 @@ treatment_labeller <- function(variable,value){
 
 
 # boxplot of mutated elution vs response, facet by treatment
-box_function('response','mut_mhcrank_el') +
+P11 <- box_function('response','mut_mhcrank_el') +
   facet_wrap(treatment~., labeller=treatment_labeller) +
   labs(title ="Box plot of Mutated Elution vs Response (by Treatment)", 
        x = "Response", 
        y = "Mutated Elution (Rank score)")
 
 # boxplot of self-similarity vs response, facet by treatment
-box_function('response','self_similarity') +
+P12 <- box_function('response','self_similarity') +
   facet_wrap(treatment~., labeller=treatment_labeller) +
   labs(title ="Box plot of Self Similarity vs Response (by Treatment)", 
        x = "Response", 
@@ -136,7 +135,7 @@ box_function('response','self_similarity') +
 
 
 ## missense mutations 
-my_data_clean_aug %>% 
+P13 <- my_data_clean_aug %>% 
   ggplot(aes(x = mutation_consequence)) +
   geom_bar(aes(fill = response), stat = "count") +
   scale_y_log10() +
@@ -162,13 +161,15 @@ for (num in 9:10) {
 
 # plot together 
 pdf(file = "Results/GGseq_plot.pdf", width = 12, height = 6)
-ggdraw() +
+P14 <- ggdraw() +
   draw_plot(plot_List[[1]], 0, .51, .45, .4) +
   draw_plot(plot_List[[2]], 0, .0, .45, .4) +
   draw_plot(plot_List[[3]], .47, .51, .45, .4) +
   draw_plot(plot_List[[4]], .47, .0, .45, .4) +
   draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
 
+pdf(file = "Results/GGseq_plot.pdf", width = 12, height = 6)
+print(P14)
 dev.off()
 
 
