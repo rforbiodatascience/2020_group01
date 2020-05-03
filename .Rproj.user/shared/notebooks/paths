@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/annbor/Documents/2020_group01_real-master_kopi/R/02_clean.R="BAED4722"
 /Users/annbor/Documents/2020_group01_real-master_kopi/R/03_augment.R="8452E2AE"
 /Users/annbor/Documents/2020_group01_real-master_kopi/R/04_analysis.R="E1CF8CB3"
@@ -23,3 +24,9 @@
 /Volumes/SUND/Public/T-cells-and-cancer/SRH group/Group members/Annie+Kamilla/MSKCC_bladder/bin/MSKCC_plots.Rmd="5FEA20E"
 /Volumes/SUND/Public/T-cells-and-cancer/SRH group/Group members/Annie+Vibeke/Scaffold_Vibeke/bin/R_markdown_vibeke.Rmd="25533194"
 /Volumes/SUND/Public/T-cells-and-cancer/SRH group/Group members/Annie/mm909_melanoma/bin/paper_plots.R="CC47E9D7"
+=======
+C:/Users/TPC/Documents/2020_group01_real_version04/Doc/01_presentation_slides.Rmd="93C50CB9"
+C:/Users/TPC/Documents/2020_group01_real_version04/R/01_load.R="1A67CD25"
+C:/Users/TPC/Documents/2020_group01_real_version04/R/02_clean.R="CC020C7"
+C:/Users/TPC/Documents/2020_group01_real_version04/R/03_augment.R="34F8CAA0"
+>>>>>>> ccc5331ccd9b6a12f78be2ed9d55ac4bf4eab853
