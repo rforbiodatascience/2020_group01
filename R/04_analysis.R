@@ -116,6 +116,11 @@ ggdraw() +
 dev.off()
 
 
+# exploring data with shiny app 
+# ------------------------------------------------------------------------------
+source(file = "R/shiny_app.R")
+Exploring_data_shiny(my_data_clean_aug)
+
 
 # Write data
 # ------------------------------------------------------------------------------
