@@ -1,10 +1,10 @@
 ---
-title: "R for Bio Data Science"
+title: 22100 - R for Bio Data Science
+subtitle: Project Presentation
 author: "Group 01: Sara, Annie, Wellace and Bokai"
 output:
   ioslides_presentation:
-    logo: ../../2020_group01_real_version03/Doc/R_for_bio_data_science_hex_logo_quadratic_small.png
-always_allow_html: yes
+    logo: ../../2020_group01_real_version04/Doc/R_for_bio_data_science_hex_logo_quadratic_small.png
 ---
 
 ```{r setup, include=FALSE}
@@ -13,12 +13,55 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Introduction
 
-R Markdown is built into RStudio and allows you to create documents like HTML, PDF, and Word documents from R. With R Markdown, you can embed R code into your documents. 
+**Project Title: **Elucidating Characteristics of Immunogenic Neopeptides from Murine Tumors and Cell Line Sequencing Data
 
-### Why use R Markdown?
-- Turn work in R into more accessible formats
-- Incorporate R code and R plots into documents
-- R Markdown documents are reproducible -- the source code gets rerun every time a document is generated, so if data change or source code changes, the output in the document will change with it. 
+## 
+#### **Neoepitopes derived from somatic mutations in the tumor**
+
+- <font size="4">High tumor mutational burden (TMB) correlates with neopeptide expression</font>
+- <font size="4">They allow the distinction between healthy vs tumor cells</font>
+
+<img src="../../2020_group01_real_version04/Doc/01_images.png" height="264px" width="700px" />
+
+## 
+### **How T Cells see the cancer cells?**
+<img src="../../2020_group01_real_version04/Doc/02_images.png" height="508px" width="730px" />
+
+##
+#### **NeoPepVac: a personalized therapeutic neopeptide-based vaccine**
+<img src="../../2020_group01_real_version04/Doc/03_images.png" height="351px" width="787px" />
+
+##
+#### **Everything starts with a bioinformatician predicting neoepitopes: Mupexi**
+
+- <font size="4">NGS pipeline: neoepitope prediction includes 24 scripts</font>
+
+<img src="../../2020_group01_real_version04/Doc/04_images.png" height="380px" width="790px" />
+
+##
+### **Experimental side**
+<img src="../../2020_group01_real_version04/Doc/05_images.png" height="360px" width="790px" />
+
+## Our Data
+- **xx_library_mupexi file:** PREDICTION OF NEOEPITOPES
+```{r, include=FALSE}
+library("tidyverse")
+library(readxl)
+```
+
+```{r, include=FALSE}
+#file.choose()
+source(file = "../../2020_group01_real_version04/R/99_project_functions.R")
+
+# Load data
+# ------------------------------------------------------------------------------
+my_data_clean_aug <- read_tsv(file = "../../2020_group01_real_version04/data/03_my_data_clean_aug.tsv") 
+
+```
+```{r}
+colnames(ct26_library_mupexi)
+```
+
 
 ## Getting Started
 
