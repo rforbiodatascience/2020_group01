@@ -15,6 +15,44 @@ my_data_clean_aug %>%
   select(mut_peptide) %>% 
   ggseqlogo()
 
+library(ggplot2)
+#install.packages(ggseqlogo)
+library(ggseqlogo)
+my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv") %>% 
+  mutate(peptide_length = str_length(mut_peptide))
+
+
+
+my_data_clean_aug %>% 
+  filter(str_length(mut_peptide)==9,response=="yes",mutation_consequence=="M") %>% 
+  select(mut_peptide) %>% 
+  ggseqlogo()
+
+hola <- my_data_clean_aug %>% select(mut_peptide, cell_line, peptide_length, response)
+
+h <- hola %>% group_split(cell_line, peptide_length, response, keep=T)
+
+ggplot() + geom_logo(seqs_dna) + theme_logo() + 
+  facet_wrap(~seq_group, ncol=4, scales='free_x') 
+
+# Dont know how to strapolate the faceting to data with a different structure
+ggplot() + geom_logo(h) + theme_logo() + 
+  facet_wrap(~seq_group, scales='free_x') 
+
+
+# Done manually - lacking to put them together 
+eightmer_yes <- seqloggo_generator(my_data_clean_aug, 8, "yes", "M", "CT26")
+eightmer_no <- seqloggo_generator(my_data_clean_aug, 8, "no", "M", "CT26")
+
+ninemer_yes <- seqloggo_generator(my_data_clean_aug, 9, "yes", "M", "CT26")
+ninemer_no <- seqloggo_generator(my_data_clean_aug, 9, "no", "M", "CT26")
+
+tenmer_yes <- seqloggo_generator(my_data_clean_aug, 10, "yes", "M", "CT26")
+tenmer_no <- seqloggo_generator(my_data_clean_aug, 10, "no", "M", "CT26")
+
+elevenmer_yes <- seqloggo_generator(my_data_clean_aug, 11, "yes", "M", "CT26")
+elevenmer_no <- seqloggo_generator(my_data_clean_aug, 11, "no", "M", "CT26")
+
 
 
 #### modelling 
