@@ -95,10 +95,10 @@ P8 <- scatterplot_function('mut_mhcrank_el', 'expression_level')+
 
 
 # boxplot of mutated elution vs response, facet by cell line
-P9 <-   facet_wrap(cell_line~.) +
-  labs(title ="Box plot of Mutated Elution vs Response (by Cell Line)", 
-       x = "Response", 
-       y = "Mutated Elution (Rank score)")
+P9 <-  box_function('response','mut_mhcrank_el') +
+  facet_wrap(cell_line~.) +
+  labs(title ="Box plot of Mutated Elution vs Response (by Cell Line)", x = "Response", y = "Mutated Elution (Rank score)")
+
 
 # boxplot of self-similarity vs response, facet by cell line
 P10 <- box_function('response','self_similarity') +
@@ -145,33 +145,31 @@ P13 <- my_data_clean_aug %>%
        x = "Mutation Consequence", 
        y = "Count")
 
+
+
 ################## GGseq logo 
 # ------------------------------------------------------------------------------------------
-# plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted 
+#plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
 plot_List <- list()
 i=1
 for (num in 9:10) {
   for(r in c("yes","no"))  {
-    p <- seqloggo_generator(my_data_clean_aug, num, r) 
+    p <- seqloggo_generator(my_data_clean_aug, num, r)
     print(p)
     plot_List[[i]] <- p
     i <- i+1
   }
 }
 
-# plot together 
+# plot together
 pdf(file = "Results/GGseq_plot.pdf", width = 12, height = 6)
-P14 <- ggdraw() +
-  draw_plot(plot_List[[1]], 0, .51, .45, .4) +
-  draw_plot(plot_List[[2]], 0, .0, .45, .4) +
-  draw_plot(plot_List[[3]], .47, .51, .45, .4) +
-  draw_plot(plot_List[[4]], .47, .0, .45, .4) +
-  draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
-
-pdf(file = "Results/GGseq_plot.pdf", width = 12, height = 6)
-print(P14)
+ggdraw() +
+   draw_plot(plot_List[[1]], 0, .51, .45, .4) +
+   draw_plot(plot_List[[2]], 0, .0, .45, .4) +
+   draw_plot(plot_List[[3]], .47, .51, .45, .4) +
+   draw_plot(plot_List[[4]], .47, .0, .45, .4) +
+   draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
 dev.off()
-
 
 # exploring data with shiny app 
 # ------------------------------------------------------------------------------
@@ -181,5 +179,5 @@ Exploring_data_shiny(my_data_clean_aug)
 
 # Write data
 # ------------------------------------------------------------------------------
-write_tsv(...)
-ggsave(...)
+#write_tsv(...)
+#ggsave(...)
