@@ -67,14 +67,84 @@ data_single_peptides %>%
   theme_bw()
 
 
-# ## new thing for bar plot missense mutation 
-# 
-# my_data_clean_aug %>%
-#   filter(str_length(mut_peptide)==9,mutation_consequence=="M") %>% 
-#   ggplot(aes(x=peptide_position)) + 
-#   geom_bar(aes(fill = response), stat = "count")+
-#   scale_y_log10() + 
-#   theme_bw()
+
+#1.
+
+scatterplot_function('mut_mhcrank_el','norm_mhcrank_el')+
+  labs(title= "Elution rank score of neoepitope vs WT epitope", 
+       x= "Neoepitope elution rank ", y="WT epitope elution rank")
+
+#2.
+
+scatterplot_function('mut_mhcrank_ba', 'norm_mhcrank_ba')+
+  labs(title= "Barcode rank score of neoepitope vs WT epitope",
+       x= "Neoepitope binding affinity rank ", y="WT epitope barcode rank")
+
+#3.
+
+scatterplot_function('mut_mhcrank_el', 'expression_level')+
+  labs(title= "Elution rank score of neoepitope vs Expression level", 
+       x= "Neoepitope elution rank ", y="Expression level")
+
+
+
+# boxplot of mutated elution vs response, facet by cell line
+box_function('response','mut_mhcrank_el') +
+  facet_wrap(cell_line~.) +
+  labs(title ="Box plot of Mutated Elution vs Response (by Cell Line)", 
+       x = "Response", 
+       y = "Mutated Elution (Rank score)")
+
+# boxplot of self-similarity vs response, facet by cell line
+box_function('response','self_similarity') +
+  facet_wrap(cell_line~.) +
+  labs(title ="Box plot of Self Similarity vs Response (by Cell Line)", 
+       x = "Response", 
+       y = "Self Similarity")
+
+
+treatment_names <- list(
+  'no'="Treatment: No",
+  'yes'="Treatment: Yes"
+)
+
+treatment_labeller <- function(variable,value){
+  return(treatment_names[value])
+}
+
+
+
+# boxplot of mutated elution vs response, facet by treatment
+box_function('response','mut_mhcrank_el') +
+  facet_wrap(treatment~., labeller=treatment_labeller) +
+  labs(title ="Box plot of Mutated Elution vs Response (by Treatment)", 
+       x = "Response", 
+       y = "Mutated Elution (Rank score)")
+
+# boxplot of self-similarity vs response, facet by treatment
+box_function('response','self_similarity') +
+  facet_wrap(treatment~., labeller=treatment_labeller) +
+  labs(title ="Box plot of Self Similarity vs Response (by Treatment)", 
+       x = "Response", 
+       y = "Self Similarity")
+
+
+## missense mutations 
+my_data_clean_aug %>% 
+  ggplot(aes(x = mutation_consequence)) +
+  geom_bar(aes(fill = response), stat = "count") +
+  scale_y_log10() +
+  theme_bw() +
+  facet_wrap(cell_line~.) +
+  labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
+       x = "Mutation Consequence", 
+       y = "Count")
+
+
+
+
+
+
 
 
 

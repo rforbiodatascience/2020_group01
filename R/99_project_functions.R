@@ -28,3 +28,20 @@ bar_plot_func <- function(num) {
 }
 
 
+
+scatterplot_function <- function(x,y) {  my_data_clean_aug %>% 
+    ggplot(mapping = aes_string(x = x, y = y)) +
+    geom_point(aes(color=response, alpha = response))+
+    scale_y_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
+    scale_x_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))
+}
+
+
+# create box_function for boxplot
+box_function <- function(x,y) {  
+  my_data_clean_aug %>% 
+    ggplot(mapping = aes_string(x = x, y = y)) +
+    geom_boxplot(aes(fill = response)) }
+
+
+
