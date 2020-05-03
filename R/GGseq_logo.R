@@ -9,9 +9,37 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 # ------------------------------------------------------------------------------
 source(file = "R/99_project_functions.R")
 
+# plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted 
+plot_List <- list()
+i=1
+for (num in 9:10) {
+  for(r in c("yes","no"))  {
+  p <- seqloggo_generator(my_data_clean_aug, num, r, "M") 
+  print(p)
+  plot_List[[i]] <- p
+  i <- i+1
+  }
+}
+
+
+
+eightmer_no <- seqloggo_generator(my_data_clean_aug, 8, "no", "M", "CT26") 
+ninemer_yes <- seqloggo_generator(my_data_clean_aug, 11, "yes", "M", "CT26")
+ninemer_no <- seqloggo_generator(my_data_clean_aug, 9, "no", "M", "CT26")
+
+tenmer_yes <- seqloggo_generator(my_data_clean_aug, 10, "yes", "M", "CT26")
+tenmer_no <- seqloggo_generator(my_data_clean_aug, 10, "no", "M", "CT26")
+
+elevenmer_yes <- seqloggo_generator(my_data_clean_aug, 11, "yes", "M", "CT26")
+elevenmer_no <- seqloggo_generator(my_data_clean_aug, 11, "no", "M", "CT26")
+
+
+
+
+
 
 my_data_clean_aug %>% 
-  filter(str_length(mut_peptide)==9,response=="yes",mutation_consequence=="M") %>% 
+  filter(str_length(mut_peptide)==10,response=="yes",mutation_consequence=="M") %>% 
   select(mut_peptide) %>% 
   ggseqlogo()
 
@@ -20,8 +48,7 @@ my_data_clean_aug %>%
   select(mut_peptide) %>% 
   ggseqlogo()
 
-my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv") %>% 
-  mutate(peptide_length = str_length(mut_peptide))
+
 
 
 
@@ -40,20 +67,6 @@ ggplot() + geom_logo(seqs_dna) + theme_logo() +
 # Dont know how to strapolate the faceting to data with a different structure
 ggplot() + geom_logo(h) + theme_logo() + 
   facet_wrap(~seq_group, scales='free_x') 
-
-
-# Done manually - lacking to put them together 
-eightmer_yes <- seqloggo_generator(my_data_clean_aug, 8, "yes", "M", "CT26")
-eightmer_no <- seqloggo_generator(my_data_clean_aug, 8, "no", "M", "CT26")
-
-ninemer_yes <- seqloggo_generator(my_data_clean_aug, 9, "yes", "M", "CT26")
-ninemer_no <- seqloggo_generator(my_data_clean_aug, 9, "no", "M", "CT26")
-
-tenmer_yes <- seqloggo_generator(my_data_clean_aug, 10, "yes", "M", "CT26")
-tenmer_no <- seqloggo_generator(my_data_clean_aug, 10, "no", "M", "CT26")
-
-elevenmer_yes <- seqloggo_generator(my_data_clean_aug, 11, "yes", "M", "CT26")
-elevenmer_no <- seqloggo_generator(my_data_clean_aug, 11, "no", "M", "CT26")
 
 
 
