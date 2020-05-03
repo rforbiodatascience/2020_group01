@@ -1,8 +1,13 @@
 library(ggplot2)
 #install.packages(ggseqlogo)
 library(ggseqlogo)
+library(tidyverse)
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv") 
 
+
+# Define functions
+# ------------------------------------------------------------------------------
+source(file = "R/99_project_functions.R")
 
 
 my_data_clean_aug %>% 
@@ -15,9 +20,6 @@ my_data_clean_aug %>%
   select(mut_peptide) %>% 
   ggseqlogo()
 
-library(ggplot2)
-#install.packages(ggseqlogo)
-library(ggseqlogo)
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv") %>% 
   mutate(peptide_length = str_length(mut_peptide))
 
