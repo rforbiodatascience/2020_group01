@@ -2,7 +2,7 @@
 library(tidyverse)
 library(devtools)
 
-#' Multiply function
+#' bar plot function
 #'
 #' This function can make par plots
 #' @param num

@@ -51,7 +51,11 @@ library(readxl)
 
 ```{r, include=FALSE}
 #file.choose()
-source(file = "../../2020_group01_real_version04/R/99_project_functions.R")
+#source(file = "../../2020_group01_real_version04/R/04_analysis.R")
+#source(file = "../../2020_group01_real_version04/R/99_project_functions.R")
+
+source(file = "R/04_analysis.R")
+source(file = "../../R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
