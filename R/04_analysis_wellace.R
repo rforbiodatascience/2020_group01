@@ -43,23 +43,14 @@ box_function('response','self_similarity') +
 
 # ------------------------------------------------------------------------------
 
-treatment_names <- list(
-  'no'="Treatment: No",
-  'yes'="Treatment: Yes"
-)
-
-treatment_labeller <- function(variable,value){
-  return(treatment_names[value])
-}
-
 # boxplot of mutated elution vs response, facet by treatment
 box_function('response','mut_mhcrank_el') +
-  facet_wrap(treatment~., labeller=treatment_labeller) +
+  facet_wrap(treatment~.) +
   labs(title ="Box plot of Mutated Elution vs Response (by Treatment)", x = "Response", y = "Mutated Elution (Rank score)")
 
 # boxplot of self-similarity vs response, facet by treatment
 box_function('response','self_similarity') +
-  facet_wrap(treatment~., labeller=treatment_labeller) +
+  facet_wrap(treatment~.) +
   labs(title ="Box plot of Self Similarity vs Response (by Treatment)", x = "Response", y = "Self Similarity")
 
 # ------------------------------------------------------------------------------
