@@ -50,7 +50,6 @@ library(readxl)
 ```
 
 ```{r, include=FALSE}
-wd = getwd()
 #file.choose()
 source(file = "../../2020_group01_real_version04/R/04_analysis.R")
 source(file = "../../2020_group01_real_version04/R/99_project_functions.R")
