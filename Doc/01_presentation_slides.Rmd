@@ -4,7 +4,7 @@ subtitle: Elucidating Characteristics of Immunogenic Neopeptides from Murine Tum
 author: "Group 01: Sara, Annie, Wellace and Bokai"
 output:
   ioslides_presentation:
-    logo: ../../Doc/R_for_bio_data_science_hex_logo_quadratic_small.png
+    logo: ../../2020_group01_real_version04/Doc/R_for_bio_data_science_hex_logo_quadratic_small.png
     widescreen: true
     smaller: true
 ---
