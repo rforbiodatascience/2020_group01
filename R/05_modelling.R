@@ -58,7 +58,10 @@ dev.off()
 
 
 
-#
+# linear model 
+mod_diamond <- lm(mut_mhcrank_el ~ expression_score, data = my_data_clean_aug)
+
+
 
 #### Trial linear model
 library(modelr)
