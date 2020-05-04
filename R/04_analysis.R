@@ -15,11 +15,11 @@ library(cowplot)
 # Define functions
 # ------------------------------------------------------------------------------
 wd = getwd()
-source(file = paste0(wd,"/R/99_project_functions.R"))
+source(file = "/R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
-my_data_clean_aug <- read_tsv(paste0(wd,file = "/data/03_my_data_clean_aug.tsv"))
+my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 
 # Wrangle data
