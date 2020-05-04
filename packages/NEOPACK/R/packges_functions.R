@@ -1,5 +1,5 @@
 # packges functions
-
+library(tidyverse)
 
 #' Multiply function
 #'
@@ -8,9 +8,9 @@
 #' @keywords number
 #' @export
 #' @examples
-#' cat_function()
-bar_plot_func <- function(num) {
-  my_data_clean_aug %>%
+#' bar_plot_func()
+bar_plot_func <- function(data,num) {
+  data() %>%
     filter(str_length(mut_peptide)==num,mutation_consequence=="M") %>%
     ggplot(aes(x=peptide_position)) +
     geom_bar(aes(fill = response), stat = "count")+
@@ -19,6 +19,7 @@ bar_plot_func <- function(num) {
     theme_bw()
 
 }
+
 bar_plot_func(9)
 
 setwd("/Users/annbor/Documents/courses/R_course_22100/2020_group01_project/packages/NEOPACK")
