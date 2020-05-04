@@ -22,7 +22,5 @@ bar_plot_func <- function(data,num) {
 
 bar_plot_func(9)
 
-setwd("/Users/annbor/Documents/courses/R_course_22100/2020_group01_project/packages/NEOPACK")
-document()
 
 
