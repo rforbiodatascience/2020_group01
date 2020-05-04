@@ -1,5 +1,6 @@
 # packges functions
 library(tidyverse)
+library(devtools)
 
 #' Multiply function
 #'
@@ -22,5 +23,5 @@ bar_plot_func <- function(data,num) {
 
 bar_plot_func(9)
 
-
+install_github('NEOPACK','annieborch')
 
