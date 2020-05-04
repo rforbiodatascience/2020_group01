@@ -14,7 +14,7 @@ library(cowplot)
 
 # Define functions
 # ------------------------------------------------------------------------------
-source(file = "../R/99_project_functions.R")
+source(file = "R/99_project_functions.R")
 
 # Load data
 # ------------------------------------------------------------------------------
@@ -121,6 +121,7 @@ treatment_labeller <- function(variable,value){
 
 
 # boxplot of mutated elution vs response, facet by treatment
+############################################################ We also need to facet by cell line
 P11 <- box_function('response','mut_mhcrank_el') +
   facet_wrap(treatment~., labeller=treatment_labeller) +
   labs(title ="Box plot of Mutated Elution vs Response (by Treatment)", 
@@ -136,6 +137,7 @@ P12 <- box_function('response','self_similarity') +
 
 
 ## missense mutations 
+############################################################ Set count to not scientific notation
 P13 <- my_data_clean_aug %>% 
   ggplot(aes(x = mutation_consequence)) +
   geom_bar(aes(fill = response), stat = "count") +
