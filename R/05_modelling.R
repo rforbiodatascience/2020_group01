@@ -1,6 +1,5 @@
 
 #### modelling 
-
 library(tidyverse)  # for data manipulation
 library(dlstats)    # for package download stats
 library(pkgsearch)
@@ -20,14 +19,15 @@ data_single_peptides <- my_data_clean_aug %>%
   distinct(identifier, .keep_all = T) %>% 
   ungroup()
 #### downsample negative data 
-X_neg <- data_single_peptides %>% filter(label==0) %>% select(mut_mhcrank_el,self_similarity,expression_level) %>% sample_n(40)
-X_pos <- data_single_peptides %>% filter(label==1) %>% select(mut_mhcrank_el,self_similarity,expression_level)
-X_all <- X_neg %>% bind_rows(., X_pos)
+X_neg <- data_single_peptides %>% filter(label==0) %>% select(mut_mhcrank_el,self_similarity,expression_level,label) %>% sample_n(40)
+X_pos <- data_single_peptides %>% filter(label==1) %>% select(mut_mhcrank_el,self_similarity,expression_level,label)
+X_selected <- rbind(X_pos,X_neg)
+X_all <- X_selected %>% 
+  select(mut_mhcrank_el,self_similarity,expression_level)
 
-#X <- data_single_peptides %>% select(mut_mhcrank_el)
-y <- data_single_peptides$label
-N <- length(rownames(X_all))
-attributeNames <- as.vector(colnames(X_all ))
+y <- X_selected$label
+N <- nrow(X_all)
+attributeNames <- as.vector(colnames(X_all))
 set.seed(1234) # for reproducibility
 # subset dataset by random 
 classNames <- c('1','0')
@@ -40,9 +40,10 @@ colnames(Error_LogReg) <- attributeNames
 # For each crossvalidation fold
 #n=1k
 n=0
-for (var in attributeNames) {
-  X <- X_all %>%  select(var)
-  n =  n=+1
+for (at in attributeNames) {
+  X <- X_selected %>%  select(at)
+  n =  n + 1
+  print(n)
   for(k in 1:N){
     print(paste('Crossvalidation fold ', k, '/', N, sep=''));
   # Extract the training and test set
@@ -51,10 +52,9 @@ for (var in attributeNames) {
     X_test <-   X[k,]# X[CV$subsets[CV$which==k], ]
     y_test <- y[k] #y[CV$subsets[CV$which==k]]
 
-  (fmla <- as.formula(paste("y_train ~ ", var)))
+  (fmla <- as.formula(paste("y_train ~ ", at)))
   # Fit logistic regression model to predict the response
   w_est = glm(fmla,family=binomial(link="logit"), data=X_train)
-  print("hej")
   p = predict(w_est, newdata=X_test,type="response")
   Error_LogReg[k,n] = (round(p,0)==y_test)
   }
@@ -63,12 +63,60 @@ for (var in attributeNames) {
 
 
 
+Error_LogReg %>% 
+  tally(.)
+
+################### model merge 
 
 
-table(Error_LogReg)[1]/1029
+#### downsample negative data 
+X_neg <- data_single_peptides %>% filter(label==0) %>% select(mut_mhcrank_el,self_similarity,expression_level,label) %>% sample_n(40)
+X_pos <- data_single_peptides %>% filter(label==1) %>% select(mut_mhcrank_el,self_similarity,expression_level,label)
+X_selected <- rbind(X_pos,X_neg) 
+X_all <- X_selected %>% 
+  select(mut_mhcrank_el,self_similarity,expression_level)
+
+y <- X_selected$label
+N <- nrow(X_all)
+attributeNames <- as.vector(colnames(X_all))
+set.seed(1234) # for reproducibility
+# subset dataset by random 
+classNames <- c('1','0')
+# Initialize variables
+##
+attributeNames <- colnames(X_all)
+Error_LogReg_merge = rep(NA, times=N)
+#Error_LogReg = rep(NA,times = K*length(attributeNames))
+# For each crossvalidation fold
+#n=1k
+n=0
+for(k in 1:N){
+    print(paste('Crossvalidation fold ', k, '/', N, sep=''));
+    # Extract the training and test set
+    X_train <- X_all [-k,]#X[CV$subsets[CV$which!=k], ]
+    y_train <- y[-k] #y[CV$subsets[CV$which!=k]];
+    X_test <-   X_all [k,]# X[CV$subsets[CV$which==k], ]
+    y_test <- y[k] #y[CV$subsets[CV$which==k]]
+    (fmla <- as.formula(paste("y_train ~ ", paste(attributeNames, collapse= "+"))))
+    # Fit logistic regression model to predict the response
+    w_est = glm(fmla,family=binomial(link="logit"), data=X_train)
+    p = predict(w_est, newdata=X_test,type="response")
+    Error_LogReg_merge[k] = (round(p,0)==y_test)
+  }
+
 
 
 ############# old code 
+
+table(Error_LogReg)[1]/70
+
+
+
+
+
+
+
+
 
 
 
