@@ -134,7 +134,7 @@ P8 <- scatterplot_function(data = my_data_clean_aug %>% filter(response=="yes") 
        x= "Mutant peptide EL %Rank ", 
        y="Expression level", 
        )
-
+ggsave(P8, file = "Results/ESP_vs_EL_rank.png")
 
 # boxplot of mutated elution vs response, facet by cell line
 P9 <-  box_function('response','mut_mhcrank_el') +
@@ -146,14 +146,6 @@ P9 <-  box_function('response','mut_mhcrank_el') +
 
 
 
-
-png(file = "Results/Wt_vs_mut_EL_BA.png", width = 800, height = 400)
-ggdraw() +
-  draw_plot(P6, 0, .0, .45, .95) +
-  draw_plot(P7, .45, .0, .45, .95) +
-  draw_plot(bind_legend, .85, .4, .2, .2) +
-  draw_plot_label(c("A", "B"), c(-0.05,  -0.06), c(1,  .48), size = 22)
-dev.off()
 
 
 
@@ -194,34 +186,34 @@ P13 <- my_data_clean_aug %>%
 
 
 ################## GGseq logo 
-# # ------------------------------------------------------------------------------------------
-# #plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
-# plot_List <- list()
-# i=1
-# for (num in 9:10) {
-#   for(r in c("yes","no"))  {
-#     p <- seqloggo_generator(my_data_clean_aug, num, r)
-#     print(p)
-#     plot_List[[i]] <- p
-#     i <- i+1
-#   }
-# }
-# 
-# # plot together
-# pdf(file = "Results/GGseq_plot.pdf", width = 12, height = 6)
-# ggdraw() +
-#    draw_plot(plot_List[[1]], 0, .51, .45, .4) +
-#    draw_plot(plot_List[[2]], 0, .0, .45, .4) +
-#    draw_plot(plot_List[[3]], .47, .51, .45, .4) +
-#    draw_plot(plot_List[[4]], .47, .0, .45, .4) +
-#    draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
-# dev.off()
-# 
-# # exploring data with shiny app 
-# # ------------------------------------------------------------------------------
-# source(file = "R/shiny_app.R")
-# Exploring_data_shiny(my_data_clean_aug)
-# 
+# ------------------------------------------------------------------------------------------
+#plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
+plot_List <- list()
+i=1
+for (num in 9:10) {
+  for(r in c("yes","no"))  {
+    p <- seqloggo_generator(my_data_clean_aug, num, r)
+    print(p)
+    plot_List[[i]] <- p
+    i <- i+1
+  }
+}
+
+# plot together
+pdf(file = "Results/GGseq_plot.pdf", width = 12, height = 6)
+ggdraw() +
+   draw_plot(plot_List[[1]], 0, .51, .45, .4) +
+   draw_plot(plot_List[[2]], 0, .0, .45, .4) +
+   draw_plot(plot_List[[3]], .47, .51, .45, .4) +
+   draw_plot(plot_List[[4]], .47, .0, .45, .4) +
+   draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
+dev.off()
+
+# exploring data with shiny app
+# ------------------------------------------------------------------------------
+source(file = "R/shiny_app.R")
+Exploring_data_shiny(my_data_clean_aug)
+
 
 # Write data
 # ------------------------------------------------------------------------------
