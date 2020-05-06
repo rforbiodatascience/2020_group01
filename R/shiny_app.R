@@ -138,8 +138,6 @@ shinyApp(ui = ui, server = server)
 
 
 
-my_data_clean_aug %>% group_split(cell_line) %>% select(sample)
-
 
 
 
