@@ -169,6 +169,9 @@ box_function('response','self_similarity') +
 ## shiny_app
 - Plotting away :)
 ![](10_images.png)
+## shiny_app
+- Plotting away :)
+![](../R/P2.png)
 
 ## R packages coming
 
