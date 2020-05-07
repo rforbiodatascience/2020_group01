@@ -14,8 +14,9 @@ library(cowplot)
 
 # Define functions
 # ------------------------------------------------------------------------------
-wd = getwd()
-source(file = "R/99_project_functions.R")
+#wd = getwd()
+#source(file = "R/99_project_functions.R")
+library(barcc)
 
 # Load data
 # ------------------------------------------------------------------------------
@@ -61,14 +62,14 @@ ggsave(P2, filename ="Results/P2.png", width = 12, height = 7)
 ## Bar plot for mutaion possition only missense mutaions 
 
 # all nine mer 
-P3 <- bar_plot_func(9) +
+P3 <- bar_plot_func(my_data_clean_aug, 9) +
   facet_grid(vars(cell_line))+
   labs(x = "Peptide Position", #title ="Bar plot of Peptide Position (by Cell Line)", 
        y = "Count") + 
   theme(legend.position = "none")
 
 # all 10 mer 
-P4 <- bar_plot_func(10) +
+P4 <- bar_plot_func(my_data_clean_aug, 10) +
   facet_grid(vars(cell_line))+
   labs( x = "Peptide Position", #title ="Bar plot of Peptide Position (by Cell Line)",
        y = "Count" ,
@@ -137,7 +138,7 @@ P8 <- scatterplot_function(data = my_data_clean_aug %>% filter(response=="yes") 
 ggsave(P8, file = "Results/ESP_vs_EL_rank.png")
 
 # boxplot of mutated elution vs response, facet by cell line
-P9 <-  box_function('response','mut_mhcrank_el') +
+P9 <-  box_function(my_data_clean_aug, 'response','mut_mhcrank_el') +
   facet_wrap(cell_line~.) +
   labs(title ="Box plot of Mutated Elution vs Response (by Cell Line)",
        x = "Response", 
@@ -151,21 +152,21 @@ P9 <-  box_function('response','mut_mhcrank_el') +
 
 
 # boxplot of self-similarity vs response, facet by cell line
-P10 <- box_function('response','self_similarity') +
+P10 <- box_function(my_data_clean_aug, 'response','self_similarity') +
   facet_wrap(cell_line~.) +
   labs(title ="Box plot of Self Similarity vs Response (by Cell Line)", 
        x = "Response", 
        y = "Self Similarity") 
 
 # boxplot of mutated elution vs response, facet by treatment
-P11 <- box_function('response','mut_mhcrank_el') +
+P11 <- box_function(my_data_clean_aug, 'response','mut_mhcrank_el') +
   facet_wrap(treatment~.) +
   labs(title ="Box plot of Mutated Elution vs Response (by Treatment)", 
        x = "Response", 
        y = "Mutated Elution (Rank score)")
 
 # boxplot of self-similarity vs response, facet by treatment
-P12 <- box_function('response','self_similarity') +
+P12 <- box_function(my_data_clean_aug, 'response','self_similarity') +
   facet_wrap(treatment~.) +
   labs(title ="Box plot of Self Similarity vs Response (by Treatment)", 
        x = "Response", 
