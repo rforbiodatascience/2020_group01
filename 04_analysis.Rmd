@@ -22,26 +22,26 @@ knitr::opts_chunk$set(echo = FALSE)
 - <font size="4">High tumor mutational burden (TMB) correlates with neopeptide expression</font>
 - <font size="4">They allow the distinction between healthy vs tumor cells</font>
 
-<img src="../../Doc/01_images.png" height="264px" width="700px" />
+<img src="Doc/01_images.png" height="264px" width="700px" />
 
 ## 
 ### **How T Cells see the cancer cells?**
-<img src="../../Doc/02_images.png" height="508px" width="730px" />
+<img src="Doc/02_images.png" height="508px" width="730px" />
 
 ##
 #### **NeoPepVac: a personalized therapeutic neopeptide-based vaccine**
-<img src="../../Doc/03_images.png" height="351px" width="787px" />
+<img src="Doc/03_images.png" height="351px" width="787px" />
 
 ##
 #### **Everything starts with a bioinformatician predicting neoepitopes: Mupexi**
 
 - <font size="4">NGS pipeline: neoepitope prediction includes 24 scripts</font>
 
-<img src="../../Doc/04_images.png" height="380px" width="790px" />
+<img src="Doc/04_images.png" height="380px" width="790px" />
 
 ##
 ### **Experimental side**
-<img src="../../Doc/05_images.png" height="360px" width="790px" />
+<img src="Doc/05_images.png" height="360px" width="790px" />
 
 ## Our Data
 ```{r, include=FALSE}
