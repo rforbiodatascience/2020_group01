@@ -200,7 +200,7 @@ for (num in 9:10) {
 }
 
 # plot together
-pdf(file = "Results/GGseq_plot.pdf", width = 12, height = 6)
+png(file = "Results/GGseq_plot.png", width = 1200, height = 600)
 ggdraw() +
    draw_plot(plot_List[[1]], 0, .51, .45, .4) +
    draw_plot(plot_List[[2]], 0, .0, .45, .4) +

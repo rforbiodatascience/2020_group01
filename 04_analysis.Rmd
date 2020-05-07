@@ -88,7 +88,10 @@ library(readxl)
 ## Mutations possition 
 ![](Results/Mutation_bar_plot.png)
 ## SEQ logos 
-![](Results/GGseq_plot.pdf)
+![](Results/GGseq_plot.png)
+## Modelling 
+
+
 
 ## shiny_app
 - Plotting away :)
