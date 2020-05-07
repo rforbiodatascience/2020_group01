@@ -56,7 +56,6 @@ X_selected <- bind_rows(X_pos,X_neg) %>%
 y <- X_selected %>% 
   select(label) %>% 
   pull(.) # make as vector
-
 # select  X data 
 X_selected <- X_selected %>% 
   select(mut_mhcrank_el,self_similarity,expression_level)
@@ -69,11 +68,14 @@ set.seed(1234) # for reproducibility
 # subset dataset by random 
 #classNames <- c('1','0')
 # Initialize variables
+tb <- as.tibble(c("true pos","true neg", "false pos", "false neg"))
 
 Error_LogReg = matrix(rep(NA, times=N*length(attributeNames)), nrow=N)
-colnames(Error_LogReg) <- attributeNames
+Error_LogReg  = cbind(Error_LogReg,y) %>% as.tibble()
+colnames(Error_LogReg) <- c(attributeNames,"True_val")                     
 # For each crossvalidation fold
 # make n for counting col possition
+val <- tibble()
 n=0
 for (at in attributeNames) {
   X <- X_selected %>%  select(at)
@@ -90,12 +92,15 @@ for (at in attributeNames) {
   # Fit logistic regression model to predict the response
   model = glm(fmla,family=binomial(link="logit"), data=X_train)
 #  model = lm(fmla, data=X_train)
-  p = predict(model, newdata=X_test,type="response")
-  # 
-   Error_LogReg[k,n] = (round(p,0)==y_test)
+  p = model %>% predict(X_test,type="response") 
+
+  Error_LogReg[k,n]  <- p                          
+      # Error_LogReg[k,n]  <- (round(p,0)==y_test)
   }
-#  Error_LogReg[k+1,n] <- (table(Error_LogReg[,n])[1]/N)
 }
+
+
+Error_LogReg %>% gather(., key = "var", value = "T/F")
 
 print(attributeNames,Error_LogReg[k+1,])
 
@@ -117,7 +122,7 @@ for(k in 1:N){
     p = predict(model, newdata=X_test,type="response")
    
      Error_LogReg_merge[k] = (round(p,0)==y_test)
-  }
+}
 
 Error_rate <-  (table(Error_LogReg_merge)[1]/N)
 # 0.4 <- lm
@@ -127,9 +132,126 @@ Error_LogReg_merge %>% sum(FALSE)/length(Error_LogReg_merge)
 
 
 ###################### leave-one-out is done ####################
+
+library(tidyverse)
+theme_set(theme_minimal())
+
+
+roc <- Error_LogReg %>% gather(., key = variable, value  = error, - True_val) %>% 
+  mutate(confs_var = 
+           case_when(error > 0.5 & True_val==1 ~ "TP",
+                     error > 0.5 & True_val==0 ~ "FP",
+                      error < 0.5 & True_val==0 ~ "TN",
+                      error < 0.5 & True_val==1 ~ "FN")) %>% 
+  group_by(variable,confs_var) %>% 
+  tally() %>% spread(., confs_var ,n) %>% 
+  na.omit() %>% 
+  mutate(TPR = TP/(TP+FN),
+         FPR = FP/(FP+TN)) 
+
+
+
+ggplot(roc , aes(x = FPR, y = TPR ))+
+  geom_line(aes(color = variable  ))
+  
+
+
+library(tidyverse)
+library(broom)
+
+glm(am ~ disp,
+    family = binomial,
+    data = mtcars
+) %>% # fit a binary classification model
+  augment() %>% # get fitted values
+  foo(predictor = .fitted, known_class = am) %>% # foo() is the function we want
+  ggplot(aes(x = fpr, y = tpr)) + # plot an ROC curve
+  geom_line()
+
+
+
+roc <- Error_LogReg %>% as_tibble() %>% 
+  gather(., key = variable, value  = error) %>% 
+  group_by(variable,error) %>% 
+  tally() %>% spread(., error,n)
+  mutate(TPR = TP/(TP+FN),
+         FPR = TN/(TN+FP)) %>% 
+    
+
+  
+  
+  roc %>% group_by(Metric) %>%
+    summarise(AUC = sum(diff(FPR) * na.omit(lead(TPR) + TPR)) / 2)
+  
+  
+  ggplot(roc, aes(FPR, TPR, color = Metric, frame = FPR)) +
+    geom_line() +
+    geom_abline(lty = 2)
+  
+  
+
+roc  %>% tally()
+
+roc <- iris %>% 
+  gather(Metric, Value, -Species) %>%
+  mutate(Positive = Species == "virginica") %>%
+  group_by(Metric, Value) %>%
+  summarise(Positive = sum(Positive),
+            Negative = n() - sum(Positive)) %>%
+  arrange(-Value) %>%
+  mutate(TPR = cumsum(Positive) / sum(Positive),
+         FPR = cumsum(Negative) / sum(Negative))
+
+roc %>% group_by(Metric) %>%
+  summarise(AUC = sum(diff(FPR) * na.omit(lead(TPR) + TPR)) / 2)
+
+
+ggplot(roc, aes(FPR, TPR, color = Metric, frame = FPR)) +
+  geom_line() +
+  geom_abline(lty = 2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 library(tidyverse)
 library(caret)      # for confusion matrix
 library(ROCR)  
+library(AUC)
+
+
+
+devtools::install_github("drsimonj/pipelearner")
+library(pipelearner)
+pl <- pipelearner(X_selected, lm, label ~ mut_mhcrank_el)
+
+#How cross validation is done is handled by learn_cvpairs(). For leave-one-out, specify k = number of rows:
+  
+  pl <- learn_cvpairs(pl, k = nrow(mtcars))
+#Finally, learn() the model on all folds:
+  
+  pl <- learn(pl)
+#This can all be written in a pipeline:
+  
+  pl <- pipelearner(mtcars, lm, hp ~ .) %>% 
+  learn_cvpairs(k = nrow(mtcars)) %>% 
+  learn()
+
+
+
+
+
+r <- roc(churn$predictions,churn$labels)
+ 
 # without leave one out 
 (fmla <- as.formula(paste("y_train ~ ", paste(attributeNames, collapse= "+"))))
 
@@ -259,9 +381,6 @@ ggplot(X_selected, aes(x, y)) +
   geom_line(data = grid, colour = "red") +
   facet_wrap(~ model)
 
-
-
-Error_LogReg
 
 roc <- Error_LogReg %>% as_tibble() %>% 
   gather(., key = variable, value  = error) %>% 
