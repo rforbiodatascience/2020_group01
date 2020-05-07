@@ -11,7 +11,7 @@ rm(list = ls())
 library(tidyverse)  # for data manipulation
 #library(dlstats)    # for package download stats
 #library(pkgsearch)
-#library(ROCR)
+library(ROCR)
 #library(ggplotify) # to make as.ggplot 
 #library(gridExtra)
 #library(grid)
@@ -157,12 +157,59 @@ for(k in 1:N){
   y_test <- y[k] #y[CV$subsets[CV$which==k]]
   (fmla <- as.formula(paste("y_train ~ ", paste(attributeNames, collapse= "+"))))
   # Fit logistic regression model to predict the response
-  w_est = glm(fmla,family=binomial(link="logit"), data=X_train)
+  w_est = glm(fmla,family=binomial(link="logit"), data=X_train) 
   p = predict(w_est, newdata=X_test,type="response")
   Error_LogReg_merge[k] = (round(p,0)==y_test)
 }
 
 
+##### ROC Curves 
+
+model_1 <- glm(fmla,family=binomial(link="logit"), data=X_train) %>% augment()  %>% mutate(model = "m2")
+library(tidyverse)
+library(broom)
+library(tidyroc)
+remotes::install_github("dariyasydykova/tidyroc")
+
+model_1 %>% # group to get individual ROC curve for each model
+  make_roc(truth = outcome, .fitted) %>% # get values to plot an ROC curve
+  ggplot(
+    aes(
+      x = 1 - specificity, 
+      y = sensitivity, 
+      color = model
+    )
+  ) + # plot with 2 ROC curves for each model
+  geom_line(size = 1.1) +
+  geom_abline(slope = 1, intercept = 0, size = 0.4) +
+  scale_color_manual(values = c("#48466D", "#3D84A8")) +
+  coord_fixed() +
+  theme_cowplot()
+
+library(tidyverse)
+library(broom)
+library(tidyroc)
+
+glm(am ~ disp, 
+    family = binomial,
+    data = mtcars
+) %>%
+  augment() %>%
+  make_roc(predictor = .fitted, known_class = am) %>%
+  ggplot(aes(x = fpr, y = tpr)) + 
+  geom_line()
+
+roc()
+
+
+glm(am ~ disp,
+    family = binomial,
+    data = mtcars
+) %>% # fit a binary classification model
+  augment() %>% # get fitted values
+  foo(predictor = .fitted, known_class = am) %>% # foo() is the function we want
+  ggplot(aes(x = fpr, y = tpr)) + # plot an ROC curve
+  geom_line()
 
 
 
@@ -170,41 +217,14 @@ for(k in 1:N){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-############# old code 
-
-table(Error_LogReg_merge)[1]/70
-
-
-
-
-
-
-
-
-
-
-
-my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
-my_data_clean_aug$label <-  ifelse(my_data_clean_aug$response=="yes", 1,0)
-my_data_clean_aug <- my_data_clean_aug %>% 
+data_single_peptides <- data_single_peptides %>% 
   mutate(new_score  = expression_level/(mut_mhcrank_el))
 
-pdf(file = "Results/ROC_curve.pdf", width = 10, height = 6)
+pdf(file = "Results/ROC_curve.png", width = 1000, height = 600)
 par(mfrow=c(2,3)) 
-pred <- prediction(my_data_clean_aug$allele_frequency, my_data_clean_aug$label)
+
+pred <- prediction(data_single_peptides %>% select(allele_frequency)
+pred <- prediction(data_single_peptides$allele_frequency, data_single_peptides$label)
 perf <- performance(pred,"tpr","fpr")
 plot(perf,colorize=TRUE, main = "allele_freq")
 
@@ -228,6 +248,31 @@ pred <- prediction(my_data_clean_aug$self_similarity, my_data_clean_aug$label)
 perf <- performance(pred,"tpr","fpr")
 plot(perf,colorize=TRUE, main = "self_similarity")
 dev.off()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+############# old code 
+
+
+
 
 
 
