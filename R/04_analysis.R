@@ -25,15 +25,13 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-# arrange data so no is plottet first 
+# arrange data so "no" is plotted first 
 my_data_clean_aug <- my_data_clean_aug %>%  arrange(response)
+
 # select unique peptides 
 data_single_peptides <- my_data_clean_aug %>% 
   group_by(response) %>% 
   distinct(identifier, .keep_all = T)
-
-
-
 
 
 # Model data
@@ -55,11 +53,13 @@ P2 <- my_data_clean_aug %>% filter(cell_line == "CT26") %>%
        color = "Respond", 
        alpha = "Respond", 
        y = "Expression level", 
-       x = "Mutant peptide EL %Rank" ) + 
+       x = "Mutant peptide EL #Rank" ) + 
   guides(color = guide_legend(override.aes = list(size = 5)))
 ggsave(P2, filename ="Results/P2.png", width = 12, height = 7)
 
-## Bar plot for mutaion possition only missense mutaions 
+## Bar plot for mutaion position only missense mutaions 
+# define some colors 
+respond_cols <- c("#91bfdb","#ef8a62")
 
 # all nine mer 
 P3 <- bar_plot_func(my_data_clean_aug, 9) +
