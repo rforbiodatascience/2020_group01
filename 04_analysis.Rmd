@@ -1,75 +1,101 @@
 ---
-title: "04_analysis"
-output: html_document
+title: 22100 - R for Bio Data Science
+subtitle: Elucidating Characteristics of Immunogenic Neopeptides from Murine Tumors and Cell Line Sequencing Data
+author: "Group 01: Sara, Annie, Wellace and Bokai"
+output:
+  ioslides_presentation:
+    logo: ../../Doc/R_for_bio_data_science_hex_logo_quadratic_small.png
+    widescreen: true
+    smaller: true
 ---
 
-```{r setup, include=FALSE,  cache = F}
-knitr::opts_chunk$set(echo = TRUE,error = TRUE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## R Markdown
+## Introduction {.smaller}
+### Rationale of the study
 
+## Background Information
+### **Neoepitopes derived from somatic mutations in the tumor**
+
+- <font size="4">High tumor mutational burden (TMB) correlates with neopeptide expression</font>
+- <font size="4">They allow the distinction between healthy vs tumor cells</font>
+
+<img src="../../Doc/01_images.png" height="264px" width="700px" />
+
+## 
+### **How T Cells see the cancer cells?**
+<img src="../../Doc/02_images.png" height="508px" width="730px" />
+
+##
+#### **NeoPepVac: a personalized therapeutic neopeptide-based vaccine**
+<img src="../../Doc/03_images.png" height="351px" width="787px" />
+
+##
+#### **Everything starts with a bioinformatician predicting neoepitopes: Mupexi**
+
+- <font size="4">NGS pipeline: neoepitope prediction includes 24 scripts</font>
+
+<img src="../../Doc/04_images.png" height="380px" width="790px" />
+
+##
+### **Experimental side**
+<img src="../../Doc/05_images.png" height="360px" width="790px" />
+
+## Our Data
 ```{r, include=FALSE}
-library(knitr)
+library("tidyverse")
+library(readxl)
 ```
 
-```{r, cache = TRUE, echo = FALSE, warning = FALSE, message = FALSE, error = TRUE}
-source(file = "R/04_analysis.R")
-```
+## Data
+![](Doc/06_images.png)
+
+## Our Data
+![](Doc/06.5_images.png)
+
+## Objective
+#### What characteristics make neoepitopes elicit tumor-specific CD8 T cell responses?
+- Combine xx_library_mupexi file with xx_barracoda file.
+- Plot different characteristics of the responses vs no-responses neoepitopes.
+- Store data wrangling and plotting functions into an R package.
+- Develop a simple Shinny app to visualize the plots.
+- Train an ANN to predict responses from the response/no response data
+
+## Objective
+![](Doc/07_images.png)
+
+## Project Roadmap
+![](Doc/08_images.png)
+
+## Project Roadmap
+![](Doc/09_images.png)
+
+## 04_analysis
+
+## Baracoda response analysis 
+![](Results/P2.png)
 
 
-```{r, include=FALSE}
-plot(P2)
-```
+## overview of CB and IB 
+![](Results/Wt_vs_mut_EL_BA.png)
+
+## Rank and expression level 
+![](Results/ESP_vs_EL_rank.png)
 
 
-```{r}
-P3
-```
+## Mutations possition 
+![](Results/Mutation_bar_plot.png)
+## SEQ logos 
+![](Results/GGseq_plot.pdf)
 
+## shiny_app
+- Plotting away :)
+![](Doc/10_images.png)
 
+## R packages coming
 
-```{r}
-P4
-```
+## Discussion
 
-```{r}
-P5
-```
-
-```{r}
-P6
-```
-
-```{r}
-P7
-```
-
-```{r}
-P8
-```
-
-```{r}
-P9
-```
-
-
-```{r}
-P10
-```
-
-
-```{r}
-P11
-```
-
-
-```{r}
-P12
-```
-
-
-```{r}
-P13
-```
-
+## Conclusion
