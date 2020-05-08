@@ -1,0 +1,74 @@
+---
+title: 22100 - R for Bio Data Science
+subtitle: Elucidating Characteristics of Immunogenic Neopeptides from Murine Tumors and Cell Line Sequencing Data
+author: "Group 01: Sara, Annie, Wellace and Bokai"
+output:
+  ioslides_presentation:
+    logo: R_for_bio_data_science_hex_logo_quadratic_small.png
+    widescreen: true
+    smaller: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## Results
+- Barracoda selection
+- Response vs non-response neoepitope characteristics
+- Neoepitope characteristics and estimated frequencies of responses
+
+## Barracoda selection {#slide3} 
+- Response selection criteria: logfold change > 2 and p-value < 0.01
+
+<center>
+
+![](../Results/p2_barracoda_selection.png){width=80%}
+
+<center>
+## Barracoda selection {#slide4} 
+- I dont know how to remove thw white space to make the plot bigger
+- lof fold change of barcode reads across cell lines and treatments
+
+<center>
+
+![](../Results/fig1_barracoda.png){width=70%}
+
+<center>
+
+## Response vs non-response characteristics {#slide5}
+
+<center>
+
+![](../Results/fig2_el_ba_similarity.png){width=90%}
+
+<center>
+
+
+## Neoepitope characteristics - mutation position {#slide6} 
+
+<center>
+
+![](../Results/fig_3_mutation_position.png){width=90%}
+
+<center>
+
+## Neoepitope characteristics and estimated frequencies
+
+<center>
+
+![](../Results/fig4_wt_neo_ba_el.png)
+
+<center>
+
+## Expression level 
+
+<center>
+
+![](../Results/p.png)
+
+<center>
+
+
+

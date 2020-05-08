@@ -26,6 +26,11 @@ my_data_clean_aug <- my_data_clean %>%
   mutate(organ = case_when(str_detect(sample, "TU$") ~ "tumor",
                            str_detect(sample, "SP$") | str_detect(sample, "^CT26") ~ "spleen")) %>% 
   
+  # remove _SP or _TU from sample
+  mutate(sample = case_when(str_detect(sample, "TU$") ~ str_replace(sample, ".{3}$",  " ") ,
+                           str_detect(sample, "SP$") ~ str_replace(sample, ".{3}$", " "),
+                           TRUE ~ as.character(sample))) %>% 
+  
   # add treatment column
   mutate(treatment = case_when(str_detect(sample, "^4T1_19") | str_detect(sample,"^4T1_23") | str_detect(sample,"^4T1_20") | 
                                  str_detect(sample,"^4T1_16") | sample == "CT26_C1" | sample == "CT26_D1" | sample == "CT26_D2" ~ "CPI",
@@ -53,8 +58,13 @@ count_norm_signif <- my_data_clean_aug %>%
 
 
 my_data_clean_aug <- full_join(my_data_clean_aug, count_norm_signif) %>% 
+  
   # add estimated_frequency_normalized column 
-  mutate(estimated_frequency_norm =(count_norm_signif*percent_pe/count_norm_signif))
+  mutate(estimated_frequency_norm = (count_norm_signif*percent_pe/count_norm_signif)) %>% 
+  
+  # change estimated_frequency_norm of non-response peptides to 0, as this measure is not relevant
+  mutate(estimated_frequency_norm = case_when(response == "no" ~ 0,
+                                              TRUE ~ as.numeric(estimated_frequency_norm)))
 
 
 # Write data
