@@ -24,7 +24,7 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data
 # ------------------------------------------------------------------------------
-# arrange data so no is plottet first 
+# arrange data so "no" is plotted first 
 my_data_clean_aug <- my_data_clean_aug %>%  arrange(response)
 # select unique peptides 
 data_single_peptides <- my_data_clean_aug %>% 
