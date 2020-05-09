@@ -70,8 +70,7 @@ bar_plot_func <- function(num) {
     scale_y_log10() + 
     scale_x_discrete(limits = c(1:num)) +
     scale_fill_manual(values = respond_cols) +
-    theme_bw() +
-    guide
+    theme_bw()
   
 }
 
@@ -99,7 +98,7 @@ box_function <- function(x,y) {
   my_data_clean_aug %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
     geom_boxplot(aes(fill = response)) +
-    facet_grid(vars(cell_line), vars(treatment), scales = "free") +
+    facet_grid(vars(cell_line), scales = "free") +
     theme_bw() +
     scale_fill_manual(values = respond_cols) +
     guides(color = guide_legend(override.aes = list(size = 4)))
