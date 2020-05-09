@@ -8,19 +8,4 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## DESCRIPTION
-This is Saras first comment.
-
-Hello Annie, **TELL ME YOU ARE HEEEEEEEERE!!!**
-
-Hola Annie que tal estas?
-
-I am here 
-
-yujuuuuuuuuuuu
-
-Sara adds a datafolder at 12.47\
-
-bo kai is here
-
-ybkhello world
-yeah
+github bages 
