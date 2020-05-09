@@ -4,6 +4,48 @@
 # define some colors 
 respond_cols <- c("#91bfdb","#ef8a62")
 
+barc_resp <- function(d, c){
+  d <- d %>% filter(cell_line == c) %>% 
+    ggplot(., aes(peptide_name, log_fold_change)) +
+    geom_point(aes(color = sample, shape = organ, alpha = response, size = estimated_frequency_norm)) +
+    geom_text_repel(d %>%
+                      filter(cell_line == c, response == "yes"), mapping = aes(label = neoepitope_sequence, size = 14)) +
+    facet_grid(vars(treatment)) +
+    labs(size = "Normalized estimated frequency",
+         shape = "Organ", 
+         color = "Sample", 
+         alpha = "Response", 
+         y = "logFC", 
+         x = "Neoepitopes")+
+    theme_bw() +
+    theme(plot.title = element_text(hjust = 0.5, size = 16), 
+          axis.title = element_text(size = 16),
+          legend.title = element_text(size = 16),
+          legend.text = element_text(size = 14)) +
+    guides(color = guide_legend(override.aes = list(size = 4)),
+           alpha = guide_legend(override.aes = list(size = 4)),
+           shape = guide_legend(override.aes = list(size = 4)))
+}
+
+# barc_freq <- function(d, c, p){
+#   d <- d %>% filter(cell_line == c) %>% 
+#     ggplot(., aes_string("peptide_name", p)) +
+#     geom_point(aes(color = organ, shape = sample), size = 3) +
+#     #geom_text_repel(d %>%
+#     #                 filter(response == "yes"), stat = "identity", mapping = aes(label = peptide_name)) +
+#     scale_fill_manual(values = respond_cols) +
+#     facet_grid(vars(treatment)) +
+#     labs(#shape = "Sample", 
+#       color = "Sample", 
+#       #alpha = "Response", 
+#       y = "Normalized estimated frequency", 
+#       x = "Neoepitopes")+
+#     theme_bw() +
+#     guides(color = guide_legend(override.aes = list(size = 2)))
+# }
+
+
+
 ### seq logo generater
 seqloggo_generator <-  function(data = my_data_clean_aug ,
                                 len = 9,
@@ -28,7 +70,8 @@ bar_plot_func <- function(num) {
     scale_y_log10() + 
     scale_x_discrete(limits = c(1:num)) +
     scale_fill_manual(values = respond_cols) +
-    theme_bw()
+    theme_bw() +
+    guide
   
 }
 
@@ -38,14 +81,14 @@ scatterplot_function <- function(data = my_data_clean_aug,
                                  y = 'expression_level') 
   {  data %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
-    geom_point(aes(color=response, alpha = response, size  = estimated_frequency))+
+    geom_point(aes(color=response, alpha = response, size  = estimated_frequency_norm))+
     scale_y_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
     scale_x_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
     theme_bw() + 
     scale_alpha_manual(breaks = c("no","yes"),labels = c("no","yes"),values = c(0.3,0.9))+
     scale_color_manual(values = respond_cols) +
     guides(color = guide_legend(override.aes = list(size = 5))) + 
-    labs(size = "Estimated frequency",
+    labs(size = "Estimated frequency normalized",
          color = "Respond", 
          alpha = "Respond")
 }
@@ -55,7 +98,12 @@ scatterplot_function <- function(data = my_data_clean_aug,
 box_function <- function(x,y) {  
   my_data_clean_aug %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
-    geom_boxplot(aes(fill = response)) }
+    geom_boxplot(aes(fill = response)) +
+    facet_grid(vars(cell_line), vars(treatment), scales = "free") +
+    theme_bw() +
+    scale_fill_manual(values = respond_cols) +
+    guides(color = guide_legend(override.aes = list(size = 4)))
+  }
 
 
 
