@@ -12,7 +12,10 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+## Introduction
 
+![](../Doc/05_images.png){width=80%}
+## Method
 
 ## Results
 - Barracoda selection
