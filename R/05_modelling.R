@@ -11,7 +11,7 @@ rm(list = ls())
 library(tidyverse)  # for data manipulation
 #library(dlstats)    # for package download stats
 #library(pkgsearch)
-#library(ROCR)
+library(ROCR)
 #library(ggplotify) # to make as.ggplot 
 #library(gridExtra)
 #library(grid)
@@ -39,18 +39,56 @@ data_single_peptides <- my_data_clean_aug %>%
   group_by(response) %>% 
   distinct(identifier, .keep_all = T) %>% 
   ungroup() %>% 
+  mutate(new_score  = expression_level/(mut_mhcrank_el)) %>%
   mutate(label = case_when(response=="yes" ~ 1,
                            response=="no" ~ 0))
+
 #### downsample negative data 
 X_neg <- data_single_peptides %>% 
-  filter(label==0) %>% select(mut_mhcrank_el,self_similarity,expression_level,label) %>% 
+  filter(label==0) %>% 
+  select(mut_mhcrank_el,self_similarity,expression_level,allele_frequency,priority_score,new_score,label) %>% 
   sample_n(40)
 X_pos <- data_single_peptides %>% 
   filter(label==1) %>% 
-  select(mut_mhcrank_el,self_similarity,expression_level,label)
+  select(mut_mhcrank_el,self_similarity,expression_level,allele_frequency,priority_score,new_score,label)
 # bindpos and negative dataset 
 X_selected <- bind_rows(X_pos,X_neg) %>% 
   sample_n(70)
+
+
+## ROC Curves 
+
+pdf(file = "Results/ROC_curve.png", width = 1000, height = 600)
+par(mfrow=c(2,3)) 
+pred <- prediction(X_selected$allele_frequency, X_selected$label)
+perf <- performance(pred,"tpr","fpr")
+plot(perf,colorize=TRUE, main = "expression_level")
+
+pred <- prediction(X_selected$expression_level, X_selected$label)
+perf <- performance(pred,"tpr","fpr")
+plot(perf,colorize=TRUE, main = "expression_level")
+
+pred <- prediction(X_selected$mut_mhcrank_el, X_selected$label)
+perf <- performance(pred,"tpr","fpr")
+plot(perf,colorize=TRUE, main = "mut_mhcrank_el")
+
+pred <- prediction(X_selected$priority_score, X_selected$label)
+perf <- performance(pred,"tpr","fpr")
+plot(perf,colorize=TRUE, main = "priority_score")
+
+pred <- prediction(X_selected$new_score, X_selected$label)
+perf <- performance(pred,"tpr","fpr")
+plot(perf,colorize=TRUE, main = "expression_level/mut_mhcrank_el")
+
+pred <- prediction(X_selected$self_similarity, X_selected$label)
+perf <- performance(pred,"tpr","fpr")
+plot(perf,colorize=TRUE, main = "self_similarity")
+
+dev.off()
+
+
+# Leave one out method 
+# -----------------------------------------------------------------------------
 
 # select predictive varriable 
 y <- X_selected %>% 
@@ -59,8 +97,8 @@ y <- X_selected %>%
 # select  X data 
 X_selected <- X_selected %>% 
   select(mut_mhcrank_el,self_similarity,expression_level)
-
 # numer of rows
+
 N <- X_selected %>% 
   nrow()
 attributeNames <- colnames(X_selected ) %>% as.vector()
@@ -133,6 +171,39 @@ Error_LogReg_merge %>% sum(FALSE)/length(Error_LogReg_merge)
 
 ###################### leave-one-out is done ####################
 
+devtools::install_github("hadley/ggplot2")
+devtools::install_github("sachsmc/plotROC")
+library(plotROC)
+
+
+set.seed(2529)
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+basicplot <- ggplot(test, aes(d = D, m = M1)) + geom_roc()
+basicplot
+ggsave(basicplot, file = "Results/roc.png")
+
+
+
+
+
+###########################################3
+
+
+
+
+
+
+
+
+
+
+
 library(tidyverse)
 theme_set(theme_minimal())
 
@@ -141,8 +212,8 @@ roc <- Error_LogReg %>% gather(., key = variable, value  = error, - True_val) %>
   mutate(confs_var = 
            case_when(error > 0.5 & True_val==1 ~ "TP",
                      error > 0.5 & True_val==0 ~ "FP",
-                      error < 0.5 & True_val==0 ~ "TN",
-                      error < 0.5 & True_val==1 ~ "FN")) %>% 
+                     error < 0.5 & True_val==0 ~ "TN",
+                     error < 0.5 & True_val==1 ~ "FN")) %>% 
   group_by(variable,confs_var) %>% 
   tally() %>% spread(., confs_var ,n) %>% 
   na.omit() %>% 
@@ -153,7 +224,7 @@ roc <- Error_LogReg %>% gather(., key = variable, value  = error, - True_val) %>
 
 ggplot(roc , aes(x = FPR, y = TPR ))+
   geom_line(aes(color = variable  ))
-  
+
 
 
 library(tidyverse)
@@ -174,21 +245,21 @@ roc <- Error_LogReg %>% as_tibble() %>%
   gather(., key = variable, value  = error) %>% 
   group_by(variable,error) %>% 
   tally() %>% spread(., error,n)
-  mutate(TPR = TP/(TP+FN),
-         FPR = TN/(TN+FP)) %>% 
-    
-
+mutate(TPR = TP/(TP+FN),
+       FPR = TN/(TN+FP)) %>% 
+  
+  
   
   
   roc %>% group_by(Metric) %>%
-    summarise(AUC = sum(diff(FPR) * na.omit(lead(TPR) + TPR)) / 2)
-  
-  
-  ggplot(roc, aes(FPR, TPR, color = Metric, frame = FPR)) +
-    geom_line() +
-    geom_abline(lty = 2)
-  
-  
+  summarise(AUC = sum(diff(FPR) * na.omit(lead(TPR) + TPR)) / 2)
+
+
+ggplot(roc, aes(FPR, TPR, color = Metric, frame = FPR)) +
+  geom_line() +
+  geom_abline(lty = 2)
+
+
 
 roc  %>% tally()
 
@@ -235,14 +306,14 @@ library(pipelearner)
 pl <- pipelearner(X_selected, lm, label ~ mut_mhcrank_el)
 
 #How cross validation is done is handled by learn_cvpairs(). For leave-one-out, specify k = number of rows:
-  
-  pl <- learn_cvpairs(pl, k = nrow(mtcars))
+
+pl <- learn_cvpairs(pl, k = nrow(mtcars))
 #Finally, learn() the model on all folds:
-  
-  pl <- learn(pl)
+
+pl <- learn(pl)
 #This can all be written in a pipeline:
-  
-  pl <- pipelearner(mtcars, lm, hp ~ .) %>% 
+
+pl <- pipelearner(mtcars, lm, hp ~ .) %>% 
   learn_cvpairs(k = nrow(mtcars)) %>% 
   learn()
 
@@ -251,7 +322,7 @@ pl <- pipelearner(X_selected, lm, label ~ mut_mhcrank_el)
 
 
 r <- roc(churn$predictions,churn$labels)
- 
+
 # without leave one out 
 (fmla <- as.formula(paste("y_train ~ ", paste(attributeNames, collapse= "+"))))
 
@@ -338,7 +409,7 @@ plot(g)
 
 
 
-  tidyroc::
+tidyroc::
   ggplot(aes(x = fpr, y = tpr)) + 
   geom_line()
 
@@ -373,7 +444,7 @@ grid <- X_selected %>%
 
 
 grid <- X_selected %>% 
-#  data_grid(x = seq_range(x, n = 50, expand = 0.1)) %>% 
+  #  data_grid(x = seq_range(x, n = 50, expand = 0.1)) %>% 
   gather_predictions(mod1, mod2, mod3, .pred = "label")
 
 ggplot(X_selected, aes(x, y)) + 
@@ -500,8 +571,7 @@ glm(am ~ disp,
 r <- roc(X_selected$expression_level, X_selected$label)
 
 ################### roc curves ####################
-data_single_peptides <- data_single_peptides %>% 
-  mutate(new_score  = expression_level/(mut_mhcrank_el))
+
 
 X_neg <- data_single_peptides %>% 
   filter(label==0) %>% 
@@ -516,36 +586,6 @@ X_selected <- bind_rows(X_pos,X_neg) %>%
 
 
 
-pdf(file = "Results/ROC_curve.png", width = 1000, height = 600)
-par(mfrow=c(2,3)) 
-pred <- prediction(data_single_peptides$allele_frequency, my_data_clean_aug)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "expression_level")
-
-pred <- prediction(my_data_clean_aug$expression_level, my_data_clean_aug$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "expression_level")
-
-pred <- prediction(my_data_clean_aug$mut_mhcrank_el, my_data_clean_aug$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "mut_mhcrank_el")
-
-pred <- prediction(my_data_clean_aug$priority_score, my_data_clean_aug$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "priority_score")
-
-pred <- prediction(my_data_clean_aug$new_score, my_data_clean_aug$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "expression_level/mut_mhcrank_el")
-
-pred <- prediction(data_single_peptides$self_similarity, data_single_peptides$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "self_similarity")
-
-dev.off()
-
-
-###########################################3
 
 
 
