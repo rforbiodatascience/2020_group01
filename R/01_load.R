@@ -43,8 +43,7 @@ mupexi_ct26 <- read_xlsx(path = "data/raw/ct26_library_mupexi.xlsx") %>%
   mutate(Mut_MHCrank_EL = as.numeric(Mut_MHCrank_EL),
          Expression_Level = as.numeric(Expression_Level))
 
-mupexi_4t1 <- read_xlsx(path = "data/raw/4T1_library_mupexi.xlsx") %>% 
-  select(-identifier, -"...1")
+mupexi_4t1 <- read_xlsx(path = "data/raw/4T1_library_mupexi.xlsx")
 #-------------------------
 
 # PE_population_info and buffycoat_HLA_info file
