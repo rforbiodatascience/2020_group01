@@ -1,9 +1,8 @@
-# Clear workspace
-# ------------------------------------------------------------------------------
+
+# Clear workspace ---------------------------------------------------------
 rm(list = ls())
 
-# Load libraries
-# ------------------------------------------------------------------------------
+# Load libraries ----------------------------------------------------------
 library(tidyverse)
 library(ggrepel)
 library(ggplot2)
@@ -12,18 +11,17 @@ library(ggseqlogo)
 library(ggseqlogo)
 library(cowplot)
 
-# Define functions
-# ------------------------------------------------------------------------------
+
+# Define functions --------------------------------------------------------
 wd = getwd()
 source(file = "R/99_project_functions.R")
 
-# Load data
-# ------------------------------------------------------------------------------
+
+# Load data ---------------------------------------------------------------
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 
-# Wrangle data
-# ------------------------------------------------------------------------------
+# Wrangle data ------------------------------------------------------------
 # arrange data so "no" is plotted first 
 my_data_clean_aug <- my_data_clean_aug %>%  arrange(response)
 # select unique peptides 
@@ -33,13 +31,7 @@ data_single_peptides <- my_data_clean_aug %>%
 
 
 
-
-# Model data
-# ------------------------------------------------------------------------------
-
-
-# Visualise data
-# ------------------------------------------------------------------------------
+# Visualise data ----------------------------------------------------------
 # 1) Barracoda characteristics --------------------------------------------
 p1_CT26 <- barc_resp(my_data_clean_aug, "CT26") +
   labs(title = "log fold change of CT26-tumor cell line neoepitope screen")
