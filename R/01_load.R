@@ -43,7 +43,8 @@ mupexi_ct26 <- read_xlsx(path = "data/raw/ct26_library_mupexi.xlsx") %>%
   mutate(Mut_MHCrank_EL = as.numeric(Mut_MHCrank_EL),
          Expression_Level = as.numeric(Expression_Level))
 
-mupexi_4t1 <- read_xlsx(path = "data/raw/4T1_library_mupexi.xlsx")
+mupexi_4t1 <- read_xlsx(path = "data/raw/4T1_library_mupexi.xlsx") %>% 
+  select(-identifier, -"...1")
 #-------------------------
 
 # PE_population_info and buffycoat_HLA_info file
@@ -77,7 +78,9 @@ mupexi_barracoda <- left_join(all_barracoda, all_mupexi, by = "identifier")
 
 my_data <- left_join(mupexi_barracoda, sample_info) %>% #bring PE_population info of each sample into barracoda_mupexi file 
   # add HLA_match column if HLA in any of the buffycoat_HLA info file
-  mutate(HLA_match = case_when(HLA %in% buffycoat.HLA_info$HLA1 | HLA %in% buffycoat.HLA_info$HLA2 | HLA %in% buffycoat.HLA_info$HLA3~"yes",
+  mutate(HLA_match = case_when(HLA %in% buffycoat.HLA_info$HLA1 | 
+                                 HLA %in% buffycoat.HLA_info$HLA2 | 
+                                 HLA %in% buffycoat.HLA_info$HLA3~"yes",
                                TRUE ~ "no"))
 
 # Write data
