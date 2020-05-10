@@ -24,7 +24,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-## Elucidation of detected neoepitope characteristics 
+
+## Objectives - Elucidation of detected neoepitope characteristics 
 
 <center>
 
@@ -76,7 +77,7 @@ knitr::opts_chunk$set(echo = FALSE)
 <center>
 
 
-## Neoepitope characteristics - mutation position {#slide6} 
+## Neoepitope characteristics - Mutation position {#slide6} 
 
 <center>
 
@@ -84,7 +85,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-## Neoepitope characteristics and estimated frequencies
+## Neoepitope characteristics and estimated frequencies {#slide7} 
 
 <center>
 
@@ -92,13 +93,25 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-## Expression level 
+## Expression level and rank score {#slide8} 
+- Now selction criteria is rank < 2% and expression > 0.1 TPM
+- Can these selection critereia be optimized 
+<div align="center">
+<img src="../Results/p10.png" width=1000 height=490>
+</div>
 
-<center>
 
-![](../Results/p.png)
 
-<center>
+## Mutation consequence 
+<div style="float: left; width: 40%;">
+- Frameshit as biomarker for benefit with CPI 
+- Can frameshift then be used to find immunugenic neoepitopes ? 
+</div>
 
+<div style="float: right; width: 60%;">
+<img src="../Results/p11.png" width=500 height=500>
+</div>
+
+## GGseq logo 
 
 

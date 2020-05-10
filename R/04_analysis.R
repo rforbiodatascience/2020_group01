@@ -173,6 +173,19 @@ p10 <- data_single_peptides %>%
   guides(color = guide_legend(override.aes = list(size = 5)))
 ggsave(p10, filename ="Results/p10.png", width = 12, height = 7)
 
+
+# why not with function ??
+scatterplot_function(data = data_single_peptides,
+                     x = 'mut_mhcrank_el', 
+                     y= 'expression_level')+
+  labs(size = "Estimated frequency normalized", 
+       color = "Respond", 
+       alpha = "Respond", 
+       y = "Expression level", 
+       x = "Mutant peptide EL %Rank" ) + 
+  theme(plot.title = element_text(hjust = 0.5)) 
+
+
 # No. mutations by HLA faceted by cell_line. This plot was made by Sara because of curiosity.
 # It shows in what MHC allele do the response peptides bind. Most of the responsive peptides
 # bind H2-Kd allele in both cell lines 
@@ -195,23 +208,23 @@ ggsave(p10, filename ="Results/p10.png", width = 12, height = 7)
 # ggsave(P8, file = "Results/ESP_vs_EL_rank.png")
 
 
-
-
-## missense mutations 
-P13 <- my_data_clean_aug %>% 
+# Mutaions overview -------------------------------------------------------
+p11 <- my_data_clean_aug %>% 
   ggplot(aes(x = mutation_consequence)) +
   geom_bar(aes(fill = response), stat = "count") +
   scale_y_log10() +
   theme_bw() +
+  scale_fill_manual(values = respond_cols) +
   facet_wrap(cell_line~.) +
   labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
        x = "Mutation Consequence", 
        y = "Count")
+ggsave(p11, filename ="Results/p11.png", width = 12, height = 7)
 
 
 
-################## GGseq logo 
-# ------------------------------------------------------------------------------------------
+
+# GGseq logo plot ---------------------------------------------------------
 #plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
 plot_List <- list()
 i=1
