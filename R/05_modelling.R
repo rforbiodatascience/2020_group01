@@ -171,24 +171,28 @@ Error_LogReg_merge %>% sum(FALSE)/length(Error_LogReg_merge)
 
 ###################### leave-one-out is done ####################
 
-devtools::install_github("hadley/ggplot2")
-devtools::install_github("sachsmc/plotROC")
-library(plotROC)
 
 
-set.seed(2529)
-D.ex <- rbinom(200, size = 1, prob = .5)
-M1 <- rnorm(200, mean = D.ex, sd = .65)
-M2 <- rnorm(200, mean = D.ex, sd = 1.5)
-
-test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
-                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
-
-basicplot <- ggplot(test, aes(d = D, m = M1)) + geom_roc()
-basicplot
-ggsave(basicplot, file = "Results/roc.pdf", height = 10, width = 10)
+roc <- Error_LogReg %>% as_tibble() %>% 
+  gather(., key = variable, value  = error) %>% 
+  group_by(variable,error) %>% 
+  summarise(Positive = sum(error), 
+            Negative = n() - sum(error)) %>% 
+  mutate(TPR = cumsum(Positive) / sum(Positive), 
+         FPR = cumsum(Negative) / sum(Negative))
 
 
+roc %>% 
+  group_by(variable) %>% 
+  summarise(AUC = sum(diff(FPR) + na.omit(lead(TPR) + TPR)) / 2)
+
+roc %>% 
+  ggplot(aes( x= FPR, y = TPR, color = variable)) +
+  geom_line() +
+  geom_abline(lty = 2) +
+  xlab("False positive rate (1-specificity)") + 
+  ylab("True positive rate (sensitivity)") +
+  ggtitle("ROC at predicting Virginica iris species")
 
 
 
