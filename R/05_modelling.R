@@ -186,7 +186,7 @@ test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1],
 
 basicplot <- ggplot(test, aes(d = D, m = M1)) + geom_roc()
 basicplot
-ggsave(basicplot, file = "Results/roc.png")
+ggsave(basicplot, file = "Results/roc.pdf", height = 10, width = 10)
 
 
 
