@@ -10,6 +10,8 @@ rm(list = ls())
 
 # Load libraries
 # ------------------------------------------------------------------------------
+# inspiration from here 
+# https://sydykova.com/post/2019-03-12-make-roc-curves-tidyverse/
 # packages to install 
 #install.packages("devtools")
 #devtools::install_github("tidyverse/broom")
@@ -55,11 +57,9 @@ X_neg <- data_single_peptides %>%
 X_pos <- data_single_peptides %>% 
   filter(label==1) %>% 
   select(mut_mhcrank_el,self_similarity,expression_level,allele_frequency,priority_score,new_score,label)
-# bindpos and negative dataset 
+# bind pos and negative dataset 
 X_selected <- bind_rows(X_pos,X_neg) %>% 
   sample_n(70)
-
-
 
 
 # Logistic regression with all chossen parameters 
@@ -77,45 +77,49 @@ glm_out2 <- glm(label ~ self_similarity,
                 family = binomial,
                 data = X_selected) %>%
   augment() %>%
-  mutate(model = "self_sim") # name the model
+  mutate(model = "self_sim")
 
 # logistic regression with mutant rank el 
 glm_out3 <- glm(label ~ mut_mhcrank_el,
                 family = binomial,
                 data = X_selected) %>%
   augment() %>%
-  mutate(model = "mut_mhcrank_el") # name the model
+  mutate(model = "mut_mhcrank_el") 
 
 # logistic regression with expression score 
 glm_out4 <- glm(label ~ expression_level,
                 family = binomial,
                 data = X_selected) %>%
   augment() %>%
-  mutate(model = "expression_level") # name the model
+  mutate(model = "expression_level")
 
 
-# combine the two datasets to make an ROC curve for each model
+# combine all the data set 
 glm_out <- bind_rows(glm_out1, glm_out2,glm_out3,glm_out4)
 glm_out$label <- as.factor(glm_out$label)
 # plot ROC curves
-glm_out %>%
+Roc_curves <- glm_out %>%
   group_by(model) %>% # group to get individual ROC curve for each model
   roc_curve(truth = label, .fitted) %>% # get values to plot an ROC curve
   ggplot(
     aes(
-      x = 1 - specificity, 
-      y = sensitivity, 
+      x = 1 - specificity,  # equal to FPR(False positive rate)
+      y = sensitivity, # equal to TPR ( True Positive Rate)
       color = model
     )
-  ) + # plot with 2 ROC curves for each model
+  ) + # plot roc curves for each models 
   geom_line(size = 1.1) +
+  labs( x = "FPR", y = "TPR")
   geom_abline(slope = 1, intercept = 0, size = 0.4) +
  # scale_color_manual(values = c("#48466D", "#3D84A8")) +
-  coord_fixed() 
- 
+  coord_fixed() +
+  theme_bw()
+ ggsave(Roc_curves, file = "Results/Roc_curves.png")
 
 
-
+ AUC_values <- glm_out %>%
+   group_by(model) %>% # group to get individual AUC value for each model
+   roc_auc(truth = label, .fitted)
 
 
 
