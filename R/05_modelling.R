@@ -58,11 +58,11 @@ X_selected <- bind_rows(X_pos,X_neg) %>%
 
 ## ROC Curves 
 
-pdf(file = "Results/ROC_curve.png", width = 1000, height = 600)
+png(file = "Results/ROC_curve.png", width = 1000, height = 600)
 par(mfrow=c(2,3)) 
 pred <- prediction(X_selected$allele_frequency, X_selected$label)
 perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "expression_level")
+plot(perf,colorize=TRUE, main = "allele_frequency")
 
 pred <- prediction(X_selected$expression_level, X_selected$label)
 perf <- performance(pred,"tpr","fpr")
@@ -109,11 +109,11 @@ set.seed(1234) # for reproducibility
 tb <- as.tibble(c("true pos","true neg", "false pos", "false neg"))
 
 Error_LogReg = matrix(rep(NA, times=N*length(attributeNames)), nrow=N)
-Error_LogReg  = cbind(Error_LogReg,y) %>% as.tibble()
+#Error_LogReg  = cbind(Error_LogReg,y) %>% as.tibble()
 colnames(Error_LogReg) <- c(attributeNames,"True_val")                     
 # For each crossvalidation fold
 # make n for counting col possition
-val <- tibble()
+#val <- tibble()
 n=0
 for (at in attributeNames) {
   X <- X_selected %>%  select(at)
@@ -132,12 +132,12 @@ for (at in attributeNames) {
 #  model = lm(fmla, data=X_train)
   p = model %>% predict(X_test,type="response") 
 
-  Error_LogReg[k,n]  <- p                          
-      # Error_LogReg[k,n]  <- (round(p,0)==y_test)
+ # Error_LogReg[k,n]  <- p                          
+  Error_LogReg[k,n]  <- (round(p,0)==y_test)
   }
 }
 
-
+Error_rate <-  (table(Error_LogReg)[1]/N)
 Error_LogReg %>% gather(., key = "var", value = "T/F")
 
 print(attributeNames,Error_LogReg[k+1,])
