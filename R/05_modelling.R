@@ -143,9 +143,9 @@ Error_LogReg %>% gather(., key = "var", value = "T/F")
 print(attributeNames,Error_LogReg[k+1,])
 
 ################### model merge all varriables 
-Error_LogReg_merge = rep(NA, times=N+1)
+Error_LogReg_merge = rep(NA, times=N)
 for(k in 1:N){
-    print(paste('Crossvalidation fold ', k, '/', N, sep=''));
+    print(paste('Leave one out number: ', k, '/', N, sep=''));
     # Extract the training and test set
     X_train <- X_selected[-k,]
     y_train <- y[-k] 
