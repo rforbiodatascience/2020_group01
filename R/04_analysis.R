@@ -29,8 +29,6 @@ data_single_peptides <- my_data_clean_aug %>%
   group_by(response) %>% 
   distinct(identifier, .keep_all = T)
 
-
-
 # Visualise data ----------------------------------------------------------
 # 1) Barracoda characteristics --------------------------------------------
 p1_CT26 <- barc_resp(my_data_clean_aug, "CT26") +
@@ -158,18 +156,19 @@ dev.off()
 
 # 4) Characteristics and estimated frequencies ----------------------------------
 p10 <- data_single_peptides %>% 
-  ggplot(., aes(mut_mhcrank_el, expression_level)) +
+  ggplot(., aes(expression_level, mut_mhcrank_el)) +
   geom_point(aes(color = response, alpha = response, size = estimated_frequency_norm))+
-  facet_grid(vars(treatment), vars(cell_line), scales = "free") +
-  geom_text_repel(my_data_clean_aug %>%
-                    group_by(cell_line) %>%
-                    filter(response == "yes"), stat = "identity", mapping = aes(label = peptide_name))+
+  facet_grid(vars(cell_line), scales = "free") +
+  # geom_text_repel(my_data_clean_aug %>%
+  #                   group_by(cell_line) %>%
+  #                   filter(response == "yes"), stat = "identity", mapping = aes(label = peptide_name))+
   theme_bw() + 
+  scale_color_manual(values = respond_cols) +
   labs(size = "Estimated frequency normalized", 
        color = "Respond", 
        alpha = "Respond", 
-       y = "Expression level", 
-       x = "Mutant peptide EL %Rank" ) + 
+       y = "Neoepitoe elution (% rank score)", 
+       x =  "Expression level") + 
   guides(color = guide_legend(override.aes = list(size = 5)))
 ggsave(p10, filename ="Results/p10.png", width = 12, height = 7)
 
