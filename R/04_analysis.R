@@ -229,8 +229,9 @@ plot_List <- list()
 i=1
 for (num in 9:10) {
   for(r in c("yes","no"))  {
-    p <- seqloggo_generator(my_data_clean_aug, num, r)
-    print(p)
+    p <- seqloggo_generator(data  = data_single_peptides, 
+                            len = num,
+                            resp = r)
     plot_List[[i]] <- p
     i <- i+1
   }

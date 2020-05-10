@@ -101,7 +101,6 @@ knitr::opts_chunk$set(echo = FALSE)
 </div>
 
 
-
 ## Mutation consequence 
 <div style="float: left; width: 40%;">
 - Frameshit as biomarker for benefit with CPI 
@@ -113,5 +112,16 @@ knitr::opts_chunk$set(echo = FALSE)
 </div>
 
 ## GGseq logo 
+<div align="center">
+<img src="../Results/GGseq_plot.png" width=800 height=500>
+</div>
 
+## Discussion
+- Data set is to small to see a clear pattern in immnunugenic and non-immunugenic neoepitopes
+- A trend that .....
+
+## Further work
+- Try out with more data, when more peptides is screened
+- Is the results the same for human data 
+- Make packages for human data 
 
