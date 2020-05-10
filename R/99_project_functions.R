@@ -18,11 +18,11 @@ barc_resp <- function(d, c){
          shape = "Organ", 
          color = "Sample", 
          alpha = "Response", 
-         y = "logFC", 
-         x = "Neoepitopes")+
+         y = "logFC") +
     theme_bw() +
     theme(plot.title = element_text(hjust = 0.5, size = 16), 
           axis.title = element_text(size = 16),
+          axis.title.x = element_blank(),
           legend.title = element_text(size = 16),
           legend.text = element_text(size = 14)) +
     guides(color = guide_legend(override.aes = list(size = 4)),

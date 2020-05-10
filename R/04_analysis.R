@@ -64,16 +64,16 @@ ggsave(p2, filename ="Results/p2_barracoda_selection.png", width = 12, height = 
 # 2) Boxplots response vs non-response  ---------------------------------------------
 # Elution rank ------------------------------------------------------------
 p3 <-  box_function('response','mut_mhcrank_el') +
-  labs(title ="Mass-spectomery elution",
+  labs(title ="Eslution (EL) rank score",
        x = "Response", 
-       y = "Neoepitopes elution (rank score)") +
+       y = "Neoepitopes elution (%rank score)") +
   theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
 
 # Binding affinity --------------------------------------------------------
 p4 <-  box_function('response','mut_mhcrank_ba') +
-  labs(title ="Binding Affinity (BA)",
+  labs(title ="Binding affinity (BA) rank score",
        x = "Response", 
-       y = "Neoepitopes binding affinity (rank score)") +
+       y = "Neoepitopes binding affinity (%rank score)") +
   theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
 
 
@@ -154,10 +154,11 @@ ggdraw() +
   draw_plot_label(c("A", "B"), c(0,  0.45), c(1, 1), size = 20)
 dev.off()
 
-# 4) Characteristics and estimated frequencies ----------------------------------
+# 4) Expression level vs rank ----------------------------------
 p10 <- data_single_peptides %>% 
   ggplot(., aes(expression_level, mut_mhcrank_el)) +
   geom_point(aes(color = response, alpha = response, size = estimated_frequency_norm))+
+  scale_x_log10() +
   facet_grid(vars(cell_line), scales = "free") +
   # geom_text_repel(my_data_clean_aug %>%
   #                   group_by(cell_line) %>%
