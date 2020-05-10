@@ -234,13 +234,3 @@ ggdraw() +
    draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
 dev.off()
 
-# exploring data with shiny app
-# ------------------------------------------------------------------------------
-source(file = "R/shiny_app.R")
-Exploring_data_shiny(my_data_clean_aug)
-
-
-# Write data
-# ------------------------------------------------------------------------------
-#write_tsv(...)
-#ggsave(...)
