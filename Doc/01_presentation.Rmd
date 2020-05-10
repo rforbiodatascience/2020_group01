@@ -7,15 +7,42 @@ output:
     logo: R_for_bio_data_science_hex_logo_quadratic_small.png
     widescreen: true
     smaller: true
+
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-## Introduction
 
-![](../Doc/05_images.png){width=80%}
-## Method
+## Neoepitopes arise from somatic mutations in the tumor... 
+
+<center>
+
+...they are not expressed in normal cells and are optimal targets for immunetherapy approaches
+
+![](../Doc/01_neoepitopes.png){width=40%}
+
+<center>
+
+## Elucidation of detected neoepitope characteristics 
+
+<center>
+
+<font size="4"> - Merging Mupexi file with Barracoda file</font>
+
+![](../Doc/01_intro.png){width=90%}
+
+<center>
+
+## Method {.columns-2 .smaller}
+
+- Data generation from mouse tumor models
+- Two cell lines (CT26 colon carcinoma and 4T1 breast cancer)
+- Two organs (spleen and tumors)
+- With and without checkpoint inhibitor treatment
+
+- Structure in two columns.
+- Roadmap of data analysis in the code
 
 ## Results
 - Barracoda selection
