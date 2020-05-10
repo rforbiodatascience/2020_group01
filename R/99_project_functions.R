@@ -4,6 +4,9 @@
 # define some colors 
 respond_cols <- c("#91bfdb","#ef8a62")
 
+
+# Baracoda respond function -----------------------------------------------
+
 barc_resp <- function(d, c){
   d <- d %>% filter(cell_line == c) %>% 
     ggplot(., aes(peptide_name, log_fold_change)) +
@@ -46,22 +49,22 @@ barc_resp <- function(d, c){
 
 
 
-### seq logo generater
+# GGseq logo function -----------------------------------------------------
 seqloggo_generator <-  function(data = my_data_clean_aug ,
                                 len = 9,
                                 resp = c("yes","no"),
                                 cons = c("F","M","I","D"),
                                 mouse = c("CT26","4T1"))
 { p <- my_data_clean_aug %>%
-    filter(str_length(mut_peptide)==len,response==resp,mutation_consequence==cons,cell_line == mouse) %>%
-    select(mut_peptide) %>%
-    ggseqlogo()
+  filter(str_length(mut_peptide)==len,response==resp,mutation_consequence==cons,cell_line == mouse) %>%
+  select(mut_peptide) %>%
+  ggseqlogo()
 return(p)
 }
-#
 
 
-## Bar plot function 
+# Bar plot function -------------------------------------------------------
+
 bar_plot_func <- function(num) {
   my_data_clean_aug %>%
     filter(str_length(mut_peptide)==num,mutation_consequence=="M") %>% 
@@ -74,6 +77,8 @@ bar_plot_func <- function(num) {
   
 }
 
+
+# Scatterplot function ----------------------------------------------------
 
 scatterplot_function <- function(data = my_data_clean_aug,
                                  x = 'mut_mhcrank_el',
@@ -93,7 +98,8 @@ scatterplot_function <- function(data = my_data_clean_aug,
 }
 
 
-# create box_function for boxplot
+# Box plot function -------------------------------------------------------
+
 box_function <- function(x,y) {  
   my_data_clean_aug %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
