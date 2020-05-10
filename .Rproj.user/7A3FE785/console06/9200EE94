@@ -132,4 +132,7 @@ fatal: pathspec 'analysis.R' did not match any files
 ]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ [KVet-m11andmar:R_project_git sasher$ git add R/04_analysis.R
 ]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ git add R/04_analysis.R
 ]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ git add R/05_modelling.R
-]0;~/Desktop/R_project_gitVet-m11andmar:R_project_git sasher$ 
+[KVet-m11andmar:R_project sasher$ git add p10.png
+fatal: pathspec 'p10.png' did not match any files
+]0;~/Desktop/R_projectVet-m11andmar:R_project sasher$ git add p10.pngng         Results/p10.png
+]0;~/Desktop/R_projectVet-m11andmar:R_project sasher$ 

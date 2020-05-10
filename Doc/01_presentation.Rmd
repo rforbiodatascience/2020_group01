@@ -45,12 +45,10 @@ knitr::opts_chunk$set(echo = FALSE)
 - Structure in two columns.
 - Roadmap of data analysis in the code
 
-## Results
-- Barracoda selection
-- Response vs non-response neoepitope characteristics
-- Neoepitope characteristics and estimated frequencies of responses
+# Results
 
-## Barracoda selection {#slide3} 
+
+## 1) Response filtering {#slide3} 
 - Response selection criteria: logfold change > 2 and p-value < 0.01
 
 <center>
@@ -68,31 +66,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-## Response vs non-response characteristics {#slide5}
-
-<center>
-
-![](../Results/fig2_el_ba_similarity.png){width=90%}
-
-<center>
-
-
-## Neoepitope characteristics - Mutation position {#slide6} 
-
-<center>
-
-![](../Results/fig_3_mutation_position.png){width=90%}
-
-<center>
-
-## Neoepitope characteristics and estimated frequencies {#slide7} 
-
-<center>
-
-![](../Results/fig4_wt_neo_ba_el.png)
-
-<center>
-
 ## Expression level and rank score {#slide8} 
 - Now selction criteria is rank < 2% and expression > 0.1 TPM
 - Can these selection critereia be optimized 
@@ -103,13 +76,38 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Mutation consequence 
 <div style="float: left; width: 40%;">
-- Frameshit as biomarker for benefit with CPI 
-- Can frameshift then be used to find immunugenic neoepitopes ? 
+- Can mutation type be used to find immunugenic neoepitopes? 
 </div>
 
 <div style="float: right; width: 60%;">
 <img src="../Results/p11.png" width=500 height=500>
 </div>
+
+
+## Elution, binding affinity rank scores and self-similarity {#slide5}
+
+<center>
+
+![](../Results/fig2_el_ba_similarity.png){width=90%}
+
+<center>
+
+## Improved binding affinity 
+
+<center>
+
+![](../Results/fig4_wt_neo_ba_el.png)
+
+<center>
+
+## Mutation position {#slide6} 
+
+<center>
+
+![](../Results/fig_3_mutation_position.png){width=90%}
+
+<center>
+
 
 ## GGseq logo 
 <div align="center">
@@ -118,10 +116,19 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Discussion
 - Data set is to small to see a clear pattern in immnunugenic and non-immunugenic neoepitopes
-- A trend that .....
 
-## Further work
-- Try out with more data, when more peptides is screened
+Further work:
+
+- Try out with more data, when more peptides are screened
 - Is the results the same for human data 
 - Make packages for human data 
+
+## R package and shiny app
+We have developed [barcc](https://github.com/rforbiodatascience/barcc) package, which includes a shiny app for rapid visualization of the data.
+
+
+
+
+
+
 
