@@ -67,14 +67,18 @@ ggsave(p2, filename ="Results/04_p2_barracoda_selection.png", width = 12, height
 
 # 2) Boxplots response vs non-response  ---------------------------------------------
 # Elution rank ------------------------------------------------------------
-p3 <-  box_function('response','mut_mhcrank_el') +
+p3 <-  box_function(data = data_single_peptides, 
+                    x = 'response',
+                    y = 'mut_mhcrank_el') +
   labs(title ="Eslution (EL) rank score",
        x = "Response", 
        y = "Neoepitopes elution (%rank score)") +
   theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
 
 # Binding affinity --------------------------------------------------------
-p4 <-  box_function('response','mut_mhcrank_ba') +
+p4 <-  box_function(data = data_single_peptides, 
+                    x = 'response',
+                    y= 'mut_mhcrank_ba') +
   labs(title ="Binding affinity (BA) rank score",
        x = "Response", 
        y = "Neoepitopes binding affinity (%rank score)") +
@@ -82,7 +86,9 @@ p4 <-  box_function('response','mut_mhcrank_ba') +
 
 
 # Self-similarity ---------------------------------------------------------
-p5 <- box_function('response','self_similarity') +
+p5 <- box_function(data = data_single_peptides, 
+                   x = 'response',
+                   y= 'self_similarity') +
   labs(title = "Self-similarity ", 
        x = "Response", 
        y = "Self Similarity")
@@ -101,7 +107,8 @@ dev.off()
 
 # 3) Barplots mutation position -------------------------------------------
 # 9mer --------------------------------------------------------------------
-p6 <- bar_plot_func(9) +
+p6 <- bar_plot_func(data = data_single_peptides,
+                      pep_length = 9) +
   facet_grid(vars(cell_line))+
   labs(x = "Peptide Position", #title ="Bar plot of Peptide Position (by Cell Line)", 
        y = "Count") + 
@@ -109,13 +116,14 @@ p6 <- bar_plot_func(9) +
 
 
 # 10mer -------------------------------------------------------------------
-p7 <- bar_plot_func(10) +
+p7 <- bar_plot_func(data = data_single_peptides,
+                    pep_length = 10) +
   facet_grid(vars(cell_line))+
   labs( x = "Peptide Position", #title ="Bar plot of Peptide Position (by Cell Line)",
-        y = "Count" ,
+        y = "number of neoepitopes" ,
         fill = "Respond")
 
-mut_bar_legend <- get_legend(P4)
+mut_bar_legend <- get_legend(p7)
 p7 <- p7 + theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
 
 
@@ -134,7 +142,8 @@ p8 <-scatterplot_function(data = data_single_peptides,
                           x = 'mut_mhcrank_el',
                           y = 'norm_mhcrank_el')+
   labs(title= "Elution (EL) of neoepitope vs WT epitope", 
-       x= "Neoepitope EL %Rank ", y="WT epitope EL %Rank") + 
+       x= "Neoepitope EL %Rank ", 
+       y="WT epitope EL %Rank") + 
   facet_grid(vars(cell_line)) +
   theme(plot.title = element_text(hjust = 0.5),
         legend.position = "none")
@@ -212,7 +221,7 @@ p11 <- my_data_clean_aug %>%
   facet_wrap(cell_line~.) +
   labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
        x = "Mutation Consequence", 
-       y = "Count")
+       y = "Aomunt of neoeptiopes")
 ggsave(p11, filename ="Results/04_Mutation_consequence.png", width = 12, height = 7)
 
 # GGseq logo plot ---------------------------------------------------------

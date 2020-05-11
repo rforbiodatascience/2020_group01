@@ -228,8 +228,6 @@ for (at in attributeNames) {
 Error_rate <-  (table(Error_LogReg)[1]/N)
 Error_LogReg %>% gather(., key = "var", value = "T/F")
 
-print(attributeNames,Error_LogReg[k+1,])
-
 ################### model merge all varriables 
 Error_LogReg_merge = rep(NA, times=N)
 for(k in 1:N){

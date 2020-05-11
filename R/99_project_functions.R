@@ -53,8 +53,6 @@ barc_resp <- function(d, c){
 seqloggo_generator <-  function(data = my_data_clean_aug ,
                                 len = 9,
                                 resp = c("yes","no"))
-                              #  cons = c("F","M","I","D"),
-                              #  mouse = c("CT26","4T1"))
 { p <- my_data_clean_aug %>%
   filter(str_length(mut_peptide)==len,response==resp) %>% #,mutation_consequence==cons,cell_line == mouse
   select(mut_peptide) %>%
@@ -65,22 +63,22 @@ return(p)
 
 # Bar plot function -------------------------------------------------------
 
-bar_plot_func <- function(num) {
-  my_data_clean_aug %>%
-    filter(str_length(mut_peptide)==num,mutation_consequence=="M") %>% 
+bar_plot_func <- function(data = my_data_clean_aug,
+                            pep_length = 9 ) {
+  data %>%
+    filter(str_length(mut_peptide)==pep_length,mutation_consequence=="M") %>% 
     ggplot(aes(x=peptide_position)) + 
     geom_bar(aes(fill = response), stat = "count")+
     scale_y_log10() + 
-    scale_x_discrete(limits = c(1:num)) +
+    scale_x_discrete(limits = factor(1:pep_length)) +
     scale_fill_manual(values = respond_cols) +
     theme_bw()
-  
 }
 
 
 # Scatterplot function ----------------------------------------------------
 
-scatterplot_function <- function(data = my_data_clean_aug,
+scatterplot_function <- function(data = data_single_peptides,
                                  x = 'mut_mhcrank_el',
                                  y = 'expression_level') 
   {  data %>% 
@@ -100,8 +98,10 @@ scatterplot_function <- function(data = my_data_clean_aug,
 
 # Box plot function -------------------------------------------------------
 
-box_function <- function(x,y) {  
-  data_single_peptides %>% 
+box_function <- function(data = data_single_peptides,
+                         x ='response',
+                         y= 'mut_mhcrank_el') {  
+    data %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
     geom_quasirandom(aes(color = response),size = 2) + 
     geom_boxplot(aes(fill = response), alpha  = 0.8 ) +
