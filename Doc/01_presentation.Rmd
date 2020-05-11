@@ -53,7 +53,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-![](../Results/p2_barracoda_selection.png){width=80%}
+![](../Results/04_p2_barracoda_selection.png){width=80%}
 
 <center>
 ## Barracoda selection {#slide4} 
@@ -62,7 +62,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-![](../Results/fig1_barracoda.png){width=70%}
+![](../Results/04_fig1_barracoda.png){width=70%}
 
 <center>
 
@@ -70,7 +70,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Now selction criteria is rank < 2% and expression > 0.1 TPM
 - Can these selection critereia be optimized 
 <div align="center">
-<img src="../Results/p10.png" width=1000 height=490>
+<img src="../Results/04_p10.png" width=1000 height=490>
 </div>
 
 
@@ -80,7 +80,7 @@ knitr::opts_chunk$set(echo = FALSE)
 </div>
 
 <div style="float: right; width: 60%;">
-<img src="../Results/p11.png" width=500 height=500>
+<img src="../Results/04_p11.png" width=500 height=500>
 </div>
 
 
@@ -88,7 +88,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-![](../Results/fig2_el_ba_similarity.png){width=90%}
+![](../Results/04_fig2_el_ba_similarity.png){width=90%}
 
 <center>
 
@@ -96,7 +96,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-![](../Results/fig4_wt_neo_ba_el.png)
+![](../Results/04_fig4_wt_neo_ba_el.png)
 
 <center>
 
@@ -104,19 +104,19 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-![](../Results/fig_3_mutation_position.png){width=90%}
+![](../Results/04_fig_3_mutation_position.png){width=90%}
 
 <center>
 
 
 ## GGseq logo 
 <div align="center">
-<img src="../Results/GGseq_plot.png" width=800 height=500>
+<img src="../Results/04_GGseq_plot.png" width=800 height=500>
 </div>
 
 ## Modelling
 <div align="center">
-<img src="../Results/Roc_curves.png" width=800 height=500>
+<img src="../Results/05_Roc_curves.png" width=800 height=500>
 </div>
 
 ## Discussion

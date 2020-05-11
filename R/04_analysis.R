@@ -12,16 +12,6 @@ library(ggseqlogo)
 library(cowplot)
 library(ggbeeswarm)
 
-# libraries for modelling 
-# packages to install 
-#install.packages("devtools")
-#devtools::install_github("tidyverse/broom")
-#remotes::install_github("dariyasydykova/tidyroc")
-library(tidyverse)
-library(tidyroc)
-library(broom)
-library(yardstick)
-library(cowplot)
 
 
 
@@ -55,7 +45,7 @@ p1_4T1 <- barc_resp(my_data_clean_aug, "4T1") +
   labs(title = "log fold change of 4T1-tumor cell line neoepitope screen")
 p1_4T1 
 
-png(file = "Results/fig1_barracoda.png", width = 1500, height = 1000)
+png(file = "Results/04_fig1_barracoda.png", width = 1500, height = 1000)
 ggdraw() +
   draw_plot(p1_4T1, .05, .52, .95, .45) +
   draw_plot(p1_CT26, .05, .0, .95, .45) +
@@ -73,7 +63,7 @@ p2 <- data_single_peptides %>%
   geom_hline(yintercept = 2, linetype = "dotted") +
   geom_vline(xintercept = 0.01, linetype = "dotted") +
   facet_grid(vars(cell_line))
-ggsave(p2, filename ="Results/p2_barracoda_selection.png", width = 12, height = 7)
+ggsave(p2, filename ="Results/04_p2_barracoda_selection.png", width = 12, height = 7)
 
 # 2) Boxplots response vs non-response  ---------------------------------------------
 # Elution rank ------------------------------------------------------------
@@ -100,7 +90,7 @@ p5 <- box_function('response','self_similarity') +
 mut_bar_legend <- get_legend(p5)
 p5 <- p5 + theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
 
-png(file = "Results/fig2_el_ba_similarity.png", width = 1200, height = 400)
+png(file = "Results/04_fig2_el_ba_similarity.png", width = 1200, height = 400)
 ggdraw() +
   draw_plot(p3, .0, .0, .3, .95) +
   draw_plot(p4, .3, .0, .3, .95) +
@@ -129,7 +119,7 @@ mut_bar_legend <- get_legend(P4)
 p7 <- p7 + theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
 
 
-png(file = "Results/fig_3_mutation_position.png", width = 800, height = 400)
+png(file = "Results/04_fig_3_mutation_position.png", width = 800, height = 400)
 ggdraw() +
   draw_plot(p6, 0, .0, .45, .95) +
   draw_plot(p7, .45, .0, .45, .95) +
@@ -160,7 +150,7 @@ p9 <- scatterplot_function(data = data_single_peptides,
 bind_legend <- get_legend(p9)
 p9 <- p9 + theme(legend.position = "none")
 
-png(file = "Results/fig4_wt_neo_ba_el.png", width = 800, height = 400)
+png(file = "Results/04_fig4_wt_neo_ba_el.png", width = 800, height = 400)
 ggdraw() +
   draw_plot(p8, 0, .0, .43, .95) +
   draw_plot(p9, .44, .0, .43, .95) +
@@ -190,7 +180,7 @@ dev.off()
 # why not with function ??
 p10 <-  scatterplot_function(data = data_single_peptides,
                      x = 'expression_level', 
-                     y= 'Neoepitope EL (% rank)')+
+                     y= 'mut_mhcrank_el')+
   labs(size = "Estimated frequency normalized", 
        color = "Respond", 
        alpha = "Respond", 
@@ -198,7 +188,7 @@ p10 <-  scatterplot_function(data = data_single_peptides,
        x =  "Expression level") +
   facet_grid(vars(cell_line), scales = "free")+
   theme(plot.title = element_text(hjust = 0.5)) 
-ggsave(p10, filename ="Results/p10.png", width = 12, height = 7)
+ggsave(p10, filename ="Results/04_p10.png", width = 12, height = 7)
 
 # No. mutations by HLA faceted by cell_line. This plot was made by Sara because of curiosity.
 # It shows in what MHC allele do the response peptides bind. Most of the responsive peptides
@@ -223,7 +213,7 @@ p11 <- my_data_clean_aug %>%
   labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
        x = "Mutation Consequence", 
        y = "Count")
-ggsave(p11, filename ="Results/p11.png", width = 12, height = 7)
+ggsave(p11, filename ="Results/04_p11.png", width = 12, height = 7)
 
 # GGseq logo plot ---------------------------------------------------------
 #plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
@@ -240,7 +230,7 @@ for (num in 9:10) {
 }
 
 # plot together
-png(file = "Results/GGseq_plot.png", width = 1200, height = 600)
+png(file = "Results/04_GGseq_plot.png", width = 1200, height = 600)
 ggdraw() +
    draw_plot(plot_List[[1]], 0, .51, .45, .4) +
    draw_plot(plot_List[[2]], 0, .0, .45, .4) +
@@ -248,97 +238,6 @@ ggdraw() +
    draw_plot(plot_List[[4]], .47, .0, .45, .4) +
    draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
 dev.off()
-
-
-# Modelling ---------------------------------------------------------------
-
-# Roc curves
-data_single_peptides <- data_single_peptides %>% 
-  mutate(new_score  = expression_level/(mut_mhcrank_el)) %>%
-  mutate(response_binary = case_when(response=="yes" ~ 1,
-                           response=="no" ~ 0))
-
-#### downsample negative data 
-X_neg <- data_single_peptides %>% 
-  filter(response_binary==0) %>% 
-  select(mut_mhcrank_el,self_similarity,expression_level,
-         allele_frequency,priority_score,new_score,response_binary) %>% 
-  sample_n(40)
-X_pos <- data_single_peptides %>% 
-  filter(response_binary==1) %>% 
-  select(mut_mhcrank_el,self_similarity,expression_level,
-         allele_frequency,priority_score,new_score,response_binary)
-# bind pos and negative dataset 
-X_selected <- bind_rows(X_pos,X_neg) %>% 
-  sample_n(70)
-
-# set the second level of truth to positive in yardstick
-options(yardstick.event_first = FALSE)
-
-# Logistic regression with all chossen parameters 
-glm_out1 <- glm(
-  formula = response_binary ~ mut_mhcrank_el+
-    self_similarity+
-    expression_level,
-  family = binomial,
-  data = X_selected) %>%
-  augment() %>%
-  mutate(model = "all") 
-
-# logistic regression with self similarity
-glm_out2 <- glm(response_binary ~ self_similarity,
-                family = binomial,
-                data = X_selected) %>%
-  augment() %>%
-  mutate(model = "self_similarity")
-
-# logistic regression with mutant rank el 
-glm_out3 <- glm(response_binary ~ mut_mhcrank_el,
-                family = binomial,
-                data = X_selected) %>%
-  augment() %>%
-  mutate(model = "mut_mhcrank_el") 
-
-# logistic regression with expression score 
-glm_out4 <- glm(response_binary ~ expression_level,
-                family = binomial,
-                data = X_selected) %>%
-  augment() %>%
-  mutate(model = "expression_level")
-
-
-# combine all the data set 
-glm_out <- bind_rows(glm_out1, glm_out2,glm_out3,glm_out4)
-# make binary variable as factor 
-glm_out <- glm_out %>% 
-  mutate(response_binary = as.factor(response_binary))
-
-# plot ROC curves
-Roc_curves <- glm_out %>%
-  group_by(model) %>% # group to get individual ROC curve for each model
-  roc_curve(truth = response_binary, .fitted) %>% # get values to plot an ROC curve
-  ggplot(
-    aes(
-      x = 1 - specificity,  # equal to FPR(False positive rate)
-      y = sensitivity, # equal to TPR ( True Positive Rate)
-      color = model
-    )
-  ) + # plot roc curves for each models 
-  geom_line(size = 1.1) +
-  labs( x = "FPR", y = "TPR") +
-geom_abline(slope = 1, intercept = 0, size = 0.4) +
-   scale_color_manual(labels = c("All", "Self similarity","Neoepitope EL (% rank)", "Expression Level"), 
-  values = c("#d7191c", "#fdae61","#abdda4","#2b83ba"), 
-  breaks = c("all", "self_similarity","mut_mhcrank_el","expression_level")) +
-  coord_fixed() +
-  theme_bw()
-ggsave(Roc_curves, file = "Results/Roc_curves.png")
-
-
-AUC_values <- glm_out %>%
-  group_by(model) %>% # group to get individual AUC value for each model
-  roc_auc(truth = response_binary, .fitted)
-
 
 
 

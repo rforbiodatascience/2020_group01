@@ -44,7 +44,7 @@ data_single_peptides <- my_data_clean_aug %>%
   distinct(identifier, .keep_all = T) %>% 
   ungroup() %>% 
   mutate(new_score  = expression_level/(mut_mhcrank_el)) %>%
-  mutate(label = case_when(response=="yes" ~ 1,
+  mutate(response_binary = case_when(response=="yes" ~ 1,
                            response=="no" ~ 0))
 
 
