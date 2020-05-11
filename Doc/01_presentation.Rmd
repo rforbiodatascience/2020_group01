@@ -114,6 +114,11 @@ knitr::opts_chunk$set(echo = FALSE)
 <img src="../Results/GGseq_plot.png" width=800 height=500>
 </div>
 
+## Modelling
+<div align="center">
+<img src="../Results/Roc_curves.png" width=800 height=500>
+</div>
+
 ## Discussion
 - Data set is to small to see a clear pattern in immnunugenic and non-immunugenic neoepitopes
 

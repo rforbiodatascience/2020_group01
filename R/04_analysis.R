@@ -190,7 +190,7 @@ dev.off()
 # why not with function ??
 p10 <-  scatterplot_function(data = data_single_peptides,
                      x = 'expression_level', 
-                     y= 'mut_mhcrank_el')+
+                     y= 'Neoepitope EL (% rank)')+
   labs(size = "Estimated frequency normalized", 
        color = "Respond", 
        alpha = "Respond", 
@@ -327,7 +327,9 @@ Roc_curves <- glm_out %>%
   geom_line(size = 1.1) +
   labs( x = "FPR", y = "TPR") +
 geom_abline(slope = 1, intercept = 0, size = 0.4) +
-  # scale_color_manual(values = c("#48466D", "#3D84A8")) +
+   scale_color_manual(labels = c("All", "Self similarity","Neoepitope EL (% rank)", "Expression Level"), 
+  values = c("#d7191c", "#fdae61","#abdda4","#2b83ba"), 
+  breaks = c("all", "self_similarity","mut_mhcrank_el","expression_level")) +
   coord_fixed() +
   theme_bw()
 ggsave(Roc_curves, file = "Results/Roc_curves.png")
