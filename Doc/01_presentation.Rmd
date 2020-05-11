@@ -49,12 +49,17 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ## 1) Response filtering {#slide3} 
+<style>
+    #slide3 > p {
+      margin-top: -50px;
+
 - Response selection criteria: logfold change > 2 and p-value < 0.01
 
 <center>
 
 ![](../Results/p2_barracoda_selection.png){width=80%}
-
+    }
+</style>
 <center>
 ## Barracoda selection {#slide4} 
 - I dont know how to remove thw white space to make the plot bigger
