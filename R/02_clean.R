@@ -32,10 +32,7 @@ my_data_clean <- my_data %>%
   rename(count = count_1,
          masked_p_value =`masked_p_p=1iflogfc<0`,
          p_value = p,
-         neoepitope_sequence = sequence)
-
-# Write data
-# ------------------------------------------------------------------------------
+         neoepitope_sequence = sequence) 
 
 
 # Write data

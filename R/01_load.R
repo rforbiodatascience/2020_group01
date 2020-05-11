@@ -41,10 +41,21 @@ mupexi_ct26 <- read_xlsx(path = "data/raw/ct26_library_mupexi.xlsx") %>%
   select(-identifier, -Mut_peptide.y, -Allele) %>% 
   # convert Mut_MHCrank_EL and Expression level to numeric so we can join both files
   mutate(Mut_MHCrank_EL = as.numeric(Mut_MHCrank_EL),
-         Expression_Level = as.numeric(Expression_Level))
+         Mut_MHCrank_BA = as.numeric(Mut_MHCrank_BA),
+         Expression_Level = as.numeric(Expression_Level),
+         Norm_MHCrank_EL = as.numeric(Norm_MHCrank_EL),
+         Norm_MHCrank_BA = as.numeric(Norm_MHCrank_BA), 
+         Self_Similarity = as.numeric(Self_Similarity))
 
 mupexi_4t1 <- read_xlsx(path = "data/raw/4T1_library_mupexi.xlsx") %>% 
-  select(-identifier, -"...1")
+  select(-identifier) %>% 
+  # convert Mut_MHCrank_EL and Expression level to numeric so we can join both files
+  mutate(Mut_MHCrank_EL = as.numeric(Mut_MHCrank_EL),
+         Mut_MHCrank_BA = as.numeric(Mut_MHCrank_BA),
+         Expression_Level = as.numeric(Expression_Level),
+         Norm_MHCrank_EL = as.numeric(Norm_MHCrank_EL),
+         Norm_MHCrank_BA = as.numeric(Norm_MHCrank_BA), 
+         Self_Similarity = as.numeric(Self_Similarity))
 #-------------------------
 
 # PE_population_info and buffycoat_HLA_info file

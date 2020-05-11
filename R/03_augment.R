@@ -38,7 +38,8 @@ my_data_clean_aug <- my_data_clean %>%
                                  sample == "CT26_C3" | sample == "CT26_C4" | sample == "CT26_D4" ~ "Isotype control")) %>% 
   
   # add cell_line column
-  mutate(cell_line = case_when(str_detect(sample, "^4T1") ~ "4T1", str_detect(sample, "^CT26") ~ "CT26")) %>% 
+  mutate(cell_line = case_when(str_detect(sample, "^4T1") ~ "4T1", 
+                               str_detect(sample, "^CT26") ~ "CT26")) %>% 
   # add percent_count.fraction column = barcode_count / sum(barcode_counts) for a particular sample * 100
   group_by(sample) %>% 
   mutate(percent_count_fraction = count/sum(count)*100) %>% 
