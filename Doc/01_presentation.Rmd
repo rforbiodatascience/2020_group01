@@ -14,41 +14,48 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Neoepitopes arise from somatic mutations in the tumor... 
+## Neoepitopes arise from somatic mutations in the tumor
 
 <center>
 
-...they are not expressed in normal cells and are optimal targets for immunetherapy approaches
+<div style="float: left; width: 40%;">
+<img src="../Doc/Figures/cd8_tcell_mhc.png" width=400 height=300>
+</div>
 
-![](../Doc/Figures/01_neoepitopes.png){width=40%}
-
-<center>
-
-
-## Objectives - Elucidation of detected neoepitope characteristics 
-
-<center>
-
-<font size="4"> - Merging Mupexi file with Barracoda file</font>
-
-![](../Doc/Figures/01_intro.png){width=90%}
+<div style="float: right; width: 60%;">
+<img src="../Doc/Figures/01_neoepitopes.png" width=400 height=400>
+</div>
 
 <center>
 
-## Method {.columns-2 .smaller}
-
-- Data generation from mouse tumor models
+## Data generation from mouse tumor models
+<div style="float: left; width: 40%;">
 - Two cell lines (CT26 colon carcinoma and 4T1 breast cancer)
 - Two organs (spleen and tumors)
 - With and without checkpoint inhibitor treatment
+</div>
+<div style="float: right; width: 60%;">
+<img src="../Doc/Figures/02_samples.png" width=400 height=150>
+</div>
+<div align="center">
+<img src="../Doc/Figures/01_intro.png" width=700 height=350>
+</div>
 
-- Structure in two columns.
+## Objectives
+ Elucidation of detected neoepitope characteristics
+
+
+## Method
 - Roadmap of data analysis in the code
+
+<div align="center">
+<img src="../Doc/Figures/project_structure.png" width=600 height=400>
+</div>
 
 # Results
 
 
-## 1) Response filtering {#slide3} 
+## Response filtering {#slide3} 
 - Response selection criteria: logfold change > 2 and p-value < 0.01
 
 <center>
