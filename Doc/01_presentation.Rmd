@@ -70,7 +70,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Now selction criteria is rank < 2% and expression > 0.1 TPM
 - Can these selection critereia be optimized 
 <div align="center">
-<img src="../Results/04_p10.png" width=1000 height=490>
+<img src="../Results/04_expression_rank.png" width=1000 height=490>
 </div>
 
 
@@ -80,7 +80,7 @@ knitr::opts_chunk$set(echo = FALSE)
 </div>
 
 <div style="float: right; width: 60%;">
-<img src="../Results/04_p11.png" width=500 height=500>
+<img src="../Results/04_Mutation_consequence.png" width=500 height=500>
 </div>
 
 

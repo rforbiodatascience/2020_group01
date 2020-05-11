@@ -188,7 +188,7 @@ p10 <-  scatterplot_function(data = data_single_peptides,
        x =  "Expression level") +
   facet_grid(vars(cell_line), scales = "free")+
   theme(plot.title = element_text(hjust = 0.5)) 
-ggsave(p10, filename ="Results/04_p10.png", width = 12, height = 7)
+ggsave(p10, filename ="Results/04_expression_rank.png", width = 12, height = 7)
 
 # No. mutations by HLA faceted by cell_line. This plot was made by Sara because of curiosity.
 # It shows in what MHC allele do the response peptides bind. Most of the responsive peptides
@@ -213,7 +213,7 @@ p11 <- my_data_clean_aug %>%
   labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
        x = "Mutation Consequence", 
        y = "Count")
-ggsave(p11, filename ="Results/04_p11.png", width = 12, height = 7)
+ggsave(p11, filename ="Results/04_Mutation_consequence.png", width = 12, height = 7)
 
 # GGseq logo plot ---------------------------------------------------------
 #plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
