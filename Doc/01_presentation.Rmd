@@ -146,7 +146,6 @@ And a [shiny app](https://annie-borch.shinyapps.io/exploring_data/) for rapid vi
 <img src="../Doc/Figures/shiny_app.png" width=350 height=400>
 </div>
 
-We have developed [barcc](https://github.com/rforbiodatascience/barcc) package, which includes a [shiny app](https://annie-borch.shinyapps.io/exploring_data/) for rapid visualization of the data.
 
 
 
