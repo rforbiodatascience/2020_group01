@@ -256,36 +256,3 @@ Error_LogReg_merge %>% sum(FALSE)/length(Error_LogReg_merge)
 ###################### leave-one-out is done ####################
 
 
-# old code 
-
-
-## ROC Curves 
-
-png(file = "Results/ROC_curve.png", width = 1000, height = 600)
-par(mfrow=c(2,3)) 
-pred <- prediction(X_selected$allele_frequency, X_selected$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "allele_frequency")
-
-pred <- prediction(X_selected$expression_level, X_selected$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "expression_level")
-
-pred <- prediction(X_selected$mut_mhcrank_el, X_selected$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "mut_mhcrank_el")
-
-pred <- prediction(X_selected$priority_score, X_selected$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "priority_score")
-
-pred <- prediction(X_selected$new_score, X_selected$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "expression_level/mut_mhcrank_el")
-
-pred <- prediction(X_selected$self_similarity, X_selected$label)
-perf <- performance(pred,"tpr","fpr")
-plot(perf,colorize=TRUE, main = "self_similarity")
-
-dev.off()
-
