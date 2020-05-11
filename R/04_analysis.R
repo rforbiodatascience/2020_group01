@@ -10,6 +10,7 @@ library(ggplot2)
 library(ggseqlogo)
 library(ggseqlogo)
 library(cowplot)
+library(ggbeeswarm)
 
 
 # Define functions --------------------------------------------------------

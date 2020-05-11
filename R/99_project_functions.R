@@ -86,8 +86,8 @@ scatterplot_function <- function(data = my_data_clean_aug,
   {  data %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
     geom_point(aes(color=response, alpha = response, size  = estimated_frequency_norm))+
-    scale_y_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
-    scale_x_log10(breaks = c(0.01, 0.10, 1.00, 2.00, 10))+
+    scale_y_log10(breaks = c(0.01, 0.10, 0.5, 1.00, 2.00, 10))+
+    scale_x_log10(breaks = c(0.01, 0.10, 0.5, 1.00, 2.00, 10))+
     theme_bw() + 
     scale_alpha_manual(breaks = c("no","yes"),labels = c("no","yes"),values = c(0.3,0.9))+
     scale_color_manual(values = respond_cols) +
@@ -101,12 +101,14 @@ scatterplot_function <- function(data = my_data_clean_aug,
 # Box plot function -------------------------------------------------------
 
 box_function <- function(x,y) {  
-  my_data_clean_aug %>% 
+  data_single_peptides %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
-    geom_boxplot(aes(fill = response)) +
+    geom_quasirandom(aes(color = response),size = 2) + 
+    geom_boxplot(aes(fill = response), alpha  = 0.8 ) +
     facet_grid(vars(cell_line), scales = "free") +
     theme_bw() +
     scale_fill_manual(values = respond_cols) +
+    scale_color_manual(values = respond_cols) +
     guides(color = guide_legend(override.aes = list(size = 4)))
   }
 
