@@ -122,6 +122,7 @@ knitr::opts_chunk$set(echo = FALSE)
 </div>
 
 ## Modelling
+- 4 sample of data set 
 <div align="center">
 <img src="../Results/05_Roc_curves.png" width=800 height=500>
 </div>
@@ -143,7 +144,7 @@ We have developed [barcc](https://github.com/rforbiodatascience/barcc) package
 </div>
 <div style="float: right; width: 60%;">
 And a [shiny app](https://annie-borch.shinyapps.io/exploring_data/) for rapid visualization of the data
-<img src="../Doc/Figures/shiny_app.png" width=350 height=400>
+<img src="../Doc/Figures/shiny_app.png" width=400 height=400>
 </div>
 
 
