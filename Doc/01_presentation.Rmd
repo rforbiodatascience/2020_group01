@@ -136,7 +136,7 @@ Further work:
 - Make packages for human data 
 
 ## R package and shiny app
-We have developed [barcc](https://github.com/rforbiodatascience/barcc) package, which includes a shiny app for rapid visualization of the data.
+We have developed [barcc](https://github.com/rforbiodatascience/barcc) package, which includes a [shiny app](https://annie-borch.shinyapps.io/exploring_data/) for rapid visualization of the data.
 
 
 
