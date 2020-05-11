@@ -107,7 +107,7 @@ p6 <- bar_plot_func(data = data_single_peptides,
 
 
 # 10mer -------------------------------------------------------------------
-p7 <- bar_plot_func(data = data_single_peptides,
+p7 <- bar_plot_func(data = my_data_clean_aug,
                     pep_length = 10,
                     no_legend = FALSE)
 # get legend
