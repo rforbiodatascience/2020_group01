@@ -136,7 +136,7 @@ Further work:
 - Make packages for human data 
 
 ## R package and shiny app
-<<<<<<< HEAD
+
 <div style="float: left; width: 40%;">
 We have developed [barcc](https://github.com/rforbiodatascience/barcc) package
 <img src="../Doc/Figures/R_packages.png" width=350 height=200>
@@ -145,12 +145,12 @@ We have developed [barcc](https://github.com/rforbiodatascience/barcc) package
 And a [shiny app](https://annie-borch.shinyapps.io/exploring_data/) for rapid visualization of the data
 <img src="../Doc/Figures/shiny_app.png" width=350 height=400>
 </div>
-=======
+
 We have developed [barcc](https://github.com/rforbiodatascience/barcc) package, which includes a [shiny app](https://annie-borch.shinyapps.io/exploring_data/) for rapid visualization of the data.
 
 
 
->>>>>>> 6aea0a5ef499db3f279544b94fb45cf5ca8af826
+
 
 
 
