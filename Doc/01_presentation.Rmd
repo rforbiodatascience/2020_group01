@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ...they are not expressed in normal cells and are optimal targets for immunetherapy approaches
 
-![](../Doc/01_neoepitopes.png){width=40%}
+![](../Doc/Figures/01_neoepitopes.png){width=40%}
 
 <center>
 
@@ -31,7 +31,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <font size="4"> - Merging Mupexi file with Barracoda file</font>
 
-![](../Doc/01_intro.png){width=90%}
+![](../Doc/Figures/01_intro.png){width=90%}
 
 <center>
 
