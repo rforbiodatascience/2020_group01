@@ -64,15 +64,25 @@ return(p)
 # Bar plot function -------------------------------------------------------
 
 bar_plot_func <- function(data = my_data_clean_aug,
-                            pep_length = 9 ) {
-  data %>%
+                            pep_length = 9 ,
+                          no_legend = TRUE) {
+ p <- data %>%
     filter(str_length(mut_peptide)==pep_length,mutation_consequence=="M") %>% 
     ggplot(aes(x=peptide_position)) + 
     geom_bar(aes(fill = response), stat = "count")+
     scale_y_log10() + 
     scale_x_discrete(limits = factor(1:pep_length)) +
     scale_fill_manual(values = respond_cols) +
-    theme_bw()
+    theme_bw() + 
+    theme(plot.title = element_text(hjust = 0.5))+
+    facet_grid(vars(cell_line))+
+    labs(x = "Peptide Position", 
+         y = "Count")
+ 
+  # Determine legend 
+  if (no_legend == TRUE) p <- p + theme(legend.position = 'none') else NULL 
+
+ return(p)
 }
 
 
@@ -80,8 +90,9 @@ bar_plot_func <- function(data = my_data_clean_aug,
 
 scatterplot_function <- function(data = data_single_peptides,
                                  x = 'mut_mhcrank_el',
-                                 y = 'expression_level') 
-  {  data %>% 
+                                 y = 'expression_level',
+                                 no_legend = TRUE) 
+  { p <- data %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
     geom_point(aes(color=response, alpha = response, size  = estimated_frequency_norm))+
     scale_y_log10(breaks = c(0.01, 0.10, 0.5, 1.00, 2.00, 10))+
@@ -90,9 +101,16 @@ scatterplot_function <- function(data = data_single_peptides,
     scale_alpha_manual(breaks = c("no","yes"),labels = c("no","yes"),values = c(0.3,0.9))+
     scale_color_manual(values = respond_cols) +
     guides(color = guide_legend(override.aes = list(size = 5))) + 
+    facet_grid(vars(cell_line), scales = "free") +
+    theme(plot.title = element_text(hjust = 0.5))+
     labs(size = "Estimated frequency normalized",
-         color = "Respond", 
-         alpha = "Respond")
+         color = "Response", 
+         alpha = "Response")
+  # Determine legend 
+  if (no_legend == TRUE) p <- p + theme(legend.position = 'none') else NULL 
+  
+  return(p)
+  
 }
 
 
@@ -100,16 +118,24 @@ scatterplot_function <- function(data = data_single_peptides,
 
 box_function <- function(data = data_single_peptides,
                          x ='response',
-                         y= 'mut_mhcrank_el') {  
-    data %>% 
+                         y= 'mut_mhcrank_el',
+                         no_legend = TRUE) {  
+   p <-  data %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
     geom_quasirandom(aes(color = response),size = 2) + 
-    geom_boxplot(aes(fill = response), alpha  = 0.8 ) +
+    geom_boxplot(aes(fill = response), 
+                 alpha = .5, outlier.shape = NA, colour = '#525252') +
     facet_grid(vars(cell_line), scales = "free") +
     theme_bw() +
+    theme(plot.title = element_text(hjust = 0.5))+
     scale_fill_manual(values = respond_cols) +
     scale_color_manual(values = respond_cols) +
-    guides(color = guide_legend(override.aes = list(size = 4)))
+    guides(fill = FALSE, color = guide_legend(override.aes = list(size = 4)))
+   
+   # Determine legend 
+   if (no_legend == TRUE) p <- p + theme(legend.position = 'none') else NULL 
+   
+   return(p)
   }
 
 

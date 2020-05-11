@@ -13,10 +13,7 @@ library(cowplot)
 library(ggbeeswarm)
 
 
-
-
 # Define functions --------------------------------------------------------
-wd = getwd()
 source(file = "R/99_project_functions.R")
 
 
@@ -33,17 +30,14 @@ data_single_peptides <- my_data_clean_aug %>%
   distinct(identifier, .keep_all = T) %>% 
   ungroup()
 
+
 # Visualise data ----------------------------------------------------------
 # 1) Barracoda characteristics --------------------------------------------
 p1_CT26 <- barc_resp(my_data_clean_aug, "CT26") +
   labs(title = "log fold change of CT26-tumor cell line neoepitope screen")
-   
-p1_CT26
-
 
 p1_4T1 <- barc_resp(my_data_clean_aug, "4T1") +
   labs(title = "log fold change of 4T1-tumor cell line neoepitope screen")
-p1_4T1 
 
 png(file = "Results/04_fig1_barracoda.png", width = 1500, height = 1000)
 ggdraw() +
@@ -53,6 +47,7 @@ ggdraw() +
   draw_plot_label(c("A", "B"), c(.0, .0), c(.95, .45), size = 22)
 dev.off()
 
+# pvalue and log fold cahnge of baracoda 
 p2 <- data_single_peptides %>% 
   ggplot(aes(p_value, log_fold_change)) +
   geom_point(aes(color=response, size  = estimated_frequency_norm)) +
@@ -72,8 +67,7 @@ p3 <-  box_function(data = data_single_peptides,
                     y = 'mut_mhcrank_el') +
   labs(title ="Eslution (EL) rank score",
        x = "Response", 
-       y = "Neoepitopes elution (%rank score)") +
-  theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+       y = "Neoepitopes elution (%rank score)")
 
 # Binding affinity --------------------------------------------------------
 p4 <-  box_function(data = data_single_peptides, 
@@ -81,21 +75,22 @@ p4 <-  box_function(data = data_single_peptides,
                     y= 'mut_mhcrank_ba') +
   labs(title ="Binding affinity (BA) rank score",
        x = "Response", 
-       y = "Neoepitopes binding affinity (%rank score)") +
-  theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
-
+       y = "Neoepitopes binding affinity (%rank score)")
 
 # Self-similarity ---------------------------------------------------------
 p5 <- box_function(data = data_single_peptides, 
                    x = 'response',
-                   y= 'self_similarity') +
+                   y= 'self_similarity',
+                   no_legend = FALSE) +
   labs(title = "Self-similarity ", 
        x = "Response", 
-       y = "Self Similarity")
-
+       y = "Self Similarity",
+       color = "Response")
+# get legend
 mut_bar_legend <- get_legend(p5)
-p5 <- p5 + theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+p5 <- p5 + theme(legend.position = "none")
 
+# Combine plots 
 png(file = "Results/04_fig2_el_ba_similarity.png", width = 1200, height = 400)
 ggdraw() +
   draw_plot(p3, .0, .0, .3, .95) +
@@ -108,25 +103,18 @@ dev.off()
 # 3) Barplots mutation position -------------------------------------------
 # 9mer --------------------------------------------------------------------
 p6 <- bar_plot_func(data = data_single_peptides,
-                      pep_length = 9) +
-  facet_grid(vars(cell_line))+
-  labs(x = "Peptide Position", 
-       y = "Count") + 
-  theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+                      pep_length = 9)
 
 
 # 10mer -------------------------------------------------------------------
 p7 <- bar_plot_func(data = data_single_peptides,
-                    pep_length = 10) +
-  facet_grid(vars(cell_line))+
-  labs( x = "Peptide Position", 
-        y = "number of neoepitopes" ,
-        fill = "Respond")
-
+                    pep_length = 10,
+                    no_legend = FALSE)
+# get legend
 mut_bar_legend <- get_legend(p7)
-p7 <- p7 + theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
+p7 <- p7 + theme(legend.position = "none")
 
-
+# Combine plots 
 png(file = "Results/04_fig_3_mutation_position.png", width = 800, height = 400)
 ggdraw() +
   draw_plot(p6, 0, .0, .45, .95) +
@@ -143,18 +131,15 @@ p8 <-scatterplot_function(data = data_single_peptides,
                           y = 'norm_mhcrank_el')+
   labs(title= "Elution (EL) of neoepitope vs WT epitope", 
        x= "Neoepitope EL %Rank ", 
-       y="WT epitope EL %Rank") + 
-  facet_grid(vars(cell_line)) +
-  theme(plot.title = element_text(hjust = 0.5),
-        legend.position = "none")
+       y="WT epitope EL %Rank")
 
 p9 <- scatterplot_function(data = data_single_peptides,
                            x = 'mut_mhcrank_ba', 
-                           y= 'norm_mhcrank_ba')+
+                           y= 'norm_mhcrank_ba',
+                           no_legend = FALSE)+
   labs(title= "Binding affinity (BA) of neoepitope vs WT epitope",
-       x= "Neoepitope BA %Rank ", y="WT epitope BA %Rank") +
-  facet_grid(vars(cell_line)) +
-  theme(plot.title = element_text(hjust = 0.5))
+       x= "Neoepitope BA %Rank ",
+       y="WT epitope BA %Rank")
 
 bind_legend <- get_legend(p9)
 p9 <- p9 + theme(legend.position = "none")
@@ -168,6 +153,71 @@ ggdraw() +
 dev.off()
 
 # 4) Expression level vs rank ----------------------------------
+p10 <-  scatterplot_function(data = data_single_peptides,
+                     x = 'expression_level', 
+                     y= 'mut_mhcrank_el')+
+  labs(y = "Neoepitoe elution (% rank score)", 
+       x =  "Expression level") +
+  theme(plot.title = element_text(hjust = 0.5)) 
+ggsave(p10, filename ="Results/04_expression_rank.png", width = 12, height = 7)
+
+
+
+# Mutaions overview -------------------------------------------------------
+p11 <- my_data_clean_aug %>% 
+  ggplot(aes(x = mutation_consequence)) +
+  geom_bar(aes(fill = response), stat = "count") +
+  scale_y_log10() +
+  theme_bw() +
+  scale_fill_manual(values = respond_cols) +
+  facet_wrap(cell_line~.) +
+  labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
+       x = "Mutation Consequence", 
+       y = "Aomunt of neoeptiopes",
+       fill = "Response")
+ggsave(p11, filename ="Results/04_Mutation_consequence.png", width = 10, height = 8)
+
+
+# GGseq logo plot ---------------------------------------------------------
+#plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
+plot_List <- list()
+i=1
+for (num in 9:10) {
+  for(r in c("yes","no"))  {
+    p <- seqloggo_generator(data  = data_single_peptides, 
+                            len = num,
+                            resp = r)
+    plot_List[[i]] <- p
+    i <- i+1
+  }
+}
+
+# Combine plots
+png(file = "Results/04_GGseq_plot.png", width = 1200, height = 600)
+ggdraw() +
+   draw_plot(plot_List[[1]], 0, .51, .45, .4) +
+   draw_plot(plot_List[[2]], 0, .0, .45, .4) +
+   draw_plot(plot_List[[3]], .47, .51, .45, .4) +
+   draw_plot(plot_List[[4]], .47, .0, .45, .4) +
+   draw_plot_label(c("Response", "No response"), c(-0.05,  -0.06), c(1,  .48), size = 22)
+dev.off()
+
+
+
+
+######## data not to use 
+
+# No. mutations by HLA faceted by cell_line. This plot was made by Sara because of curiosity.
+# It shows in what MHC allele do the response peptides bind. Most of the responsive peptides
+# bind H2-Kd allele in both cell lines 
+# hla <- data_single_peptides %>% 
+#   filter(response == "yes") %>% 
+#   ggplot(aes(x = hla)) +
+#   geom_bar(aes(fill = hla), stat = "count") +
+#   facet_grid(vars(cell_line)) +
+#   theme_bw()
+# ggsave(hla, filename ="Results/hla.png", width = 12, height = 7)
+
 # p10 <- data_single_peptides %>% 
 #   ggplot(., aes(expression_level, mut_mhcrank_el)) +
 #   geom_point(aes(color = response, alpha = response, size = estimated_frequency_norm))+
@@ -185,77 +235,6 @@ dev.off()
 #        x =  "Expression level") + 
 #   guides(color = guide_legend(override.aes = list(size = 5)))
 # ggsave(p10, filename ="Results/p10.png", width = 12, height = 7)
-
-# why not with function ??
-p10 <-  scatterplot_function(data = data_single_peptides,
-                     x = 'expression_level', 
-                     y= 'mut_mhcrank_el')+
-  labs(size = "Estimated frequency normalized", 
-       color = "Respond", 
-       alpha = "Respond", 
-       y = "Neoepitoe elution (% rank score)", 
-       x =  "Expression level") +
-  facet_grid(vars(cell_line), scales = "free")+
-  theme(plot.title = element_text(hjust = 0.5)) 
-ggsave(p10, filename ="Results/04_expression_rank.png", width = 12, height = 7)
-
-# No. mutations by HLA faceted by cell_line. This plot was made by Sara because of curiosity.
-# It shows in what MHC allele do the response peptides bind. Most of the responsive peptides
-# bind H2-Kd allele in both cell lines 
-# hla <- data_single_peptides %>% 
-#   filter(response == "yes") %>% 
-#   ggplot(aes(x = hla)) +
-#   geom_bar(aes(fill = hla), stat = "count") +
-#   facet_grid(vars(cell_line)) +
-#   theme_bw()
-# ggsave(hla, filename ="Results/hla.png", width = 12, height = 7)
-
-
-# Mutaions overview -------------------------------------------------------
-p11 <- my_data_clean_aug %>% 
-  ggplot(aes(x = mutation_consequence)) +
-  geom_bar(aes(fill = response), stat = "count") +
-  scale_y_log10() +
-  theme_bw() +
-  scale_fill_manual(values = respond_cols) +
-  facet_wrap(cell_line~.) +
-  labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
-       x = "Mutation Consequence", 
-       y = "Aomunt of neoeptiopes",
-       fill = "Respond")
-ggsave(p11, filename ="Results/04_Mutation_consequence.png", width = 12, height = 7)
-
-
-# GGseq logo plot ---------------------------------------------------------
-#plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
-plot_List <- list()
-i=1
-for (num in 9:10) {
-  for(r in c("yes","no"))  {
-    p <- seqloggo_generator(data  = data_single_peptides, 
-                            len = num,
-                            resp = r)
-    plot_List[[i]] <- p
-    i <- i+1
-  }
-}
-
-# plot together
-png(file = "Results/04_GGseq_plot.png", width = 1200, height = 600)
-ggdraw() +
-   draw_plot(plot_List[[1]], 0, .51, .45, .4) +
-   draw_plot(plot_List[[2]], 0, .0, .45, .4) +
-   draw_plot(plot_List[[3]], .47, .51, .45, .4) +
-   draw_plot(plot_List[[4]], .47, .0, .45, .4) +
-   draw_plot_label(c("Responses", "No responses"), c(-0.05,  -0.06), c(1,  .48), size = 22)
-dev.off()
-
-
-
-
-
-
-
 
 
 

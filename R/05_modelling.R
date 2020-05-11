@@ -29,8 +29,6 @@ library(cowplot)
 # a distance metric based on the statistical idea of likelihood.
 
 
-
-
 # Load data ---------------------------------------------------------------
 
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
