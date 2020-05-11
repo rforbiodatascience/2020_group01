@@ -110,7 +110,7 @@ dev.off()
 p6 <- bar_plot_func(data = data_single_peptides,
                       pep_length = 9) +
   facet_grid(vars(cell_line))+
-  labs(x = "Peptide Position", #title ="Bar plot of Peptide Position (by Cell Line)", 
+  labs(x = "Peptide Position", 
        y = "Count") + 
   theme(legend.position = "none", plot.title = element_text(hjust = 0.5))
 
@@ -119,7 +119,7 @@ p6 <- bar_plot_func(data = data_single_peptides,
 p7 <- bar_plot_func(data = data_single_peptides,
                     pep_length = 10) +
   facet_grid(vars(cell_line))+
-  labs( x = "Peptide Position", #title ="Bar plot of Peptide Position (by Cell Line)",
+  labs( x = "Peptide Position", 
         y = "number of neoepitopes" ,
         fill = "Respond")
 
@@ -221,8 +221,10 @@ p11 <- my_data_clean_aug %>%
   facet_wrap(cell_line~.) +
   labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
        x = "Mutation Consequence", 
-       y = "Aomunt of neoeptiopes")
+       y = "Aomunt of neoeptiopes",
+       fill = "Respond")
 ggsave(p11, filename ="Results/04_Mutation_consequence.png", width = 12, height = 7)
+
 
 # GGseq logo plot ---------------------------------------------------------
 #plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
