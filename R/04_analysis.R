@@ -59,7 +59,8 @@ p2 <- data_single_peptides %>%
   geom_vline(xintercept = 0.01, linetype = "dotted") +
   facet_grid(vars(cell_line)) +
   labs(x = "p-value",
-       y = "log fold change")
+       y = "log fold change",
+       size = "Nomalized estimated frequency")
 ggsave(p2, filename ="Results/04_p2_barracoda_selection.png", width = 12, height = 7)
 
 # 2) Boxplots response vs non-response  ---------------------------------------------
