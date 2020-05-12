@@ -118,7 +118,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## GGseq logo 
 <div align="center">
-<img src="../Results/04_GGseq_plot.png" width=800 height=500>
+<img src="../Results/04_GGseq_plot.png" width=750 height=500>
 </div>
 
 ## Modelling

@@ -199,7 +199,7 @@ ggdraw() +
    draw_plot(plot_List[[2]], 0, .0, .45, .4) +
    draw_plot(plot_List[[3]], .47, .51, .45, .4) +
    draw_plot(plot_List[[4]], .47, .0, .45, .4) +
-   draw_plot_label(c("Response", "No response"), c(-0.05,  -0.06), c(1,  .48), size = 22)
+   draw_plot_label(c("Response", "No response"), c(-0.03,  -0.03), c(1,  .48), size = 22)
 dev.off()
 
 
