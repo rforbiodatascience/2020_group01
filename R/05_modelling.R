@@ -12,11 +12,10 @@ rm(list = ls())
 # libraries for modelling 
 # packages to install 
 #install.packages("devtools")
-devtools::install_github("tidyverse/broom")
+#devtools::install_github("tidyverse/broom")
 #remotes::install_github("dariyasydykova/tidyroc")
 library(tidyverse)
 library(tidyroc)
-library("tidyverse/broom")
 library(yardstick)
 library(cowplot)
 
