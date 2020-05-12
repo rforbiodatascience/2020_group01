@@ -99,7 +99,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-![](../Results/04_fig4_wt_neo_ba_el.png)
+![](../Results/04_fig4_wt_neo_el.png)
 
 <center>
 
