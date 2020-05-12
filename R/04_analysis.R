@@ -68,17 +68,17 @@ ggsave(p2, filename ="Results/04_p2_barracoda_selection.png", width = 12, height
 p3 <-  box_function(data = data_single_peptides, 
                     x = 'response',
                     y = 'mut_mhcrank_el') +
-  labs(title ="Elution (EL) rank score",
+  labs(title ="Eluted ligand %rank",
        x = "Response", 
-       y = "Neoepitopes elution (%rank score)")
+       y = "Neoepitopes eluted ligand %rank")
 
 # Binding affinity --------------------------------------------------------
 p4 <-  box_function(data = data_single_peptides, 
                     x = 'response',
                     y= 'mut_mhcrank_ba') +
-  labs(title ="Binding affinity (BA) rank score",
+  labs(title ="Binding affinity %rank",
        x = "Response", 
-       y = "Neoepitopes binding affinity (%rank score)")
+       y = "Neoepitopes binding affinity %rank")
 
 # Self-similarity ---------------------------------------------------------
 p5 <- box_function(data = data_single_peptides, 
@@ -133,9 +133,9 @@ p8 <-scatterplot_function(data = data_single_peptides,
                           x = 'mut_mhcrank_el',
                           y = 'norm_mhcrank_el',
                           no_legend = FALSE)+
-  labs(title= "Elution (EL) of neoepitope vs WT epitope", 
-       x= "Neoepitope EL %Rank ", 
-       y="WT epitope EL %Rank")
+  labs(title= "Eluted ligand of neoepitope vs WT epitope", 
+       x= "Neoepitope Eluted ligand %Rank ", 
+       y="WT epitope Eluted ligand %Rank")
 ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 10, height = 10)
 
 
@@ -143,7 +143,7 @@ ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 10, height = 10)
 p10 <-  scatterplot_function(data = data_single_peptides,
                      x = 'expression_level', 
                      y= 'mut_mhcrank_el')+
-  labs(y = "Neoepitoe elution (% rank score)", 
+  labs(y = "Neoepitope eluted ligand %Rank", 
        x =  "Expression level") +
   theme(plot.title = element_text(hjust = 0.5)) 
 ggsave(p10, filename ="Results/04_expression_rank.png", width = 12, height = 7)
