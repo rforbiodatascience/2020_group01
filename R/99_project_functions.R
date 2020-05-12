@@ -8,11 +8,14 @@ respond_cols <- c("#91bfdb","#ef8a62")
 # Baracoda respond function -----------------------------------------------
 
 barc_resp <- function(d, c){
+  
   d <- d %>% filter(cell_line == c) %>% 
     ggplot(., aes(peptide_name, log_fold_change)) +
-    geom_point(aes(color = sample, shape = organ, alpha = response, size = estimated_frequency_norm)) +
+    geom_point(aes(color = sample, shape = organ, 
+                   alpha = response, size = estimated_frequency_norm)) +
     geom_text_repel(d %>%
-                      filter(cell_line == c, response == "yes"), mapping = aes(label = peptide_name, size = 14)) +
+                      filter(cell_line == c, response == "yes"),
+                    mapping = aes(label = peptide_name, size = 14)) +
     facet_grid(vars(treatment)) +
     labs(size = "Normalized estimated frequency",
          shape = "Organ", 
@@ -30,30 +33,11 @@ barc_resp <- function(d, c){
            shape = guide_legend(override.aes = list(size = 4)))
 }
 
-# barc_freq <- function(d, c, p){
-#   d <- d %>% filter(cell_line == c) %>% 
-#     ggplot(., aes_string("peptide_name", p)) +
-#     geom_point(aes(color = organ, shape = sample), size = 3) +
-#     #geom_text_repel(d %>%
-#     #                 filter(response == "yes"), stat = "identity", mapping = aes(label = peptide_name)) +
-#     scale_fill_manual(values = respond_cols) +
-#     facet_grid(vars(treatment)) +
-#     labs(#shape = "Sample", 
-#       color = "Sample", 
-#       #alpha = "Response", 
-#       y = "Normalized estimated frequency", 
-#       x = "Neoepitopes")+
-#     theme_bw() +
-#     guides(color = guide_legend(override.aes = list(size = 2)))
-# }
-
-
-
 # GGseq logo function -----------------------------------------------------
 seqloggo_generator <-  function(data = my_data_clean_aug ,
                                 len = 9,
-                                resp = c("yes","no"))
-{ p <- my_data_clean_aug %>%
+                                resp = c("yes","no")){
+ p <- my_data_clean_aug %>%
   filter(str_length(mut_peptide)==len,response==resp) %>% 
   select(mut_peptide) %>%
   ggseqlogo()
@@ -91,8 +75,8 @@ bar_plot_func <- function(data = my_data_clean_aug,
 scatterplot_function <- function(data = data_single_peptides,
                                  x = 'mut_mhcrank_el',
                                  y = 'expression_level',
-                                 no_legend = TRUE) 
-  { p <- data %>% 
+                                 no_legend = TRUE) {
+   p <- data %>% 
     ggplot(mapping = aes_string(x = x, y = y)) +
     geom_point(aes(color=response, alpha = response, size  = estimated_frequency_norm))+
     scale_y_log10(breaks = c(0.01, 0.10, 0.5, 1.00, 2.00, 10))+
