@@ -16,7 +16,6 @@ rm(list = ls())
 #remotes::install_github("dariyasydykova/tidyroc")
 library(tidyverse)
 library(tidyroc)
-library(broom)
 library(yardstick)
 library(cowplot)
 
@@ -137,104 +136,5 @@ ggdraw() +
   draw_plot(Roc_plot_list[[4]], .38, .0, .5, .5) +
   draw_plot(roc_legend, .68, .33, .45, .4)
 dev.off()
-
-
-
-
-
-
-#### downsample negative data 
-X_neg <- data_single_peptides %>% 
-  filter(label==0) %>% 
-  select(mut_mhcrank_el,self_similarity,expression_level,allele_frequency,priority_score,new_score,label) %>% 
-  sample_n(40)
-X_pos <- data_single_peptides %>% 
-  filter(label==1) %>% 
-  select(mut_mhcrank_el,self_similarity,expression_level,allele_frequency,priority_score,new_score,label)
-# bindpos and negative dataset 
-X_selected <- bind_rows(X_pos,X_neg) %>% 
-  sample_n(70)
-
-# Leave one out method 
-# -----------------------------------------------------------------------------
-
-# select predictive varriable 
-y <- X_selected %>% 
-  select(label) %>% 
-  pull(.) # make as vector
-# select  X data 
-X_selected <- X_selected %>% 
-  select(mut_mhcrank_el,self_similarity,expression_level)
-# numer of rows
-
-N <- X_selected %>% 
-  nrow()
-attributeNames <- colnames(X_selected ) %>% as.vector()
-set.seed(1234) # for reproducibility
-# subset dataset by random 
-#classNames <- c('1','0')
-# Initialize variables
-tb <- as.tibble(c("true pos","true neg", "false pos", "false neg"))
-
-Error_LogReg = matrix(rep(NA, times=N*length(attributeNames)), nrow=N)
-#Error_LogReg  = cbind(Error_LogReg,y) %>% as.tibble()
-colnames(Error_LogReg) <- c(attributeNames,"True_val")                     
-# For each crossvalidation fold
-# make n for counting col possition
-#val <- tibble()
-n=0
-for (at in attributeNames) {
-  X <- X_selected %>%  select(at)
-  n =  n + 1
-  for(k in 1:N){
-    print(paste('Crossvalidation fold ', k, '/', N, sep=''));
-  # Extract the training and test set
-    X_train <- X[-k,]
-    y_train <- y[-k] 
-    X_test <-   X[k,]
-    y_test <- y[k] 
-
-  (fmla <- as.formula(paste("y_train ~ ", at)))
-  # Fit logistic regression model to predict the response
-  model = glm(fmla,family=binomial(link="logit"), data=X_train)
-#  model = lm(fmla, data=X_train)
-  p = model %>% predict(X_test,type="response") 
-
- # Error_LogReg[k,n]  <- p                          
-  Error_LogReg[k,n]  <- (round(p,0)==y_test)
-  }
-}
-
-Error_rate <-  (table(Error_LogReg)[1]/N)
-Error_LogReg %>% gather(., key = "var", value = "T/F")
-
-################### model merge all varriables 
-Error_LogReg_merge = rep(NA, times=N)
-for(k in 1:N){
-    print(paste('Leave one out number: ', k, '/', N, sep=''));
-    # Extract the training and test set
-    X_train <- X_selected[-k,]
-    y_train <- y[-k] 
-    X_test <-   X_selected[k,]
-    y_test <- y[k] 
-    
-    (fmla <- as.formula(paste("y_train ~ ", paste(attributeNames, collapse= "+"))))
-   
-     # Fit logistic regression model to predict the response
-    model = glm(fmla,family=binomial(link="logit"), data=X_train)
-  #  model = lm(fmla, data=X_train)
-    p = predict(model, newdata=X_test,type="response")
-   
-     Error_LogReg_merge[k] = (round(p,0)==y_test)
-}
-
-Error_rate <-  (table(Error_LogReg_merge)[1]/N)
-# 0.4 <- lm
-# 0.39 <- glm  
-# lm model 
-Error_LogReg_merge %>% sum(FALSE)/length(Error_LogReg_merge)
-
-
-###################### leave-one-out is done ####################
 
 
