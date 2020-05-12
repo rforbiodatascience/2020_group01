@@ -64,7 +64,6 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 ## Barracoda selection {#slide4} 
-- I dont know how to remove thw white space to make the plot bigger
 - lof fold change of barcode reads across cell lines and treatments
 
 <center>
@@ -74,7 +73,7 @@ knitr::opts_chunk$set(echo = FALSE)
 <center>
 
 ## Expression level and rank score {#slide8} 
-- Now selction criteria is rank < 2% and expression > 0.1 TPM
+- Now selection criteria is rank < 2% and expression > 0.1 TPM - top 500 neoepitopes
 - Can these selection critereia be optimized 
 <div align="center">
 <img src="../Results/04_expression_rank.png" width=1000 height=490>
