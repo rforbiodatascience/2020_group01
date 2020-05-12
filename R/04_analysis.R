@@ -8,7 +8,6 @@ library(ggrepel)
 library(ggplot2)
 #install.packages(ggseqlogo)
 library(ggseqlogo)
-library(ggseqlogo)
 library(cowplot)
 library(ggbeeswarm)
 
