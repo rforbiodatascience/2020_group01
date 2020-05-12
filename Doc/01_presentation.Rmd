@@ -43,7 +43,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ## Method
-- Roadmap of data analysis in the code
+- Roadmap of data analysis in the code in the [github repository](https://github.com/rforbiodatascience/2020_group01)
 
 <div align="center">
 <img src="../Doc/Figures/project_structure.png" width=800 height=400>
@@ -60,14 +60,10 @@ knitr::opts_chunk$set(echo = FALSE)
 ![](../Results/04_p2_barracoda_selection.png){width=80%}
 
 <center>
-## Barracoda selection {#slide4} 
-- lof fold change of barcode reads across cell lines and treatments
 
-<center>
 
-![](../Results/04_fig1_barracoda.png){width=70%}
 
-<center>
+
 
 ## Expression level and rank score {#slide8} 
 - Now selection criteria is rank < 2% and expression > 0.1 TPM - top 500 neoepitopes
@@ -96,12 +92,10 @@ knitr::opts_chunk$set(echo = FALSE)
 <center>
 
 ## Improved binding affinity 
+<div align="center">
+<img src="../Results/04_fig4_wt_neo_el.png" width=500 height=500>
+</div>
 
-<center>
-
-![](../Results/04_fig4_wt_neo_el.png)
-
-<center>
 
 ## Mutation position {#slide6} 
 
@@ -150,6 +144,13 @@ Further work:
 
 
 
+<!-- ## Barracoda selection {#slide4}  -->
+<!-- - lof fold change of barcode reads across cell lines and treatments -->
+
+
+<!-- <center> -->
+<!-- ![](../Results/04_fig1_barracoda.png){width=70%} -->
+<!-- <center> -->
 
 
 
