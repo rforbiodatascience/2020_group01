@@ -17,8 +17,8 @@ devtools::install_github("tidyverse/broom")
 library(broom)
 library(tidyverse)
 library(tidyroc)
-library(yardstick)
-library(cowplot)
+#library(yardstick)
+#library(cowplot)
 
 # Load data ---------------------------------------------------------------
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
