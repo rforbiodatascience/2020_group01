@@ -56,13 +56,12 @@ mupexi_4t1 <- read_xlsx(path = "data/raw/4T1_library_mupexi.xlsx") %>%
          Norm_MHCrank_EL = as.numeric(Norm_MHCrank_EL),
          Norm_MHCrank_BA = as.numeric(Norm_MHCrank_BA), 
          Self_Similarity = as.numeric(Self_Similarity))
-#-------------------------
 
-# PE_population_info and buffycoat_HLA_info file
+
+# Sample_info file: includes flow cytometry information of the percentage of neopeptide-specific CD8 T cells (percent_PE)
 #-------------------------
 sample_info <- read_xlsx(path = "data/raw/sample_info.xlsx")
-buffycoat.HLA_info <- read_xlsx(path = "data/raw/buffycoatHLA_info.xlsx")
-#-------------------------
+
 
 # Wrangle data
 # ------------------------------------------------------------------------------
@@ -88,11 +87,6 @@ all_mupexi <- full_join(mupexi_4t1, mupexi_ct26) %>%
 mupexi_barracoda <- left_join(all_barracoda, all_mupexi, by = "identifier")
 
 my_data <- left_join(mupexi_barracoda, sample_info) %>% #bring PE_population info of each sample into barracoda_mupexi file 
-  # add HLA_match column if HLA in any of the buffycoat_HLA info file
-  mutate(HLA_match = case_when(HLA %in% buffycoat.HLA_info$HLA1 | 
-                                 HLA %in% buffycoat.HLA_info$HLA2 | 
-                                 HLA %in% buffycoat.HLA_info$HLA3~"yes",
-                               TRUE ~ "no"))
 
 # Write data
 # ------------------------------------------------------------------------------

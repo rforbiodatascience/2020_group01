@@ -151,7 +151,7 @@ ggsave(p10, filename ="Results/04_expression_rank.png", width = 12, height = 7)
 
 # GGseq logo plot ---------------------------------------------------------
 #plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
-plot_List <- list()
+plot_list <- list()
 i=1
 for (num in 9:10) {
   for(r in c("yes","no"))  {
@@ -166,10 +166,10 @@ for (num in 9:10) {
 # Combine plots
 png(file = "Results/04_GGseq_plot.png", width = 1200, height = 600)
 ggdraw() +
-   draw_plot(plot_List[[1]], 0, .51, .45, .4) +
-   draw_plot(plot_List[[2]], 0, .0, .45, .4) +
-   draw_plot(plot_List[[3]], .47, .51, .45, .4) +
-   draw_plot(plot_List[[4]], .47, .0, .45, .4) +
+   draw_plot(plot_list[[1]], 0, .51, .45, .4) +
+   draw_plot(plot_list[[2]], 0, .0, .45, .4) +
+   draw_plot(plot_list[[3]], .47, .51, .45, .4) +
+   draw_plot(plot_list[[4]], .47, .0, .45, .4) +
    draw_plot_label(c("Response", "No response"), c(-0.03,  -0.03), c(1,  .48), size = 22)
 dev.off()
 
