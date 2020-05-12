@@ -134,8 +134,8 @@ p8 <-scatterplot_function(data = data_single_peptides,
                           y = 'norm_mhcrank_el',
                           no_legend = FALSE)+
   labs(title= "Eluted ligand of neoepitope vs WT epitope", 
-       x= "Neoepitope Eluted ligand %Rank ", 
-       y="WT epitope Eluted ligand %Rank")
+       x= "Neoepitope eluted ligand %Rank ", 
+       y="WT epitope eluted ligand %Rank")
 ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 10, height = 10)
 
 
