@@ -66,7 +66,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ## Expression level and rank score {#slide8} 
-- Now selection criteria is rank < 2% and expression > 0.1 TPM - top 500 neoepitopes
+- Now selection criteria is eluted ligand rank < 2% and expression > 0.1 TPM - top 500 neoepitopes
 - Can these selection critereia be optimized 
 <div align="center">
 <img src="../Results/04_expression_rank.png" width=700 height=490>
