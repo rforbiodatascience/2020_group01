@@ -73,14 +73,7 @@ knitr::opts_chunk$set(echo = FALSE)
 </div>
 
 
-## Mutation consequence 
-<div style="float: left; width: 40%;">
-- Can mutation type be used to find immunugenic neoepitopes? 
-</div>
 
-<div style="float: right; width: 60%;">
-<img src="../Results/04_Mutation_consequence.png" width=500 height=500>
-</div>
 
 
 ## Elution, binding affinity rank scores and self-similarity {#slide5}
@@ -105,14 +98,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-
-<!-- ## GGseq logo  -->
-<!-- <div align="center"> -->
-<!-- <img src="../Results/04_GGseq_plot.png" width=750 height=500> -->
-<!-- </div> -->
-
 ## Modelling
-- 4 sample of data set 
+- Takeing the 40 random negative and the 30 potitive, repeat 4 times. 
 <div align="center">
 <img src="../Results/05_Roc_curves.png" width=800 height=500>
 </div>
@@ -153,5 +140,19 @@ Further work:
 <!-- <center> -->
 
 
+<!-- ## GGseq logo  -->
+<!-- <div align="center"> -->
+<!-- <img src="../Results/04_GGseq_plot.png" width=750 height=500> -->
+<!-- </div> -->
+
+
+<!-- ## Mutation consequence  -->
+<!-- <div style="float: left; width: 40%;"> -->
+<!-- - Can mutation type be used to find immunugenic neoepitopes?  -->
+<!-- </div> -->
+
+<!-- <div style="float: right; width: 60%;"> -->
+<!-- <img src="../Results/04_Mutation_consequence.png" width=500 height=500> -->
+<!-- </div> -->
 
 
