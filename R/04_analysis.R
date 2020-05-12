@@ -57,7 +57,9 @@ p2 <- data_single_peptides %>%
   theme_bw() +
   geom_hline(yintercept = 2, linetype = "dotted") +
   geom_vline(xintercept = 0.01, linetype = "dotted") +
-  facet_grid(vars(cell_line))
+  facet_grid(vars(cell_line)) +
+  labs(x = "p-value",
+       y = "log fold change")
 ggsave(p2, filename ="Results/04_p2_barracoda_selection.png", width = 12, height = 7)
 
 # 2) Boxplots response vs non-response  ---------------------------------------------
@@ -65,7 +67,7 @@ ggsave(p2, filename ="Results/04_p2_barracoda_selection.png", width = 12, height
 p3 <-  box_function(data = data_single_peptides, 
                     x = 'response',
                     y = 'mut_mhcrank_el') +
-  labs(title ="Eslution (EL) rank score",
+  labs(title ="Elution (EL) rank score",
        x = "Response", 
        y = "Neoepitopes elution (%rank score)")
 

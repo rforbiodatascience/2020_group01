@@ -12,7 +12,7 @@ barc_resp <- function(d, c){
     ggplot(., aes(peptide_name, log_fold_change)) +
     geom_point(aes(color = sample, shape = organ, alpha = response, size = estimated_frequency_norm)) +
     geom_text_repel(d %>%
-                      filter(cell_line == c, response == "yes"), mapping = aes(label = neoepitope_sequence, size = 14)) +
+                      filter(cell_line == c, response == "yes"), mapping = aes(label = peptide_name, size = 14)) +
     facet_grid(vars(treatment)) +
     labs(size = "Normalized estimated frequency",
          shape = "Organ", 

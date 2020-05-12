@@ -41,9 +41,6 @@ knitr::opts_chunk$set(echo = FALSE)
 <img src="../Doc/Figures/01_intro.png" width=700 height=350>
 </div>
 
-## Objectives
- Elucidation of detected neoepitope characteristics
-
 
 ## Method
 - Roadmap of data analysis in the code
@@ -76,7 +73,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Now selection criteria is rank < 2% and expression > 0.1 TPM - top 500 neoepitopes
 - Can these selection critereia be optimized 
 <div align="center">
-<img src="../Results/04_expression_rank.png" width=1000 height=490>
+<img src="../Results/04_expression_rank.png" width=700 height=490>
 </div>
 
 
@@ -115,25 +112,16 @@ knitr::opts_chunk$set(echo = FALSE)
 <center>
 
 
-## GGseq logo 
-<div align="center">
-<img src="../Results/04_GGseq_plot.png" width=750 height=500>
-</div>
+<!-- ## GGseq logo  -->
+<!-- <div align="center"> -->
+<!-- <img src="../Results/04_GGseq_plot.png" width=750 height=500> -->
+<!-- </div> -->
 
 ## Modelling
 - 4 sample of data set 
 <div align="center">
 <img src="../Results/05_Roc_curves.png" width=800 height=500>
 </div>
-
-## Discussion
-- Data set is to small to see a clear pattern in immnunugenic and non-immunugenic neoepitopes
-
-Further work:
-
-- Try out with more data, when more peptides are screened
-- Is the results the same for human data 
-- Make packages for human data 
 
 ## R package and shiny app
 
@@ -147,6 +135,18 @@ And a [shiny app](https://annie-borch.shinyapps.io/exploring_data/) for rapid vi
 </div>
 
 
+## Discussion
+- Data set is to small to see a clear pattern in immnunugenic and non-immunugenic neoepitopes
+- Also shown by a poor performance of the model
+- But! With a trend that if we take into account multiple neoepitope characteristics, we can improve immunogenic selection
+
+Further work:
+
+- Try out with more data, when more peptides are screened
+- Is the results the same for human data 
+- Make packages for human data 
+
+# Thank you!
 
 
 
