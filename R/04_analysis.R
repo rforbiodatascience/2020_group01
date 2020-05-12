@@ -136,7 +136,7 @@ p8 <-scatterplot_function(data = data_single_peptides,
   labs(title= "Elution (EL) of neoepitope vs WT epitope", 
        x= "Neoepitope EL %Rank ", 
        y="WT epitope EL %Rank")
-ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 12, height = 7)
+ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 10, height = 10)
 
 
 # 4) Expression level vs rank ----------------------------------
