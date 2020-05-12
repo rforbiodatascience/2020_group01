@@ -12,7 +12,7 @@ rm(list = ls())
 # libraries for modelling 
 # packages to install 
 #install.packages("devtools")
-#devtools::install_github("tidyverse/broom")
+devtools::install_github("tidyverse/broom")
 #remotes::install_github("dariyasydykova/tidyroc")
 library(tidyverse)
 library(tidyroc)
@@ -67,29 +67,28 @@ glm_out1 <- glm(
 glm_out2 <- glm(response_binary ~ self_similarity,
                 family = binomial,
                 data = X_selected) %>%
-  augment() %>%
-  mutate(model = "self_similarity")
+            augment() %>%
+            mutate(model = "self_similarity")
 
 # logistic regression with mutant rank el 
 glm_out3 <- glm(response_binary ~ mut_mhcrank_el,
                 family = binomial,
                 data = X_selected) %>%
-  augment() %>%
-  mutate(model = "mut_mhcrank_el") 
+            augment() %>%
+            mutate(model = "mut_mhcrank_el") 
 
 # logistic regression with expression score 
 glm_out4 <- glm(response_binary ~ expression_level,
                 family = binomial,
                 data = X_selected) %>%
-  augment() %>%
-  mutate(model = "expression_level")
+            augment() %>%
+            mutate(model = "expression_level")
 
 
-# combine all the data set 
-glm_out <- bind_rows(glm_out1, glm_out2,glm_out3,glm_out4)
-# make binary variable as factor 
-glm_out <- glm_out %>% 
+# combine all the data set and make binary variable as factor  
+glm_out <- bind_rows(glm_out1, glm_out2,glm_out3,glm_out4) %>% 
   mutate(response_binary = as.factor(response_binary))
+
 
 # plot ROC curves
 Roc_curves <- glm_out %>%
