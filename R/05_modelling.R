@@ -12,13 +12,13 @@ rm(list = ls())
 # libraries for modelling 
 # packages to install 
 #install.packages("devtools")
-devtools::install_github("tidyverse/broom")
+#devtools::install_github("tidyverse/broom")
 #remotes::install_github("dariyasydykova/tidyroc")
 library(broom)
 library(tidyverse)
 library(tidyroc)
-#library(yardstick)
-#library(cowplot)
+library(yardstick)
+library(cowplot)
 
 # Load data ---------------------------------------------------------------
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
