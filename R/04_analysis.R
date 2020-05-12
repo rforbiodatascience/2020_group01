@@ -131,29 +131,13 @@ dev.off()
 # WT vs Neo El and BA -----------------------------------------------------
 p8 <-scatterplot_function(data = data_single_peptides,
                           x = 'mut_mhcrank_el',
-                          y = 'norm_mhcrank_el')+
+                          y = 'norm_mhcrank_el',
+                          no_legend = FALSE)+
   labs(title= "Elution (EL) of neoepitope vs WT epitope", 
        x= "Neoepitope EL %Rank ", 
        y="WT epitope EL %Rank")
+ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 12, height = 7)
 
-p9 <- scatterplot_function(data = data_single_peptides,
-                           x = 'mut_mhcrank_ba', 
-                           y= 'norm_mhcrank_ba',
-                           no_legend = FALSE)+
-  labs(title= "Binding affinity (BA) of neoepitope vs WT epitope",
-       x= "Neoepitope BA %Rank ",
-       y="WT epitope BA %Rank")
-
-bind_legend <- get_legend(p9)
-p9 <- p9 + theme(legend.position = "none")
-
-png(file = "Results/04_fig4_wt_neo_ba_el.png", width = 800, height = 400)
-ggdraw() +
-  draw_plot(p8, 0, .0, .43, .95) +
-  draw_plot(p9, .44, .0, .43, .95) +
-  draw_plot(bind_legend, .88, .4, .2, .2) +
-  draw_plot_label(c("A", "B"), c(0,  0.45), c(1, 1), size = 20)
-dev.off()
 
 # 4) Expression level vs rank ----------------------------------
 p10 <-  scatterplot_function(data = data_single_peptides,
@@ -163,22 +147,6 @@ p10 <-  scatterplot_function(data = data_single_peptides,
        x =  "Expression level") +
   theme(plot.title = element_text(hjust = 0.5)) 
 ggsave(p10, filename ="Results/04_expression_rank.png", width = 12, height = 7)
-
-
-
-# Mutaions overview -------------------------------------------------------
-p11 <- my_data_clean_aug %>% 
-  ggplot(aes(x = mutation_consequence)) +
-  geom_bar(aes(fill = response), stat = "count") +
-  scale_y_log10() +
-  theme_bw() +
-  scale_fill_manual(values = respond_cols) +
-  facet_wrap(cell_line~.) +
-  labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
-       x = "Mutation Consequence", 
-       y = "Aomunt of neoeptiopes",
-       fill = "Response")
-ggsave(p11, filename ="Results/04_Mutation_consequence.png", width = 10, height = 8)
 
 
 # GGseq logo plot ---------------------------------------------------------
@@ -206,6 +174,21 @@ ggdraw() +
 dev.off()
 
 
+
+# # Mutaions overview -------------------------------------------------------
+# p11 <- my_data_clean_aug %>% 
+#   ggplot(aes(x = mutation_consequence)) +
+#   geom_bar(aes(fill = response), stat = "count") +
+#   scale_y_log10() +
+#   theme_bw() +
+#   scale_fill_manual(values = respond_cols) +
+#   facet_wrap(cell_line~.) +
+#   labs(title ="Bar plot of Mutation Consequence (by Cell Line)", 
+#        x = "Mutation Consequence", 
+#        y = "Aomunt of neoeptiopes",
+#        fill = "Response")
+# ggsave(p11, filename ="Results/04_Mutation_consequence.png", width = 10, height = 8)
+# 
 
 
 ######## data not to use 
@@ -240,4 +223,21 @@ dev.off()
 # ggsave(p10, filename ="Results/p10.png", width = 12, height = 7)
 
 
+# p9 <- scatterplot_function(data = data_single_peptides,
+#                            x = 'mut_mhcrank_ba', 
+#                            y= 'norm_mhcrank_ba',
+#                            no_legend = FALSE)+
+#   labs(title= "Binding affinity (BA) of neoepitope vs WT epitope",
+#        x= "Neoepitope BA %Rank ",
+#        y="WT epitope BA %Rank")
+# 
+# bind_legend <- get_legend(p9)
+# p9 <- p9 + theme(legend.position = "none")
 
+# png(file = "Results/04_fig4_wt_neo_ba_el.png", width = 800, height = 400)
+# ggdraw() +
+#   draw_plot(p8, 0, .0, .43, .95) +
+#   draw_plot(p9, .44, .0, .43, .95) +
+#   draw_plot(bind_legend, .88, .4, .2, .2) +
+#   draw_plot_label(c("A", "B"), c(0,  0.45), c(1, 1), size = 20)
+# dev.off()
