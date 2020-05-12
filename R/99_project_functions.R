@@ -4,9 +4,7 @@
 # define some colors 
 respond_cols <- c("#91bfdb","#ef8a62")
 
-
 # Baracoda respond function -----------------------------------------------
-
 barc_resp <- function(d, c){
   
   d <- d %>% filter(cell_line == c) %>% 
