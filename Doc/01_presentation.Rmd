@@ -43,7 +43,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ## Method
-- Roadmap of data analysis in the code
+- Roadmap of data analysis in the code in the [github repository](https://github.com/rforbiodatascience/2020_group01)
 
 <div align="center">
 <img src="../Doc/Figures/project_structure.png" width=800 height=400>
@@ -60,31 +60,20 @@ knitr::opts_chunk$set(echo = FALSE)
 ![](../Results/04_p2_barracoda_selection.png){width=80%}
 
 <center>
-## Barracoda selection {#slide4} 
-- lof fold change of barcode reads across cell lines and treatments
 
-<center>
 
-![](../Results/04_fig1_barracoda.png){width=70%}
 
-<center>
+
 
 ## Expression level and rank score {#slide8} 
-- Now selection criteria is rank < 2% and expression > 0.1 TPM - top 500 neoepitopes
+- Now selection criteria is eluted ligand rank < 2% and expression > 0.1 TPM - top 500 neoepitopes
 - Can these selection critereia be optimized 
 <div align="center">
 <img src="../Results/04_expression_rank.png" width=700 height=490>
 </div>
 
 
-## Mutation consequence 
-<div style="float: left; width: 40%;">
-- Can mutation type be used to find immunugenic neoepitopes? 
-</div>
 
-<div style="float: right; width: 60%;">
-<img src="../Results/04_Mutation_consequence.png" width=500 height=500>
-</div>
 
 
 ## Elution, binding affinity rank scores and self-similarity {#slide5}
@@ -96,12 +85,10 @@ knitr::opts_chunk$set(echo = FALSE)
 <center>
 
 ## Improved binding affinity 
+<div align="center">
+<img src="../Results/04_fig4_wt_neo_el.png" width=500 height=500>
+</div>
 
-<center>
-
-![](../Results/04_fig4_wt_neo_el.png)
-
-<center>
 
 ## Mutation position {#slide6} 
 
@@ -111,14 +98,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-
-<!-- ## GGseq logo  -->
-<!-- <div align="center"> -->
-<!-- <img src="../Results/04_GGseq_plot.png" width=750 height=500> -->
-<!-- </div> -->
-
 ## Modelling
-- 4 sample of data set 
+- Takeing the 40 random negative and the 30 potitive, repeat 4 times. 
 <div align="center">
 <img src="../Results/05_Roc_curves.png" width=800 height=500>
 </div>
@@ -150,7 +131,28 @@ Further work:
 
 
 
+<!-- ## Barracoda selection {#slide4}  -->
+<!-- - lof fold change of barcode reads across cell lines and treatments -->
 
 
+<!-- <center> -->
+<!-- ![](../Results/04_fig1_barracoda.png){width=70%} -->
+<!-- <center> -->
+
+
+<!-- ## GGseq logo  -->
+<!-- <div align="center"> -->
+<!-- <img src="../Results/04_GGseq_plot.png" width=750 height=500> -->
+<!-- </div> -->
+
+
+<!-- ## Mutation consequence  -->
+<!-- <div style="float: left; width: 40%;"> -->
+<!-- - Can mutation type be used to find immunugenic neoepitopes?  -->
+<!-- </div> -->
+
+<!-- <div style="float: right; width: 60%;"> -->
+<!-- <img src="../Results/04_Mutation_consequence.png" width=500 height=500> -->
+<!-- </div> -->
 
 
