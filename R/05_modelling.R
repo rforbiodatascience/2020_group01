@@ -14,6 +14,7 @@ rm(list = ls())
 #install.packages("devtools")
 devtools::install_github("tidyverse/broom")
 #remotes::install_github("dariyasydykova/tidyroc")
+library(broom)
 library(tidyverse)
 library(tidyroc)
 library(yardstick)
@@ -29,7 +30,6 @@ data_single_peptides <- my_data_clean_aug %>%
   group_by(response) %>% 
   distinct(identifier, .keep_all = T) %>% 
   ungroup() %>% 
-  mutate(new_score  = expression_level/(mut_mhcrank_el)) %>%
   mutate(response_binary = case_when(response=="yes" ~ 1,
                            response=="no" ~ 0))
 
@@ -41,13 +41,11 @@ Roc_plot_list <- list()
 for (i in 1:4) {
 X_neg <- data_single_peptides %>% 
   filter(response_binary==0) %>% 
-  select(mut_mhcrank_el,self_similarity,expression_level,
-         allele_frequency,priority_score,new_score,response_binary) %>% 
+  select(mut_mhcrank_el,self_similarity,expression_level,response_binary) %>% 
   sample_n(40)
 X_pos <- data_single_peptides %>% 
   filter(response_binary==1) %>% 
-  select(mut_mhcrank_el,self_similarity,expression_level,
-         allele_frequency,priority_score,new_score,response_binary)
+  select(mut_mhcrank_el,self_similarity,expression_level,response_binary)
 # bind pos and negative dataset 
 X_selected <- bind_rows(X_pos,X_neg) %>% 
   sample_n(70)
