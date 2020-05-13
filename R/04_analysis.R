@@ -22,7 +22,8 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data ------------------------------------------------------------
 # arrange data so "no" is plotted first 
-my_data_clean_aug <- my_data_clean_aug %>%  arrange(response)
+my_data_clean_aug <- my_data_clean_aug %>%  
+  arrange(response)
 # select unique peptides 
 data_single_peptides <- my_data_clean_aug %>% 
   group_by(response) %>% 
@@ -56,7 +57,7 @@ p2 <- data_single_peptides %>%
   theme_bw() +
   geom_hline(yintercept = 2, linetype = "dotted") +
   geom_vline(xintercept = 0.01, linetype = "dotted") +
-  facet_grid(vars(cell_line)) +
+  facet_grid(cell_line~.) +
   labs(x = "p-value",
        y = "log fold change",
        size = "Nomalized estimated frequency")

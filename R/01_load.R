@@ -68,9 +68,6 @@ sample_info <- read_xlsx(path = "data/raw/sample_info.xlsx")
 all_barracoda <- full_join(all_ct26_barracoda_raw, all_4t1_barracoda_raw)
 
 # Wrong HLA annotation: H-2XX instead of H2-XX as mupexi. 
-all_barracoda %>% group_by(HLA) %>%
-  count()
-
 all_barracoda <-  all_barracoda %>% 
   # Rename it so that columns can be merged
   mutate(HLA = str_replace(HLA, "^H-2", "H2-")) %>% 
@@ -86,7 +83,8 @@ all_mupexi <- full_join(mupexi_4t1, mupexi_ct26) %>%
 # ------------------------------------------------------------------------------
 mupexi_barracoda <- left_join(all_barracoda, all_mupexi, by = "identifier")
 
-my_data <- left_join(mupexi_barracoda, sample_info) %>% #bring PE_population info of each sample into barracoda_mupexi file 
+#bring PE_population info of each sample into barracoda_mupexi file 
+my_data <- left_join(mupexi_barracoda, sample_info) 
 
 # Write data
 # ------------------------------------------------------------------------------

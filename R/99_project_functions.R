@@ -57,7 +57,7 @@ bar_plot_func <- function(data = my_data_clean_aug,
     scale_fill_manual(values = respond_cols) +
     theme_bw() + 
     theme(plot.title = element_text(hjust = 0.5))+
-    facet_grid(vars(cell_line))+
+    facet_grid(cell_line~.)+
     labs(x = "Peptide Position", 
          y = "Count")
  
@@ -83,7 +83,7 @@ scatterplot_function <- function(data = data_single_peptides,
     scale_alpha_manual(breaks = c("no","yes"),labels = c("no","yes"),values = c(0.3,0.9))+
     scale_color_manual(values = respond_cols) +
     guides(color = guide_legend(override.aes = list(size = 5))) + 
-    facet_grid(vars(cell_line), scales = "free") +
+    facet_grid(cell_line~., scales = "free") +
     theme(plot.title = element_text(hjust = 0.5))+
     labs(size = "Estimated frequency normalized",
          color = "Response", 
@@ -107,7 +107,7 @@ box_function <- function(data = data_single_peptides,
     geom_quasirandom(aes(color = response),size = 2) + 
     geom_boxplot(aes(fill = response), 
                  alpha = .5, outlier.shape = NA, colour = '#525252') +
-    facet_grid(vars(cell_line), scales = "free") +
+    facet_grid(cell_line~., scales = "free") +
     theme_bw() +
     theme(plot.title = element_text(hjust = 0.5))+
     scale_fill_manual(values = respond_cols) +
