@@ -16,7 +16,7 @@ barc_resp <- function(data = my_data_clean_aug,
                       filter(cell_line == mouce_cell_line, response == "yes"),
                     mapping = aes(label = peptide_name, size = 14)) +
     facet_grid(treatment ~.) +
-    labs(size = "Normalized estimated frequency",
+    labs(size = "Normalized estimated frequency %",
          shape = "Organ", 
          color = "Sample", 
          alpha = "Response", 
@@ -87,7 +87,7 @@ scatterplot_function <- function(data = data_single_peptides,
     guides(color = guide_legend(override.aes = list(size = 5))) + 
     facet_grid(cell_line~., scales = "free") +
     theme(plot.title = element_text(hjust = 0.5))+
-    labs(size = "Estimated frequency normalized",
+    labs(size = "Normalized estimated frequency %",
          color = "Response", 
          alpha = "Response")
   # Determine legend 

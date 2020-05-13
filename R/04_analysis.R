@@ -42,7 +42,6 @@ png(file = "Results/04_fig1_barracoda.png", width = 1500, height = 1000)
 ggdraw() +
   draw_plot(p1_4T1, .05, .52, .95, .45) +
   draw_plot(p1_CT26, .05, .0, .95, .45) +
-  #draw_plot(barracoda_legend, .95, .4, .2, .2) +
   draw_plot_label(c("A", "B"), c(.0, .0), c(.95, .45), size = 22)
 dev.off()
 
@@ -60,7 +59,8 @@ p2 <- data_single_peptides %>%
   facet_grid(cell_line~.) +
   labs(x = "p-value",
        y = "log fold change",
-       size = "Nomalized estimated frequency")
+       size = "Nomalized estimated frequency %",
+       color = "Response")
 ggsave(p2, filename ="Results/04_p2_barracoda_selection.png", width = 12, height = 7)
 
 # 2) Boxplots response vs non-response  ---------------------------------------------
@@ -136,14 +136,16 @@ p8 <-scatterplot_function(data = data_single_peptides,
                           no_legend = FALSE)+
   labs(title= "Eluted ligand of neoepitope vs WT epitope", 
        x= "Neoepitope eluted ligand %Rank ", 
-       y="WT epitope eluted ligand %Rank")
+       y="WT epitope eluted ligand %Rank",
+       color = "Response")
 ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 10, height = 10)
 
 
 # 4) Expression level vs rank ----------------------------------
 p10 <-  scatterplot_function(data = data_single_peptides,
                      x = 'expression_level', 
-                     y= 'mut_mhcrank_el')+
+                     y= 'mut_mhcrank_el',
+                     no_legend = FALSE)+
   labs(y = "Neoepitope eluted ligand %Rank", 
        x =  "Expression level") +
   theme(plot.title = element_text(hjust = 0.5)) 

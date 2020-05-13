@@ -55,11 +55,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Response filtering {#slide3} 
 - Response selection criteria: logfold change > 2 and p-value < 0.01
 
-<center>
-
-![](../Results/04_p2_barracoda_selection.png){width=80%}
-
-<center>
+<div align="center">
+<img src="../Results/04_p2_barracoda_selection.png" width=800 height=400>
+</div>
 
 
 
@@ -69,7 +67,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - Now selection criteria is eluted ligand rank < 2% and expression > 0.1 TPM - top 500 neoepitopes
 - Can these selection critereia be optimized 
 <div align="center">
-<img src="../Results/04_expression_rank.png" width=700 height=490>
+<img src="../Results/04_expression_rank.png" width=700 height=400>
 </div>
 
 
