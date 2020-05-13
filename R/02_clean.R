@@ -27,7 +27,7 @@ my_data_clean <- my_data %>%
   # make all lowescases
   rename_all(funs(str_to_lower(.))) %>% 
   # remove control peptides that has introduced all NAs (present in barracoda file but not in Mupexi file)
-#  drop_na(norm_peptide) %>% 
+  drop_na(norm_peptide) %>% 
   # rename variables to ease reproducibility from now on
   rename(count = count_1,
          masked_p_value =`masked_p_p=1iflogfc<0`,

@@ -65,7 +65,6 @@ my_data_clean_aug <- full_join(my_data_clean_aug, count_norm_signif) %>%
   mutate(estimated_frequency_norm = case_when(response == "no" ~ 0,
                                               TRUE ~ as.numeric(estimated_frequency_norm)))
 
-
 # Write data
 # ------------------------------------------------------------------------------
 write_tsv(x = my_data_clean_aug,
