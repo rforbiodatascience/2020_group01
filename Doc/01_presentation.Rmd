@@ -99,7 +99,7 @@ knitr::opts_chunk$set(echo = FALSE)
 <center>
 
 ## Modelling
-- Takeing the 40 random negative and the 30 potitive, repeat 4 times. 
+- 40 random negative and the 30 potitive.
 <div align="center">
 <img src="../Results/05_Roc_curves.png" width=800 height=500>
 </div>
