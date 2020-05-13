@@ -33,10 +33,12 @@ data_single_peptides <- my_data_clean_aug %>%
 
 # Visualise data ----------------------------------------------------------
 # 1) Barracoda characteristics --------------------------------------------
-p1_CT26 <- barc_resp(my_data_clean_aug, "CT26") +
+p1_CT26 <- barc_resp(data  = my_data_clean_aug, 
+                     mouce_cell_line =  "CT26") +
   labs(title = "log fold change of CT26-tumor cell line neoepitope screen")
 
-p1_4T1 <- barc_resp(my_data_clean_aug, "4T1") +
+p1_4T1 <- barc_resp(data  = my_data_clean_aug, 
+                    mouce_cell_line =  "4T1") +
   labs(title = "log fold change of 4T1-tumor cell line neoepitope screen")
 
 png(file = "Results/04_fig1_barracoda.png", width = 1500, height = 1000)

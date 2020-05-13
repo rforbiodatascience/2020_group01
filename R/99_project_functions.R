@@ -5,16 +5,17 @@
 respond_cols <- c("#91bfdb","#ef8a62")
 
 # Baracoda respond function -----------------------------------------------
-barc_resp <- function(d, c){
+barc_resp <- function(data = my_data_clean_aug, 
+                      mouce_cell_line = "CT26" ){
   
-  d <- d %>% filter(cell_line == c) %>% 
+  p <- data %>% filter(cell_line == mouce_cell_line) %>% 
     ggplot(., aes(peptide_name, log_fold_change)) +
     geom_point(aes(color = sample, shape = organ, 
                    alpha = response, size = estimated_frequency_norm)) +
-    geom_text_repel(d %>%
-                      filter(cell_line == c, response == "yes"),
+    geom_text_repel(data  %>%
+                      filter(cell_line == mouce_cell_line, response == "yes"),
                     mapping = aes(label = peptide_name, size = 14)) +
-    facet_grid(vars(treatment)) +
+    facet_grid(treatment ~.) +
     labs(size = "Normalized estimated frequency",
          shape = "Organ", 
          color = "Sample", 
@@ -29,6 +30,7 @@ barc_resp <- function(d, c){
     guides(color = guide_legend(override.aes = list(size = 4)),
            alpha = guide_legend(override.aes = list(size = 4)),
            shape = guide_legend(override.aes = list(size = 4)))
+  return(p)
 }
 
 # GGseq logo function -----------------------------------------------------
