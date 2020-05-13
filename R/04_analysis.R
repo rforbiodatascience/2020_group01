@@ -19,7 +19,6 @@ source(file = "R/99_project_functions.R")
 # Load data ---------------------------------------------------------------
 my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
-
 # Wrangle data ------------------------------------------------------------
 # arrange data so "no" is plotted first 
 my_data_clean_aug <- my_data_clean_aug %>%  
@@ -27,9 +26,7 @@ my_data_clean_aug <- my_data_clean_aug %>%
 # select unique peptides 
 data_single_peptides <- my_data_clean_aug %>% 
   group_by(response) %>% 
-  distinct(identifier, .keep_all = T) %>% 
-  ungroup()
-
+  distinct(identifier, .keep_all = T) 
 
 # Visualise data ----------------------------------------------------------
 # 1) Barracoda characteristics --------------------------------------------
@@ -111,7 +108,10 @@ p6 <- bar_plot_func(data = data_single_peptides,
                       pep_length = 9)
 
 # 10mer -------------------------------------------------------------------
-p7 <- bar_plot_func(data = my_data_clean_aug,
+p7 <- bar_plot_func(data = data_single_peptides,
+                    pep_length = 10,
+                    no_legend = FALSE)
+p7_1 <- bar_plot_func(data = my_data_clean_aug,
                     pep_length = 10,
                     no_legend = FALSE)
 # get legend
@@ -157,7 +157,7 @@ for (num in 9:10) {
     p <- seqloggo_generator(data  = data_single_peptides, 
                             len = num,
                             resp = r)
-    plot_List[[i]] <- p
+    plot_list[[i]] <- p
     i <- i+1
   }
 }

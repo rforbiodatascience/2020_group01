@@ -81,7 +81,7 @@ all_mupexi <- full_join(mupexi_4t1, mupexi_ct26) %>%
 
 # Merged dataset
 # ------------------------------------------------------------------------------
-mupexi_barracoda <- left_join(all_barracoda, all_mupexi, by = "identifier")
+mupexi_barracoda <- left_join(all_mupexi,all_barracoda, by = "identifier")
 
 #bring PE_population info of each sample into barracoda_mupexi file 
 my_data <- left_join(mupexi_barracoda, sample_info) 
