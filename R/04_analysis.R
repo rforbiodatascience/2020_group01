@@ -107,7 +107,6 @@ dev.off()
 p6 <- bar_plot_func(data = data_single_peptides,
                       pep_length = 9)
 
-
 # 10mer -------------------------------------------------------------------
 p7 <- bar_plot_func(data = my_data_clean_aug,
                     pep_length = 10,
@@ -124,7 +123,6 @@ ggdraw() +
   draw_plot(mut_bar_legend, .85, .4, .2, .2) +
   draw_plot_label(c("A", "B"), c(0, 0.45), c(1, 1), size = 22)
 dev.off()
-
 
 # Neoepitope characteristics and est.freq --------------------------------
 # WT vs Neo El and BA -----------------------------------------------------
@@ -146,7 +144,6 @@ p10 <-  scatterplot_function(data = data_single_peptides,
        x =  "Expression level") +
   theme(plot.title = element_text(hjust = 0.5)) 
 ggsave(p10, filename ="Results/04_expression_rank.png", width = 12, height = 7)
-
 
 # GGseq logo plot ---------------------------------------------------------
 #plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted
