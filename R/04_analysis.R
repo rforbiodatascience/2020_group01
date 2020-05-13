@@ -51,7 +51,8 @@ p2 <- data_single_peptides %>%
   ggplot(aes(p_value, log_fold_change)) +
   geom_point(aes(color=response, size  = estimated_frequency_norm)) +
   scale_color_manual(values = respond_cols) +
-  scale_x_log10(breaks = c(0.001, 0.01, 0.1, 0)) +
+  scale_x_log10(breaks = c(1, 0.0001, 0.01, 0.1, 0),
+                labels = c("1", "0.0001", "0.01", "0.1", "0")) +
   scale_y_continuous(breaks = c(-10, -5, 0, 2, 5)) +
   theme_bw() +
   geom_hline(yintercept = 2, linetype = "dotted") +
