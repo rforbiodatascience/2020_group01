@@ -78,13 +78,13 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <center>
 
-![](../Results/04_fig2_el_ba_similarity.png){width=90%}
+![](../Results/04_fig2_el_ba_similarity.png){width=95%}
 
 <center>
 
 ## Improved binding affinity 
 <div align="center">
-<img src="../Results/04_fig4_wt_neo_el.png" width=500 height=500>
+<img src="../Results/04_fig4_wt_neo_el.png" width=700 height=500>
 </div>
 
 

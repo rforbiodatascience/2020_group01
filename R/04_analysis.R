@@ -28,6 +28,12 @@ data_single_peptides <- my_data_clean_aug %>%
   group_by(response) %>% 
   distinct(identifier, .keep_all = T) 
 
+# set the all with estimated_frequency_norm > 4 to 4 to avoid delution in scale.
+# That will only effect one which has a frequency of 20.9, all otehrs is under 4.
+data_single_peptides <- data_single_peptides %>% 
+  mutate(estimated_frequency_norm = case_when(estimated_frequency_norm > 4 ~ 4 ,
+                                              TRUE ~ estimated_frequency_norm ))
+
 # Visualise data ----------------------------------------------------------
 # 1) Barracoda characteristics --------------------------------------------
 p1_CT26 <- barc_resp(data  = my_data_clean_aug, 
@@ -57,6 +63,9 @@ p2 <- data_single_peptides %>%
   geom_hline(yintercept = 2, linetype = "dotted") +
   geom_vline(xintercept = 0.01, linetype = "dotted") +
   facet_grid(cell_line~.) +
+  theme(axis.title = element_text(size = 14),
+        legend.text = element_text(size = 12),
+        legend.title = element_text(size = 14))+
   labs(x = "p-value",
        y = "log fold change",
        size = "Nomalized estimated frequency %",
@@ -138,7 +147,7 @@ p8 <-scatterplot_function(data = data_single_peptides,
        x= "Neoepitope eluted ligand %Rank ", 
        y="WT epitope eluted ligand %Rank",
        color = "Response")
-ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 10, height = 10)
+ggsave(p8, filename ="Results/04_fig4_wt_neo_el.png", width = 10, height = 8)
 
 
 # 4) Expression level vs rank ----------------------------------
@@ -149,7 +158,7 @@ p10 <-  scatterplot_function(data = data_single_peptides,
   labs(y = "Neoepitope eluted ligand %Rank", 
        x =  "Expression level") +
   theme(plot.title = element_text(hjust = 0.5)) 
-ggsave(p10, filename ="Results/04_expression_rank.png", width = 12, height = 7)
+ggsave(p10, filename ="Results/04_expression_rank.png", width = 10, height = 8)
 
 # GGseq logo plot ---------------------------------------------------------
 #plot seq log, there only exist responses in length 9 to 10 so that is the only one illustarted

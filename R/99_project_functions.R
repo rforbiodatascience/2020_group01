@@ -61,7 +61,8 @@ bar_plot_func <- function(data = my_data_clean_aug,
     theme(plot.title = element_text(hjust = 0.5))+
     facet_grid(cell_line~.)+
     labs(x = "Peptide Position", 
-         y = "Amount neopeptides")
+         y = "Amount neopeptides",
+         fill = "Response")
  
   # Determine legend 
   if (no_legend == TRUE) p <- p + theme(legend.position = 'none') else NULL 
@@ -86,7 +87,10 @@ scatterplot_function <- function(data = data_single_peptides,
     scale_color_manual(values = respond_cols) +
     guides(color = guide_legend(override.aes = list(size = 5))) + 
     facet_grid(cell_line~., scales = "free") +
-    theme(plot.title = element_text(hjust = 0.5))+
+    theme(plot.title = element_text(hjust = 0.5), 
+          axis.title = element_text(size = 14),
+          legend.text = element_text(size = 12),
+          legend.title = element_text(size = 14))+
     labs(size = "Normalized estimated frequency %",
          color = "Response", 
          alpha = "Response")
@@ -111,7 +115,10 @@ box_function <- function(data = data_single_peptides,
                  alpha = .5, outlier.shape = NA, colour = '#525252') +
     facet_grid(cell_line~., scales = "free") +
     theme_bw() +
-    theme(plot.title = element_text(hjust = 0.5))+
+    theme(plot.title = element_text(size = 14,hjust = 0.5), 
+           axis.title = element_text(size = 14),
+           legend.text = element_text(size = 12),
+           legend.title = element_text(size = 14))+
     scale_fill_manual(values = respond_cols) +
     scale_color_manual(values = respond_cols) +
     guides(fill = FALSE, color = guide_legend(override.aes = list(size = 4)))
