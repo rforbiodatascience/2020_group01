@@ -47,10 +47,10 @@ my_data_clean_aug <- my_data_clean %>%
   # add estimated_frequency column
   mutate(estimated_frequency = percent_pe*percent_count_fraction/100) %>% 
   
-  # add a sum of the normalized counts column for the significant epitopes (response == yes) to calculate the normalized estimated freq
-  #mutate(count_norm_signif = case_when(response == "yes" ~ sum(count_normalised_edger))) %>% 
-  mutate(identifier = paste(neoepitope_sequence, hla, sep = "_"),
-         identifier = paste(identifier, cell_line, sep = "_"))
+  # add a sum of the normalized counts column for the significant 
+  #epitopes (response == yes) to calculate the normalized estimated freq
+  mutate(identifier = paste(neoepitope_sequence, hla, cell_line, sep = "_"))
+     #    identifier = paste(identifier, cell_line, sep = "_"))
 
 
 count_norm_signif <- my_data_clean_aug %>%

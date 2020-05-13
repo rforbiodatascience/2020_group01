@@ -39,3 +39,4 @@ my_data_clean <- my_data %>%
 # ------------------------------------------------------------------------------
 write_tsv(x = my_data_clean,
           path = "data/02_my_data_clean.tsv")
+

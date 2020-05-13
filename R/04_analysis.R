@@ -22,7 +22,8 @@ my_data_clean_aug <- read_tsv(file = "data/03_my_data_clean_aug.tsv")
 
 # Wrangle data ------------------------------------------------------------
 # arrange data so "no" is plotted first 
-my_data_clean_aug <- my_data_clean_aug %>%  arrange(response)
+my_data_clean_aug <- my_data_clean_aug %>%  
+  arrange(response)
 # select unique peptides 
 data_single_peptides <- my_data_clean_aug %>% 
   group_by(response) %>% 
@@ -32,10 +33,12 @@ data_single_peptides <- my_data_clean_aug %>%
 
 # Visualise data ----------------------------------------------------------
 # 1) Barracoda characteristics --------------------------------------------
-p1_CT26 <- barc_resp(my_data_clean_aug, "CT26") +
+p1_CT26 <- barc_resp(data  = my_data_clean_aug, 
+                     mouce_cell_line =  "CT26") +
   labs(title = "log fold change of CT26-tumor cell line neoepitope screen")
 
-p1_4T1 <- barc_resp(my_data_clean_aug, "4T1") +
+p1_4T1 <- barc_resp(data  = my_data_clean_aug, 
+                    mouce_cell_line =  "4T1") +
   labs(title = "log fold change of 4T1-tumor cell line neoepitope screen")
 
 png(file = "Results/04_fig1_barracoda.png", width = 1500, height = 1000)
@@ -56,7 +59,7 @@ p2 <- data_single_peptides %>%
   theme_bw() +
   geom_hline(yintercept = 2, linetype = "dotted") +
   geom_vline(xintercept = 0.01, linetype = "dotted") +
-  facet_grid(vars(cell_line)) +
+  facet_grid(cell_line~.) +
   labs(x = "p-value",
        y = "log fold change",
        size = "Nomalized estimated frequency")
