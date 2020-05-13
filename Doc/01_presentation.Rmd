@@ -129,30 +129,3 @@ Further work:
 
 # Thank you!
 
-
-
-<!-- ## Barracoda selection {#slide4}  -->
-<!-- - lof fold change of barcode reads across cell lines and treatments -->
-
-
-<!-- <center> -->
-<!-- ![](../Results/04_fig1_barracoda.png){width=70%} -->
-<!-- <center> -->
-
-
-<!-- ## GGseq logo  -->
-<!-- <div align="center"> -->
-<!-- <img src="../Results/04_GGseq_plot.png" width=750 height=500> -->
-<!-- </div> -->
-
-
-<!-- ## Mutation consequence  -->
-<!-- <div style="float: left; width: 40%;"> -->
-<!-- - Can mutation type be used to find immunugenic neoepitopes?  -->
-<!-- </div> -->
-
-<!-- <div style="float: right; width: 60%;"> -->
-<!-- <img src="../Results/04_Mutation_consequence.png" width=500 height=500> -->
-<!-- </div> -->
-
-
