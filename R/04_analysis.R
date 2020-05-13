@@ -183,3 +183,4 @@ ggdraw() +
    draw_plot(plot_list[[4]], .47, .0, .45, .4) +
    draw_plot_label(c("Response", "No response"), c(-0.03,  -0.03), c(1,  .48), size = 22)
 dev.off()
+
