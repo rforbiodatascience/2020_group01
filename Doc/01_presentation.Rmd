@@ -97,7 +97,7 @@ knitr::opts_chunk$set(echo = FALSE)
 <center>
 
 ## Modelling
-- Sampling 40 negative and the 30 potitive.
+- Sampling 40 negative and the 30 positive.
 <div align="center">
 <img src="../Results/05_Roc_curves.png" width=800 height=500>
 </div>
